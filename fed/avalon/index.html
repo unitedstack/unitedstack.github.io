@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title> by Tengfei</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Avalon</h1>
+        <h2>Mini easy to use MVVM framework</h2>
+        <a href="https://github.com/RubyLouvre/avalon" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="" class="anchor" href=""><span class="octicon octicon-link"></span></a>
+Advantage
+<img src="https://secure.travis-ci.org/modulejs/modjs.png?branch=master" alt="Build Status"></a>
+</h1>
+<ul>
+  <li>Easy to use, add the binding in HTML, JS using avalon.define defined in ViewModel, then call avalon.scan method, it got the moves!</li>
+  <li>Compatible to IE6 (other mvvm framework, knockoutjs IE6, angularjs IE7, emberjs IE8, winJS IE9)</li>
+  <li>No dependencies, only 72K, 22K compressed</li>
+  <li>Support the pipe character style filter function, easy formatting output</li>
+  <li>Partial refresh particle size has been refined to a text node, attribute node</li>
+  <li>To operate the nodes on the first scan and view refresh function with bindings and cached, so there is no room for playing selector</li>
+  <li>Let DOM manipulation code nearly extinct</li>
+  <li>Overlapping coverage using CSS-like mechanism to allow each ViewModel partition alternately rendering the page</li>
+  <li>Nodes removed, smart uninstall the corresponding view refresh function saves memory</li>
+  <li>Operational data that is operating DOM, on the ViewModel synchronized operations will go to the View and Model</li>
+</ul>
+
+<h2>
+<a name="what-is-StackUI" class="anchor" href="#what-is-mod"><span class="octicon octicon-link"></span></a>Structure</h2>
+
+<p><img src="./images/architecture.jpg" /></p>
+<ul>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.api.html">API文档</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.define.html">avalon.define</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.mix.html">avalon.mix</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.important.html">ms-important与ms-controller绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.class.html">ms-class、 ms-hover与ms-active绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.html.html">ms-text, ms-html, {{text}}与{{text|html}}</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.model.html">ms-model绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.css.html">ms-css绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.visible.html">ms-visible绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.include.html">ms-include绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.bind.html">ms-bind绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.watch.html">$watch方法</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.href.html">ms-href, ms-src, ms-alt, ms-title, ms-value绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.disabled.html">ms-disabled, ms-enabled, ms-readonly, ms-checked, ms-selected绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.data.html">ms-data绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.on.html">ms-on-*, ms-dblclick, ms-mouseout, ms-click, ms-mouseover等事件绑定</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.each.html">ms-each绑定</a></li>
+
+    <li><a href="datepicker.html">日期选择器</a></li>
+    <li><a href="todos.html">todos示例</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.router.html">avalon路由系统</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.switch.html">switch组件</a></li>
+    <!--<li><a href="http://rubylouvre.github.io/mvvm/avalon.grid.html">grid组件</a></li>-->
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.slider.html">slider组件</a></li>
+    <li><a href="http://rubylouvre.github.io/mvvm/avalon.draggable.html">ms-draggable绑定(以插件形式引入)</a></li>
+</ul>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight">
+<pre>
+&lt;fieldset ms-controller="simple"&gt;
+    &lt;legend&gt;例子&lt;/legend&gt;
+    &lt;p&gt;First name: &lt;input ms-model="firstName" /&gt;&lt;/p&gt;
+    &lt;p&gt;Last name: &lt;input ms-model="lastName"  /&gt;&lt;/p&gt;
+    &lt;p&gt;Hello,    &lt;input ms-model="fullName"&gt;&lt;/p&gt;
+    &lt;div&gt;{{firstName +" | "+ lastName }}&lt;/div&gt;
+    &lt;p&gt;nick name: &lt;input ms-model="nick.name"  /&gt;&lt;/p&gt;
+    &lt;p&gt;{{nick.name}}&lt;/p&gt;
+&lt;/fieldset&gt;
+avalon.define("simple", function(vm) {
+    vm.firstName = "司徒"
+    vm.lastName = "正美"
+    vm.fullName = {//一个包含set或get的对象会被当成PropertyDescriptor，
+        set: function(val) {//set, get里面的this不能改成vm
+            var array = (val || "").split(" ");
+            this.firstName = array[0] || "";
+            this.lastName = array[1] || "";
+        },
+        get: function() {
+            return this.firstName + " " + this.lastName;
+        }
+    },
+    vm.nick = {
+          name: "暗黑之民"
+    }
+});
+</pre>
+</div>
+
+<h2>
+<a name="website" class="anchor" href="#website"><span class="octicon octicon-link"></span></a>Website</h2>
+
+<ul>
+<li>Website：<a href="http://openstack.unitedstack.com">http://openstack.unitedstack.com</a>
+</li>
+<li>chinese website<a href="http://openstack.unitedstack.com">http://openstack.ustack.com/</a>
+</li>
+</ul>
+
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Project is released under a <a href="http://opensource.org/licenses/mit-license.php">MIT</a> license.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/RubyLouvre/avalon/archive/master.zip" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/RubyLouvre/avalon/archive/master.zip" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="http://rubylouvre.github.io/mvvm/"></a> is maintained by <a href="http://rubylouvre.github.io/mvvm/">UnitedStack Opensource</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div> 
+  </body>
+</html>
