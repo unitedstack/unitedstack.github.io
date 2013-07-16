@@ -1,0 +1,32 @@
+{
+    "countdown": {
+        "year": 2013,
+        "month": 8,
+        "day": 1,
+        "hour": 0,
+        "minute": 0,
+        "second": 0
+    },
+
+    "subscription_form_tooltips": {
+        "success": "You have been subscribed!",
+        "default_error": "Error! Please, contact administration",
+        "empty_email": "Please, enter your email",
+        "invalid_email": "Email is invalid. Please, enter valid email address",
+        "already_subscribed": "You are already subscribed"
+    },
+
+    "email_settings": {
+        "email": "email@example.com",
+        "name": "Almighty Mailer",
+        "subscription_emails": {
+            "enabled": true,
+            "subject": "You have been subscribed to awesome news",
+            "message": "Thank you for your interest."
+        },
+        "notification_emails": {
+            "subject": "We have launched our awesome site!",
+            "message": "Please, visit http://example.com."
+        }
+    }
+}

@@ -1,0 +1,110 @@
+.demo-panel {
+    padding: 15px 15px 10px 15px;
+
+    position: fixed;
+    left: -246px;
+    top: 200px;
+
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    text-shadow: none;
+
+    background: #fff;
+
+    border: 1px solid #888;
+    border-left: 0;
+
+    -webkit-transition: 0.25s left;
+    -moz-transition: 0.25s left;
+    transition: 0.25s left;
+}
+
+.demo-panel.active {
+    left: 0;
+}
+
+.demo-panel a {
+    color: #08c;
+    -webkit-transition: 0.12s color;
+    -moz-transition: 0.12s color;
+    transition: 0.12s color;
+}
+
+.demo-panel a:hover {
+    color: #D44032;
+}
+
+.demo-panel-activator {
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+
+
+    position: absolute;
+    left: 100%;
+    top: -1px;
+
+    font-size: 22px;
+    line-height: 36px;
+    color: #333;
+    text-decoration: none;
+
+    background: #fff;
+
+    border: 1px solid #888;
+    border-left: 0;
+
+    cursor: pointer;
+
+    -webkit-transition: 0.12s color;
+    -moz-transition: 0.12s color;
+    transition: 0.12s color;
+}
+
+.demo-panel-activator:hover {
+    color: #08c;
+}
+
+.demo-panel-activator i {
+    line-height: 36px;
+}
+
+.demo-panel-heading {
+    margin: 15px 0 0 0;
+    font-size: 16px;
+}
+
+.demo-panel-backgrounds {
+    margin: 5px 0 0 -5px;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.demo-panel-backgrounds li {
+    float: left;
+    border: 5px solid transparent;
+    -webkit-transition: 0.15s border-color;
+    -moz-transition: 0.15s border-color;
+    transition: 0.15s border-color;
+}
+
+.demo-panel-backgrounds li:nth-child(2n + 1) {
+    clear: left;
+}
+
+.demo-panel-backgrounds li:hover {
+    border-color: #00B159;
+}
+
+.demo-panel-backgrounds li.active {
+    border-color: #D44032;
+}
+
+.demo-panel-backgrounds img {
+    cursor: pointer;
+    vertical-align: top;
+}

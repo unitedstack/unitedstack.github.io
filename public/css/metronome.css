@@ -1,0 +1,553 @@
+/***********************************************************************************************************************
+========================================================================================================================
+
+
+    Metronome - Coming Soon Page
+
+    v 1.0, 13 May 2013
+
+    by Alex Shnayder
+
+
+========================================================================================================================
+
+    Template stylesheet
+
+***********************************************************************************************************************/
+
+
+
+
+
+/*
+        Page
+==================================================================================================*/
+
+html {
+  display: table;
+  width: 100%;
+  height: 100%;
+  font: 300 20px/1.4 'Open Sans', Helvetica, Arial, sans-serif;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  background: #181818 url("../img/bg8.jpg") no-repeat;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  display: table-cell;
+  margin: 0;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+
+
+
+/*
+        Links
+==================================================================================================*/
+
+a {
+  color: #32a7d3;
+}
+
+a:hover,
+a:focus {
+  color: #2588ad;
+}
+
+
+
+
+
+/*
+        Layout
+==================================================================================================*/
+
+.container {
+  display: inline-block;
+  max-width: 630px;
+  padding: 20px;
+}
+
+.section {
+  margin: 0 0 60px;
+}
+
+
+
+
+
+/*
+        Header
+==================================================================================================*/
+
+.header {
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+
+
+
+
+/*
+        Subscription form
+==================================================================================================*/
+
+.subscription-form {
+  position: relative;
+}
+
+
+
+/*      Email field
+----------------------------------------------------------*/
+
+.subscription-email {
+  width: 510px;
+  height: 50px;
+  padding: 0 12px;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: inherit;
+  color: #222;
+  text-shadow: none;
+  border: 0;
+  border-radius: 0;
+  transition: 0;
+}
+
+.subscription-email:focus {
+  padding: 0 12px 0 9px;
+  border-width: 3px 0 3px 3px;
+  border-style: solid;
+  box-shadow: none;
+  outline: none;
+}
+
+/* IE8 hack for vertical text aligning in the email field */
+@media \0screen {
+  .subscription-email {
+    padding-top: 11px;
+  }
+
+  .subscription-email:focus {
+    padding-top: 8px;
+  }
+}
+/* Placeholder */
+.subscription-email::-webkit-input-placeholder {
+  color: #777;
+}
+
+.subscription-email:-moz-placeholder {
+  /* Firefox 18- */
+  color: #777;
+}
+
+.subscription-email::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #777;
+}
+
+.subscription-email:-ms-input-placeholder {
+  color: #777;
+}
+
+
+
+/*      Submit button
+----------------------------------------------------------*/
+
+.subscription-submit {
+  width: 120px;
+  height: 50px;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: inherit;
+  color: #fff;
+  text-shadow: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  transition: 0.12s;
+}
+
+
+
+/*      Tooltip
+----------------------------------------------------------*/
+
+.subscription-tooltip {
+  margin: 10px 0 0;
+  padding: 8px 15px;
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  z-index: 1;
+  text-shadow: none;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+.subscription-tooltip:before {
+  content: '';
+  margin: -8px 0 0 -8px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border: solid transparent;
+  border-width: 0 8px 8px;
+}
+
+.subscription-tooltip.error {
+  color: #fff;
+  background: #d44032;
+}
+
+.subscription-tooltip.error:before {
+  border-bottom-color: #d44032;
+}
+
+.subscription-tooltip.success {
+  color: #fff;
+  background: #00b159;
+}
+
+.subscription-tooltip.success:before {
+  border-bottom-color: #00b159;
+}
+
+
+
+/*      Colors
+----------------------------------------------------------*/
+
+/* Red */
+.subscription-form.red .subscription-email:focus {
+  border-color: #d44032;
+}
+
+.subscription-form.red .subscription-submit {
+  background: #d44032;
+}
+
+.subscription-form.red .subscription-submit:hover,
+.subscription-form.red .subscription-submit:focus {
+  background: #c33629;
+}
+
+.subscription-form.red .subscription-submit:active {
+  background: #a62e23;
+}
+
+/* Blue */
+.subscription-form.blue .subscription-email:focus {
+  border-color: #32a7d3;
+}
+
+.subscription-form.blue .subscription-submit {
+  background: #32a7d3;
+}
+
+.subscription-form.blue .subscription-submit:hover,
+.subscription-form.blue .subscription-submit:focus {
+  background: #2a98c2;
+}
+
+.subscription-form.blue .subscription-submit:active {
+  background: #2381a4;
+}
+
+/* Green */
+.subscription-form.green .subscription-email:focus {
+  border-color: #00b159;
+}
+
+.subscription-form.green .subscription-submit {
+  background: #00b159;
+}
+
+.subscription-form.green .subscription-submit:hover,
+.subscription-form.green .subscription-submit:focus {
+  background: #00984c;
+}
+
+.subscription-form.green .subscription-submit:active {
+  background: #00743a;
+}
+
+/* Yellow */
+.subscription-form.yellow .subscription-email:focus {
+  border-color: #e8a800;
+}
+
+.subscription-form.yellow .subscription-submit {
+  background: #e8a800;
+}
+
+.subscription-form.yellow .subscription-submit:hover,
+.subscription-form.yellow .subscription-submit:focus {
+  background: #cf9600;
+}
+
+.subscription-form.yellow .subscription-submit:active {
+  background: #ab7c00;
+}
+
+
+
+
+
+/*
+        Countdown
+==================================================================================================*/
+
+.countdown {
+  display: inline-block;
+  overflow: hidden;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  perspective: 1000px;
+}
+
+.countdown-item {
+  margin: 0 0 0 50px;
+  float: left;
+}
+
+.countdown-item:first-child {
+  margin-left: 0;
+}
+
+.countdown-label {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.countdown-number {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  font-size: 58px;
+  line-height: 120px;
+  text-shadow: none;
+  -webkit-transition: 1s;
+  transition: 1s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.countdown-number.red > .countdown-number-side {
+  background: #d44032;
+}
+
+.countdown-number.blue > .countdown-number-side {
+  background: #32a7d3;
+}
+
+.countdown-number.green > .countdown-number-side {
+  background: #00b159;
+}
+
+.countdown-number.yellow > .countdown-number-side {
+  background: #e8a800;
+}
+
+.countdown-number-side {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.countdown-number-back {
+  display: none;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+
+
+
+
+/*
+        Social links
+==================================================================================================*/
+
+[class^="icon-"], [class*=" icon-"] {
+  width: auto;
+  height: auto;
+  margin: 0;
+  vertical-align: bottom;
+  line-height: 1;
+  background: transparent;
+}
+
+.social-links {
+  font-size: 0;
+}
+
+.social-links > a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 10px 10px;
+  font-size: 24px;
+  line-height: 42px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.social-links > a:first-child {
+  margin-left: 0;
+}
+
+.social-links > a.red {
+  background: #d44032;
+}
+
+.social-links > a.red:hover,
+.social-links > a.red:focus {
+  color: #d44032;
+}
+
+.social-links > a.blue {
+  background: #32a7d3;
+}
+
+.social-links > a.blue:hover,
+.social-links > a.blue:focus {
+  color: #32a7d3;
+}
+
+.social-links > a.green {
+  background: #00b159;
+}
+
+.social-links > a.green:hover,
+.social-links > a.green:focus {
+  color: #00b159;
+}
+
+.social-links > a.yellow {
+  background: #e8a800;
+}
+
+.social-links > a.yellow:hover,
+.social-links > a.yellow:focus {
+  color: #e8a800;
+}
+
+.social-links > a:hover,
+.social-links > a:focus {
+  background: #fff;
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+
+
+
+
+/*
+        Responsiveness
+==================================================================================================*/
+
+@media (max-width: 767px) {
+  html,
+  .subscription-email,
+  .subscription-submit {
+    font-size: 18px;
+  }
+
+  .header,
+  .countdown-number {
+    font-size: 48px;
+  }
+
+  .countdown-label {
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .subscription-email {
+    width: 340px;
+    height: 40px;
+    padding: 0 5px;
+  }
+
+  .subscription-email:focus {
+    padding: 0 8px 0 2px;
+  }
+
+  .subscription-submit {
+    width: 100px;
+    height: 40px;
+  }
+
+  .subscription-tooltip {
+    padding: 4px 8px;
+    white-space: normal;
+  }
+
+  .countdown-item {
+    margin: 0 0 30px 30px;
+  }
+
+  .countdown-number {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+  }
+}
+@media (max-width: 480px) {
+  .subscription-email,
+  .subscription-submit {
+    width: 100%;
+  }
+
+  .subscription-email {
+    margin-bottom: 10px;
+  }
+
+  .subscription-email:focus {
+    border-right-width: 3px;
+  }
+
+  .countdown-item {
+    width: 50%;
+    margin-left: 0;
+  }
+}
