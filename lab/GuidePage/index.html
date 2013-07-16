@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+<style>
+html {overflow:hidden}
+body {position: absolute; margin:0; padding:0;width:100%; height:100%; background: #444 url(images/bg8.jpg) no-repeat 0 0;}
+canvas {display:block}
+p {text-align: center; font-size:12px;color:#454545;}
+</style>
+<script src="./js/laro.fsm.js"></script>
+<script src="./js/JCanvas.0.1.js"></script>
+<canvas id="canvas" width="600" height="400"></canvas>
+<img id="logo" style="display:none" src="./images/yun20.png" />
+<img id="us" style="display:none" src="./images/us.png" />
+<img id="uos" style="display:none" src="./images/uos.png" />
+<img id="at" style="display:none" src="./images/at.png" />
+
+<script>
+Laro.register('UsHome', function (La) {
+	var pkg = this;
+	
+	this.initStage = function () {
+		var canvas = document.getElementById('canvas');
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		
+		this.canvas = canvas;
+		this.stage = new CVS.$stage(canvas);
+		this.ctx = this.stage.ctx;
+		this.vpx = canvas.width/2;
+		this.vpy = canvas.height/2;
+		this.normalN = 100;
+		this.normalBalls = [];
+		this.angleX = 0.001;
+		this.angleY = 0.001;
+		
+		this.zstep = 1;
+		this.zflag = 1;
+	}
+	
+	this.range = function (a, b) {
+        return Math.floor(Math.random()*(b-a) + a);
+    }
+	
+	this.tween = function (ball, t) {
+		if (!ball.end) {
+			var _x = ball.xpos, _y = ball.ypos, _z = ball.zpos;
+			var _t = (+new Date) - ball.startAnimTime;
+				ball.xpos = ball.f_xpos + (ball.t_xpos - ball.f_xpos)*Math.sin(Math.PI*_t/(2*t));
+				ball.ypos = ball.f_ypos + (ball.t_ypos - ball.f_ypos)*Math.sin(Math.PI*_t/(2*t));
+				ball.zpos = ball.f_zpos + (ball.t_zpos - ball.f_zpos)*Math.sin(Math.PI*_t/(2*t));
+
+			 if (_t >= t) {
+				ball.end = true;
+				//stage.removeChild(ball);
+			}
+		}
+	}
+	
+	this.addNormalBalls = function (n) {
+		var vpx = this.vpx, vpy = this.vpy, range = this.range, stage = this.stage,
+			_this = this;
+		if (n) {
+			this.normalN = n;
+		}
+		for (var i=0; i< this.normalN; i++) {
+
+			var ball = CVS.createPoint3D(this.stage.ctx, function () {
+                var color = 'rgb('+range(0, 256)+', '+range(0, 256)+', '+range(0, 256)+')';
+				//var a = Math.PI * 2 * Math.random();
+                //var b = Math.PI * 2 * Math.random();
+				//var r = range(vpx, vpy);
+
+				//this.xpos = Math.sin(a) * Math.sin(b) * r;
+				//this.ypos = Math.cos(a) * Math.sin(b) * r;
+				//this.zpos = Math.cos(b) * r;
+				this.xpos = range(-vpx, vpx);
+				this.ypos = range(-vpy, vpy);
+				this.zpos = range(-vpx, vpx);
+
+				this.width = range(8, 15);
+				this.w = this.width;
+				this.draw = function () {
+					this.ctx.beginPath();
+					this.ctx.arc(0, 0, this.width/2, 0, Math.PI*2, true);
+					this.ctx.closePath();
+                    this.ctx.fillStyle = color;
+					this.ctx.fill();
+				}
+			});
+			ball.type = 'normal';
+			ball.setVanishPoint(vpx, vpy);
+			ball.setCenterPoint(0, 0, 0);
+			stage.addChild(ball);
+			this.normalBalls.push(ball);
+		}
+	}
+	
+	this.updateBalls = function (dt, name) {
+		var balls = this.particleHash[name];
+		for (var i = 0; i < balls.length; i ++) {
+			var ball = balls[i];
+			
+			ball.zpos += UsHome.zstep;
+
+			ball.rotateX(this.angleX);
+			ball.rotateY(this.angleY);
+			var scale = ball.getScale(),
+				pos = ball.getScreenXY();
+			ball.width = Math.max(10*scale, 2);
+			ball.x = pos.x;
+			ball.y = pos.y;
+		}
+	};
+
+	this.pushBalls = function (name) {
+		var balls = this.particleHash[name];
+		for (var i = 0; i < balls.length; i ++) {
+			var ball = balls[i];
+			UsHome.stage.addChild(ball);
+			ball.end = false;
+			ball.width = ball.logoPos.width;
+			ball.color = 'rgb('+ball.logoPos.r+', '+ball.logoPos.g+', '+ball.logoPos.b+')';
+			ball.startAnimTime = (+ new Date);
+			
+		}
+	}
+	
+	this.bindStage = function () {
+		var _this = this;
+		this.stage.addEventListener('mousemove', function (x, y) {
+			_this.angleY = (x - _this.vpx) * .00001;
+            _this.angleX = (y - _this.vpy) * .00001;
+		})
+	}
+	
+	this.initParticles = function () {
+//		this.qqParticles = this.getParticles('qq', 40, 40);
+//		this.jxParticles = this.getParticles('jx', 49, 34);
+//		this.qplusParticles = this.getParticles('qplus', 50, 50, 100);
+//		this.atParticles = this.getParticles('at', 225, 44, 500);
+
+		
+//		this.particleHash = {
+//			'normal': this.normalBalls,
+//			'qq': this.qqParticles,
+//			'jx': this.jxParticles,
+//			'qplus': this.qplusParticles,
+//			'at': this.atParticles
+//		}
+
+        this.logoParticles = this.getParticles('logo', 20, 15);
+        this.usParticles = this.getParticles('us', 49, 34);
+        this.uosParticles = this.getParticles('uos', 50, 50, 100);
+        this.atParticles = this.getParticles('at', 256, 50, 500);
+//        this.lgParticles = this.getParticles('lg', 256, 50, 500);
+
+        this.particleHash = {
+            'normal': this.normalBalls,
+            'logo': this.logoParticles,
+            'us': this.usParticles,
+            'uos': this.uosParticles,
+            'at': this.atParticles,
+//            'lg': this.lgParticles
+        }
+	}
+	this.getParticles = function (id, w, h, z) {
+		if (z == undefined) { z = 0; }
+		var image = document.getElementById(id);
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.ctx.drawImage(image, 0, 0, w, h, this.canvas.width/2-w/4, this.canvas.height/2-h/4, w/2, h/2);
+		
+		var imageData = this.ctx.getImageData(this.canvas.width/2-w/4, this.canvas.height/2-h/4, w/2, h/2);
+		var ret = [];
+		for (var x = 0; x < imageData.width; x ++) {
+			for (var y = 0; y < imageData.height; y ++) {
+				//var i = 4*(x * imageData.height + y);
+				var i = 4*(y * imageData.width + x);
+				if (imageData.data[i + 3] > 128) { // 半透以上就算
+					var r = imageData.data[i],
+						g = imageData.data[i + 1],
+						b = imageData.data[i + 2];
+					ret.push(new UsHome.Particle(this.stage, this.canvas, id, w, h, x, y, z, r, g, b));
+				}
+			}
+		}
+		return ret;
+	}
+	
+	this.init = function () {
+		this.initStage();
+		this.bindStage();
+		this.initParticles();
+		//this.addNormalBalls();
+		
+		UsHome.$fsm.init();
+		UsHome.$loop.init();
+	}
+});
+
+Laro.register('UsHome', function (La) {
+	var pkg = this,
+		range = UsHome.range,
+		vpx = UsHome.vpx,
+		vpy = UsHome.vpy;
+	
+	this.Particle = function (stage, canvas, id, w, h, x, y, z, r, g, b) {
+		this.canvas = canvas;
+		
+		var vpx = canvas.width/2,
+			vpy = canvas.height/2;
+
+		var ball =  CVS.createPoint3D(stage.ctx, function () {
+			var color = 'rgb('+ range(200, 255) +', '+ range(200, 255) +', '+ range(200, 255) +')';
+			//var color = 'rgb('+r+', '+g+', '+b+')';
+			
+			/*	this.xpos = range(-10*vpx, 10*vpx);
+				this.ypos = range(-10*vpy, 10*vpy);
+				this.zpos = 10*vpx;
+				*/
+				var a = Math.PI * 2 * Math.random();
+                var b = Math.PI * 2 * Math.random();
+				var r = range(vpx, vpy);
+
+				this.xpos = Math.sin(a) * Math.sin(b) * r;
+				this.ypos = Math.cos(a) * Math.sin(b) * r;
+				this.zpos = -Math.abs(Math.cos(b) * r);
+				
+				this.width = range(3, 15);
+				this.color = color;
+				this.draw = function () {
+					this.ctx.beginPath();
+					this.ctx.arc(0, 0, this.width/2, 0, Math.PI*2, true);
+					this.ctx.closePath();
+                    this.ctx.fillStyle = this.color;
+					this.ctx.fill();
+				}
+		});
+
+		ball.logoPos = {
+			x: (x-w/4)*20,
+			y: (y-h/4)*20,
+			z: 0,
+			width: 10,
+			r: r,
+			g: g,
+			b: b
+		};
+		ball.f_xpos = ball.xpos;
+		ball.f_ypos = ball.ypos;
+		ball.f_zpos = ball.zpos;
+		ball.t_xpos = ball.logoPos.x;
+		ball.t_ypos = ball.logoPos.y;
+		ball.t_zpos = ball.logoPos.z;
+		ball.startAnimTime = (+new Date);
+		ball.end = true;
+		ball.type = id;
+		
+		ball.setVanishPoint(canvas.width/2, canvas.height/2);
+		ball.setCenterPoint(0, 0, z);
+		
+		ball.moveX = 1 - Math.random()*2;
+		//stage.addChild(ball);
+		
+		return ball;
+	}
+});
+
+Laro.register('UsHome.$states', function (La) {
+	var pkg = this;
+	
+	this.No = La.BaseState.extend(function () {
+	
+	}).methods({
+		enter: function (msg, fromState) {
+			this._t = 0;
+			UsHome.addNormalBalls();
+		},
+		leave: function () {
+		
+		},
+		update: function (dt) {
+			this._t += dt;
+			UsHome.updateBalls(dt, 'normal');
+		},
+		transition: function () { 
+			if (this._t > 2) { 
+				this.host.setState(1);
+			} 
+		},
+		draw: function () {
+			
+		}
+	});
+	
+	this.Logo = La.BaseState.extend(function () {
+	
+	}).methods({
+		enter: function (msg, fromState) {
+			for (var i = 0; i < UsHome.logoParticles.length; i ++) {
+				var ball = UsHome.logoParticles[i];
+				UsHome.stage.addChild(ball);
+				ball.end = false;
+				ball.width = ball.logoPos.width;
+				ball.startAnimTime = (+ new Date);
+				
+			}
+			this._t = 0;
+			this.explosion = false;
+		},
+		leave: function () {
+			for (var i = 0; i < UsHome.stage.children.length; i ++) {
+				var ball = UsHome.stage.children[i];
+				if (ball.type == 'normal') {
+					UsHome.stage.children.splice(i, 1);
+					i --;
+				}
+			}
+		},
+		update: function (dt) {
+			this._t += dt;
+			UsHome.updateBalls(dt, 'normal');
+			
+			for (var i = 0; i < UsHome.logoParticles.length; i ++) {
+				var ball = (UsHome.logoParticles[i]);
+
+				UsHome.tween(ball, 1000);
+				ball.zpos += UsHome.zstep;
+				
+				ball.rotateX(UsHome.angleX);
+				ball.rotateY(UsHome.angleY);
+				var scale = ball.getScale(),
+				pos = ball.getScreenXY();
+				
+				ball.width = Math.max(10*scale, 2);
+				ball.x = pos.x;
+				ball.y = pos.y;
+			}
+		},
+		transition: function () {
+			var range = UsHome.range,
+				vpx = UsHome.vpx,
+				vpy = UsHome.vpy;
+			if (this._t > 5 && !this.explosion) {
+				for (var i = 0; i < UsHome.logoParticles.length; i ++) {
+					var ball = UsHome.logoParticles[i];
+
+					ball.f_xpos = ball.xpos;
+					ball.f_ypos = ball.ypos;
+					ball.f_zpos = ball.zpos;
+					ball.t_xpos = range(-vpx, vpx);
+					ball.t_ypos = range(-vpy, vpy);
+					ball.t_zpos = range(-vpx, vpx);
+					
+					ball.end = false;
+					ball.width = range(8, 15);
+					ball.startAnimTime = (+ new Date);
+				}
+				this.explosion = true;
+				this.explosionT = (+new Date);
+			}
+			if (this.explosion && (+new Date) - this.explosionT >= 1000) {
+				this.host.setState(2);
+			}
+		},
+		draw: function () {
+		
+		}
+	});
+	
+	this.Us = La.BaseState.extend(function () {
+	
+	}).methods({
+		enter: function (msg, fromState) {
+			//console.log('jx')
+
+			this.push = false;
+			this._t = 0;
+			this.explosion = false;
+		},
+		leave: function () {
+			for (var i = 0; i < UsHome.stage.children.length; i ++) {
+				var ball = UsHome.stage.children[i];
+				if (ball.type == 'logo') {
+					UsHome.stage.children.splice(i, 1);
+					i --;
+				}
+			}
+		},
+		update: function (dt) {
+			this._t += dt;
+			UsHome.updateBalls(dt, 'logo');
+			
+			if (this._t > 2 && !this.push) {
+				UsHome.pushBalls('us');
+				this.push = true;
+			}
+			if (this.push) {
+				for (var i = 0; i < UsHome.usParticles.length; i ++) {
+					var ball = (UsHome.usParticles[i]);
+
+					UsHome.tween(ball, 1000);
+					ball.zpos += UsHome.zstep;
+					
+					ball.rotateX(UsHome.angleX);
+					ball.rotateY(UsHome.angleY);
+					var scale = ball.getScale(),
+					pos = ball.getScreenXY();
+					
+					ball.width = Math.max(10*scale, 2);
+					ball.x = pos.x;
+					ball.y = pos.y;
+				}
+			}
+			
+			// explosion
+			this.checkExplosion();
+		},
+		checkExplosion: function () {
+			var range = UsHome.range,
+				vpx = UsHome.vpx,
+				vpy = UsHome.vpy;
+			if (this._t > 5 && !this.explosion) {
+				for (var i = 0; i < UsHome.usParticles.length; i ++) {
+					var ball = UsHome.usParticles[i];
+
+					ball.f_xpos = ball.xpos;
+					ball.f_ypos = ball.ypos;
+					ball.f_zpos = ball.zpos;
+					ball.t_xpos = range(-vpx, vpx);
+					ball.t_ypos = range(-vpy, vpy);
+					ball.t_zpos = range(-vpx, vpx);
+					
+					ball.end = false;
+					ball.width = range(8, 15);
+					ball.startAnimTime = (+ new Date);
+				}
+				this.explosion = true;
+				this.explosionT = (+new Date);
+			}
+			if (this.explosion && (+new Date) - this.explosionT >= 1000) {
+				this.host.setState(3);
+			}
+		},
+		draw: function () {
+		
+		}
+	});
+	
+	this.Uos = La.BaseState.extend(function () {
+		
+	}).methods({
+		enter: function (msg, fromState) {
+			this.push = false;
+			this._t = 0;
+			this.explosion = false;
+		},
+		leave: function () {
+			for (var i = 0; i < UsHome.stage.children.length; i ++) {
+				var ball = UsHome.stage.children[i];
+				if (ball.type == 'us') {
+					UsHome.stage.children.splice(i, 1);
+					i --;
+				}
+			}
+		},
+		update: function (dt) {
+			this._t += dt;
+			UsHome.updateBalls(dt, 'us');
+			
+			if (this._t > 2 && !this.push) {
+				UsHome.pushBalls('uos');
+				this.push = true;
+			}
+			
+			if (this.push) {
+				for (var i = 0; i < UsHome.uosParticles.length; i ++) {
+					var ball = (UsHome.uosParticles[i]);
+
+					UsHome.tween(ball, 1000);
+					ball.zpos += UsHome.zstep;
+					
+					ball.rotateX(UsHome.angleX);
+					ball.rotateY(UsHome.angleY);
+					var scale = ball.getScale(),
+					pos = ball.getScreenXY();
+					
+					ball.width = Math.max(10*scale, 2);
+					ball.x = pos.x;
+					ball.y = pos.y;
+				}
+			}
+			this.checkExplosion();
+			
+		},
+		checkExplosion: function () {
+			var range = UsHome.range,
+				vpx = UsHome.vpx,
+				vpy = UsHome.vpy;
+			if (this._t > 5 && !this.explosion) {
+				for (var i = 0; i < UsHome.uosParticles.length; i ++) {
+					var ball = UsHome.uosParticles[i];
+
+					ball.f_xpos = ball.xpos;
+					ball.f_ypos = ball.ypos;
+					ball.f_zpos = ball.zpos;
+					ball.t_xpos = range(-vpx, vpx);
+					ball.t_ypos = range(-vpy, vpy);
+					ball.t_zpos = range(-vpx, vpx);
+					
+					ball.end = false;
+					ball.width = range(8, 15);
+					ball.startAnimTime = (+ new Date);
+				}
+				this.explosion = true;
+				this.explosionT = (+new Date);
+			}
+			if (this.explosion && (+new Date) - this.explosionT >= 1000) {
+				this.host.setState(4);
+			}
+		},
+		transition: function () {
+		
+		},
+		draw: function () {
+		
+		}
+	});
+	
+	this.AT = La.BaseState.extend(function () {
+	
+	}).methods({
+		enter: function (msg, fromState) {
+			this.push = false;
+			this._t = 0;
+			this.explosion = false;
+		},
+
+		leave: function () {
+		
+		},
+		update: function (dt) {
+			this._t += dt;
+			UsHome.updateBalls(dt, 'uos');
+			
+			if (this._t > 2 && !this.push) {
+				UsHome.pushBalls('at');
+				this.push = true;
+			}
+			
+			if (this.push) {
+				for (var i = 0; i < UsHome.atParticles.length; i ++) {
+					var ball = (UsHome.atParticles[i]);
+
+					UsHome.tween(ball, 1000);
+					ball.zpos += UsHome.zstep;
+					
+					ball.rotateX(UsHome.angleX);
+					ball.rotateY(UsHome.angleY);
+					var scale = ball.getScale(),
+					pos = ball.getScreenXY();
+					
+					ball.width = Math.max(10*scale, 2);
+					ball.x = pos.x;
+					ball.y = pos.y;
+				}
+			}
+			//this.checkExplosion();
+		},
+		transition: function () {
+			if (this._t > 7 && !this.tryJump) {
+				window.location.href = 'http://www.ustack.com/';
+				this.tryJump = true;
+			}
+		},
+		draw: function () {
+		
+		}
+	});
+});
+
+Laro.register('UsHome.$fsm', function (La) {
+	var pkg = this;
+	
+	this.init = function () {
+		this.getStatesList();
+		this.$ = new La.AppFSM(this, this.statesList);
+		this.$.setState(0);
+	}
+	this.getStatesList = function () {
+		this.statesList = [
+			0, UsHome.$states.No,
+			1, UsHome.$states.Logo,
+			2, UsHome.$states.Us,
+			3, UsHome.$states.Uos,
+			4, UsHome.$states.AT
+		];
+	}
+	
+	this.setState = function (state, msg, suspendCurrent) {
+		this.$.setState(state, msg, suspendCurrent);
+	}
+});
+
+Laro.register('UsHome.$loop', function (La) {
+	var pkg = this;
+	
+	this.init = function () {
+		this.$ = new La.Loop(this.looper, this);
+	}
+	
+	this.looper = function (dt) {
+		this.update(dt);
+		this.draw();
+	}
+	this.update = function (dt) {
+		UsHome.$fsm.$.update(dt);
+		if (UsHome.zstep > 2 || UsHome.zstep < -2) {
+			UsHome.zflag *= -1;
+		}
+		UsHome.zstep += UsHome.zflag*0.01;
+		//UsHome.updateNormalBalls(dt);
+	}
+	this.draw = function () {
+		UsHome.ctx.clearRect(0, 0, UsHome.canvas.width, UsHome.canvas.height);
+		UsHome.stage.render();
+		UsHome.$fsm.$.draw();
+	}
+});
+
+onload = function () { UsHome.init() }
+</script>
+</html>
+
