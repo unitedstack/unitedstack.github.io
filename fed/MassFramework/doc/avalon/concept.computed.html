@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>concept.computed</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <article>
+            <h3>concept.computed</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>computed, 计算属性是指通过ViewModel其他属性来计算自己的值的属性。this总是指向ViewModel。相对于knockout, emberjs，
+                avalon利用Object.defineProperty能非常智能地侦测自己的依赖于某些属性。 </p>
+            <p>knockout的实现</p>
+            <pre class="brush:js;gutter:false;toolbar:false">
+function AppViewModel() {
+    this.firstName = ko.observable('Bob');
+    this.lastName = ko.observable('Smith');
+    this.fullName = ko.computed(function() {
+         return this.firstName() + " " + this.lastName();
+      }, this);
+   }
+}
+//或者
+function AppViewModel() {
+    var self = this;
+    self.firstName = ko.observable('Bob');
+    self.lastName = ko.observable('Smith');
+    self.fullName = ko.computed(function() {
+        return self.firstName() + " " + self.lastName();
+    });
+}
+            </pre>   
+            <p>emberjs的实现</p>
+            <pre class="brush:js;gutter:false;toolbar:false">
+App.Person = Ember.Object.extend({
+  firstName: "xxx",
+  lastName: "yyyy",
+  fullName: function() {
+    return this.get('firstName') +
+           " " + this.get('lastName');
+  }.property('firstName', 'lastName')
+});
+
+            </pre> 
+            <p>avalon的实现</p>
+            <pre class="brush:js;gutter:false;toolbar:false">
+   $.avalon.define(function(a){
+       a.firstName =  "司徒";
+       a.lastName =  "正美";
+       a.fullName = {
+            get: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+    })
+            </pre>   
+        </article>
+    </body>
+
+</html>

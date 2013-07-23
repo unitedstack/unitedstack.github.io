@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>concept.method</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <article>
+            <h3>concept.method</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>ViewModel可以混杂许多方法，作用如同controller的action一样，这样我们就可以把复杂的逻辑分离出页面。 </p>
+            <div ms-skip>
+            <pre class="brush:html;gutter:false;toolbar:false">
+         &lt;p&gt;请输入名字: &lt;input ms-model="nick" /&gt;&lt;/p&gt;
+         &lt;p&gt;你的头衔是{{getName()}}！！！&lt;/p&gt;   
+         &lt;p&gt;{{nick}}&lt;/p&gt;     
+            </pre>  
+            </div>
+            <pre class="brush:js;gutter:false;toolbar:false">
+require("more/avalon, ready", function($) {
+   $.avalon.define(function(a){
+       a.nick = "ruby";
+       a.getName = function(){//method
+          return a.nick +"将军"
+       } 
+   })
+   $.avalon.scan()
+});
+            </pre>   
+            <button class="doc_btn" type="button">点我，执行代码</button>
+            <fieldset>
+                <legend>例子</legend>
+                <p>请输入名字: <input ms-model="nick" /></p>
+                <p>你的头衔是{{getName()}}！！！</p>   
+                <p>{{nick}}</p>    
+            </fieldset>
+        </article>
+    </body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>click-binding</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+    <body>
+        <article>
+            <h3>click-binding</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>点击绑定是一个最常用的事件绑定，其实它是内部调用了event绑定，语法为ms-click="fn" </p>
+            <div ms-skip>
+            <pre class="brush:html;gutter:false;toolbar:false">
+        &lt;div&gt;你已经点击了{{numberOfClicks}} 次&lt;/div&gt;
+        &lt;button ms-click="registerClick" ms-disabled="hasClickedTooManyTimes"&gt;点我&lt;/button&gt;
+        &lt;div ms-visible="hasClickedTooManyTimes"&gt;
+            你已经点击了许多次,不能再说了,请&lt;button ms-click="resetClicks"&gt;重置&lt;/button&gt;
+        &lt;/div&gt;
+            </pre>   
+            </div>
+            <pre class="brush:js;gutter:false;toolbar:false">
+            require("more/avalon, ready", function($) {
+                 $.avalon.define(function(a) {
+                    a.numberOfClicks = 0;
+                    a.registerClick = function() {
+                        a.numberOfClicks++;
+                    };
+                    a.resetClicks = function() {
+                        a.numberOfClicks = 0;
+                    };
+                    a.hasClickedTooManyTimes = {
+                        get: function() {
+                            return this.numberOfClicks >= 5;
+                        }
+                    }
+                });
+                $.avalon.scan();
+            });
+            </pre>   
+            <button class="doc_btn" type="button">点我，执行代码</button>
+            <fieldset>
+                <legend>例子</legend>
+        <div>你已经点击了{{numberOfClicks}} 次</div>
+        <button ms-click="registerClick" ms-disabled="hasClickedTooManyTimes">点我</button>
+        <div ms-visible="hasClickedTooManyTimes">
+            你已经点击了许多次，不能再点了，请<button ms-click="resetClicks">重置</button>
+        </div>
+            </fieldset>
+            <p>你可以对比knockout<a href="http://knockoutjs.com/examples/clickCounter.html">相应的例子</a>，就知道avalon多么简洁了。</p>
+        </article>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>$.avalon.controller</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <article>
+            <h3>$.avalon.define(name?, deps? factory)</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>添加一个作用域到$.avalon.model中 </p>
+            <dl>
+                <dt>id</dt>
+                <dd>可选。String。作用域的ID，默认是root，没有随机生成一个名字。我们可以在生成作用域对象的$id上看到其名字。</dd>
+                <dt>deps</dt>
+                <dd>可选。Array。依赖列表，里面是一个个作用域</dd>
+                <dt>factory</dt>
+                <dd>必需。Function。模块工厂。参数是当前作用域及其他依赖。function(scope){ scope.name = 11}</dd>
+            </dl>
+            <p>
+                <span class="stress">返回值：</span>
+            </p>
+            <p>作用域对象</p>
+            <p>factory会将根据第一个传参，将它转换Object.defineProperties的第二个参数，方便在读写器里面查找到它们的依赖关系。
+            如果想保持原状，可以在scope上定义一个$skipArray数组。
+            </p>
+            <p>在scope中，所有$开头的属性或方法都为框架所保留。</p>
+            <p>下面是个简单的例子，描述avalon的大概运作机理。</p>
+            <pre class="brush:html;gutter:false;toolbar:false">
+              &lt;p&gt;First name: &lt;input ms-model="firstName" /&gt;&lt;/p&gt;
+              &lt;p&gt;Last name: &lt;input ms-model="lastName"  /&gt;&lt;/p&gt;
+              &lt;p&gt;Hello, &lt;input ms-model="fullName"&gt;&lt;/p&gt;
+              &lt;div&gt;{{firstName +" | "+ lastName }}&lt;/div&gt;
+            </pre>   
+            <pre class="brush:js;gutter:false;toolbar:false">
+require("more/avalon, ready", function($) {
+    $.avalon.define(function(scope) {
+        scope.firstName = "司徒"
+        scope.lastName = "正美"
+        scope.fullName = {//一个包含set或get的对象会被当成PropertyDescriptor，
+            set: function(val) {//里面必须用this指向scope，不能使用scope
+                var array = (val || "").split(" ");
+                this.firstName = array[0] || "";
+                this.lastName = array[1] || "";
+            },
+            get: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+    })
+    $.avalon.scan()
+});
+            </pre>   
+            <button class="doc_btn" type="button">点我，执行代码</button>
+            <fieldset>
+                <legend>例子</legend>
+                <p>First name: <input ms-model="firstName" /></p>
+                <p>Last name: <input ms-model="lastName"  /></p>
+                <p>Hello,    <input ms-model="fullName"></p>
+                <div>{{firstName +" | "+ lastName }}</div>
+            </fieldset>
+            <div class="knowledge"  ms-skip="true">
+                <p>avalone是由定义ViewModel开始，我们可以用$.avalon.controller来定义一个ViewModel，它包含一般的属性与基于set, get方法的computed属性及与其他方法。
+                    如果没有指定controller的名字，那么默认为"root"。定义好ViewModel后，我们就在页面上进行绑定，
+                    现在暂时介绍两个绑定，ms-model是将ViewModel的某个属性绑定一个表单元素上。默认，表单元素是使用input同步属性的值。</p>
+                <p><strong>{{firstName +" | "+ lastName }}</strong>为一个插值表达式，现在它位于innerText中，因此相当于一个文本绑定。当model中的值改变时，
+                    插值表达式会重新计算自身，更新所在的文本节点的nodeValue</p>
+            </div>
+        </article>
+    </body>
+
+</html>

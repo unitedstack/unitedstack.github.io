@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>avalon</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <article>
+            <center><h1>avalon</h1></center>
+            <p>一个完美遵循<span class="stress">“操作数据即操作DOM”</span>理念的MVVM框架</p>
+            <p>特点</p>
+            <ul>
+                <li>基于Object.defineProperty, __defineGetter__, __defineSetter__, VBScript property等一切可使用的读写器，
+                    智能收集依赖与派发信息</li>
+                <li>拥有Computey依赖属性，实现跨属性操作，拥有监控数组，实现集合操作</li>
+                <li>使用angular风格的作用域定义ViewModel，并将方法混杂其间，通过传递其他作用域做参数，以实现跨作用域的交互。</li>
+                <li>使用{{}}插值表达式代表原来的text binding。</li>
+                <li>支持管道符风格的过滤函数，方便格式化输出。</li>
+                <li>强大的each绑定，与监控数组一起方便操作一大片数据。</li>
+                <li>兼容到IE6</li>
+                <li>让DOM操作的代码近乎绝迹</li>
+                <li>局部刷新的颗粒度已细化到一个文本节点，特性节点。</li>
+                <li>要操作的节点，在第一次扫描就与视图刷新函数相绑定，并缓存起来，因此没有选择器出场的余地。</li>
+            </ul>
+
+            <!--
+            <p>自从jQuery将人们从DOM的桎梏中解放出来，得以有空研究其他。
+                轮子创造活动也日益频繁，只要有了一个带头者，就有无数个跟风，后浪推前浪，挡也挡不住，
+                前端的轮子大多数是开源的，因此可以互相借鉴，会越造越好。后端的分层构架就是这个时候引入前端的。
+                首先是基于jQuery的javascriptMVC(现在更名为CanJS)，然后是设计更清晰的Backbone。
+                Backbone火的时候，就像PrototypeJS那样有无数复制品。
+            </p>
+            <p>这时候偷偷崛起了三个MVVM框架，knockoutjs, emberjs, angularjs。 </p>
+            <p>knockoutjs是微软的大牛Steven Sanderson开发，深得MVVM的精髓，设计思路也很近似WPF，拥有一样属性绑定，
+                监控函数，依赖监控函数（我比较喜欢用emberjs的叫法，computed）与监控数组
+                虽然说是MVVM，应该有三个层，Model，View, ViewModel，在knockout中，Model只是作为ViewModel的定义而存在，
+                ViewModel创建后，Model就立即消弥，想重新得到纯数据的Model，可使用 ko.mapping.toJS还原。
+                ViewModel是复杂得难以想象的观察者，与View死死绑定在一起，而Model的原始数据则被打散锁到一个个闭包内，由可读写的
+                监控函数所操作。View主要是绑定。我们通过ko.applyBindings(myViewModel)方法，它就开始扫描DOM树，
+                然后将元素节点特定前缀的特性节点或注释节点的值抽取出来，转换为视图刷新函数，与ViewModel的监控函数在一起。
+                knockout以惊人的毅力抛弃jQuery自己对抗IE6的疑难杂症并成功了，而且是三千多行代码。knockout还一个监控数组，
+                我们只需要调用数组的splice, push, pop, sort等方法就能让对应的DOM列表发生变化，是“操作数据即操作DOM”理念的先行者。
+                它用注释节点进行绑定，就不会让页面在JS加载前出现乱码一样的情况。最赞的是，它操作一组节点，会根据Levenshtein Distance算法进行，将元素的创建，删除，移动等步骤减到最少。
+                不过，knockout的缺点也很明显，源码晦涩，
+                绑定冗长，操作数据时并不是按原Model样子操作——因为ViewModel都把它们转换为监控函数与监控数组。</p>
+             <p>emberjs是jQuery, rails，Sproutecore，Merb，Handlebars这几个著名框架的核心成员Yehuda Katz创建，它是Sproutecore2.0，
+                它依赖于Handlebars模块库，能够实现比knockout更复杂更精细的动态绑定，这时整个页面就是一个模板。
+                动态刷新的颗粒度细化到每一个特性节点，文本节点。它基本上把后端除数据库外的所有东西都挪到前端。
+                服务端变成了一个仅用来分发JSON API的机制，有趣的界面工作都在客户端用JS来完整实现。Model类似于数据定义表的字段那样，允许你制定一些验证规则，
+                Controller与rails一样，拥有一模一样action，我们也在视图看到它们踪影。链接与点击等事件会被劫持action，中间可能会通过linkTo等方法跑到Router到再Controller了。
+                路由是它的MVC的桥头堡。
+                为了防止点击链接发生页面跳转，用到了HTML5的新History方法与hash重写技术。相对于knockout操作数据时还能链式化，emberjs则是被包裹到set, get这两个上帝方法中，
+                而它们内部用到的是Object.defineProperty或__defineGetter__,defineSetter，这些读写器作为双向依赖链的末梢，
+                能非常敏感就捕捉到Model的改动并通知另一端的观察者去。因为操作DOM的成本远远操作一千个JS纯对象要大得多，因此在这个过程，它有一个非常严密的比较新旧值的过程，
+                对大对象每一个属性的改动及对数组元素的位置都能查个透彻。emberjs是设计API的高手，无论是命名还是实现都比其他两个高出一大截。
+                但它现在还远远没完工，虽然可以投入使用，但文档又跟不上。这是完美主义者的弱点。</p>
+             <p>angularjs是google组织开发的，1.0后大改动，由MVC改为现在的MVW，其实与MVVM差不多。参考者为google的算法帝，写个编译器不算什么难事，因此里面有两个parser。
+             HTMLParser用于抽取指令及解析自定义标签，其实自定义标签也归为一个指令，而指令就是knockout, emberjs的绑定。
+             在angular中，指令分为四种形态，插值表达式，可以位于文本节点，注释节点，类名，特性节点中；以特殊前缀命名的特性节点；
+             以特殊结构作辨识的类名，不过这个已经渐渐淡出视野了；自定义标签。它们会编译成一个个链接函数，里面包含着节点，因此相当于其他框架所说的刷新函数。
+             但由于angularjs允许用户随意在视图定义对象，而这些对象在angularjs的世界中必定属于某个作用域，作用域又存在套嵌，因此必须等到整个DOM扫描完才能够判定。
+             作用域是一个奇特的东西，其当于Model与Controller的集合，用于圈定视图某个区域是由它负责。如果它处理不了，那么就由它上一级的父作用域出马。
+             angularjs在视图的戏份非常重，Model完全弱化为作用域某个属性，比如ng-model指的是某一个字段而不是一个对象。
+             插值表达式相当于knockoutjs的text 绑定，显然比后者用一个属性来绑定简单多了，
+             并且通过管道符风格的过滤器，我们可以更优雅地格式化输出。数据的验证，我们可以临时拉上ng-require绑定来处理，这时其他两个框架不敢想象的。
+             angularjs拥有三者中最丰富的绑定器，能满足你做各种需求，并且提供了各种接口让你自定各种绑定，服务，视图助手。
+             JSParser主要用于分析各种绑定的值，与模型的字段相关联，完成双向绑定。
+             但官网看不到直接操作Model字段的例子，只教你用$watch监听，让框架去让调用绑定背后的处理函数。
+             它没有computed函数与监控数组，因此需要你自己去写指令模拟。从浏览器支持程度看，它支持到IE7，emberjs是IE8， knockoutjs是IE6。
+             从各项指标来看，它也是排第二。如果纯粹是MVVM，还是knockout做得最好。但由于knockout坚守几千行的代码现模，现在能与emberjs对抗的就是angular了。
+             两者都拥有路由，历史，验证，测试套装。angularjs的两个编译器其实能让它走得更远更好，但API设计太劣拙了（包括要兼容之前更笨的旧版），拉底了水准。
+             </p>
+             <p>而现在的avalon（v4）则是汲取上述三者优点搞鼓出来的。avalon之前三个版本主要是参考knockoutjs，
+                 花了很长时间才弄懂如何智能收集依赖实现computed，以及与视图刷新函数的绑定。监控数组的实现甚至比knockoutjs更优雅。</p>
+             <p>avalon v4从emberjs借鉴了用Object.definePerperty监听数据改动的做法，并进一步使用VBScript让它在IE6也能运作。
+                 Model被设计成数据描述对象，一经定义不能修改。这是出于建筑学的永恒之前——一座建筑的地基决定了它的底座，
+                 底座决定了它的结构，结构决定了它的外观。 建筑的每一个阶段都比上一个阶段更固定，更难以改变。如果的确想改，也不是在原Model上改
+                 而是使用CSS覆盖原则，用另一个对象的同名属性来覆盖。这是不是有点像子类改写父类呢。
+                 但内部并不存在继承，而是使用angular类似的父子作用域。
+             </p>
+             <p>angular的{{}}插值表达式也抄过来，用于取替text binding，其实它就是text binding。不同的是刷新时，原来是对整个innerText进行修改，
+             现在只对某个文本节点的nodeValue进行重置了。管道符风格的过滤器也抄过来。
+             但传参时有点不同，使用小括号包起来，与JS传参一样，方便直接截取出来，然后eval。</p>
+             <p>computed监控属性也少不了，由于使用Object.definePerperty，变得更简单。监控数组也实现更优雅，knockout那个$index完全支持了。</p>
+             <p>提供完善的数据验证，让IE6也支持HTML5的表单验证与输入表单</p>
+             <p style="display:none;">  http://www.cnblogs.com/whitewolf/archive/2013/04/16/3024843.html
+            //http://jsfiddle.net/adamdbradley/Qdk5M/</p>
+            -->
+        </article>
+    </body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>concept.method</title>
+        <link rel="stylesheet" href="http://files.cnblogs.com/rubylouvre/todos.css"/>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <div ms-skip>
+            <pre class="brush:html;gutter:false;toolbar:false">
+        &lt;!--[if IE 6]&gt;&lt;center style="display:inline-block;zoom:1;text-align:left;"&gt; &lt;![endif]--&gt;
+        &lt;div id="todoapp"&gt;
+            &lt;header&gt;
+                &lt;h1&gt;Todos&lt;/h1&gt;
+                &lt;input id="new-todo" ms-model="newPost" placeholder="What needs to be done?" ms-on-keypress="addPost"&gt;
+            &lt;/header&gt;
+
+            &lt;section id="main" ms-visible="posts.size()"&gt;
+                &lt;input id="toggle-all" type="checkbox" ms-click="checkAll"&gt;
+                &lt;label for="toggle-all"&gt;Mark all as complete&lt;/label&gt;
+                &lt;ul id="todo-list" ms-each-post="posts"&gt;
+                    &lt;li ms-on-dblclick="editPost" ms-class-editing="post.edit" ms-class-done="post.done"&gt;
+                        &lt;div class="view"&gt;
+                            &lt;input class="toggle" ms-checked="post.done" type="checkbox" ms-click="togglePost"  /&gt;
+                            &lt;label&gt;{{post.text}}&lt;/label&gt;
+                            &lt;a class="destroy" ms-click="removePost"&gt;&lt;/a&gt;
+                        &lt;/div&gt;
+                        &lt;input class="edit" ms-value="post.text" ms-on-blur="unEditPost" /&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+            &lt;footer ms-visible="posts.size()"&gt;
+                &lt;a id="clear-completed" ms-click="removePosts" ms-visible="posts.size() - left"&gt;Clear completed&lt;/a&gt;
+                &lt;div id="todo-count"&gt;
+                    &lt;b&gt; {{left}}&lt;b&gt; {{left &lt;= 1 ? "item" : "items"}} left
+                  &lt;/div&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;
+        &lt;!--[if IE 6]&gt;&lt;/center&gt; &lt;![endif]--&gt;
+            </pre>  
+            </div>
+            <pre class="brush:js;gutter:false;toolbar:false">
+            require("more/avalon, ready", function($) {
+                $.avalon.define(function(a) {
+                    a.posts = [{text: "aaa", done: false, edit: false}, {text: "bbb", done: false, edit: false}]
+                    a.left = a.posts.length;
+                    a.addPost = function(e) {
+                        if (e.keyCode == 13 && this.value) {
+                            var posts = a.posts;
+                            posts.push({
+                                text: this.value,
+                                done: false,
+                                edit: false
+                            })
+                            this.value = "";
+                            a.left++;
+                        }
+                    }
+                    a.removePost = function() {
+                        var p = this.$scope.post.text;
+                        a.posts.removeAll(function(post) {
+                            if (post.text == p) {
+                                a.left--;
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
+                    a.removePosts = function() {
+                        a.posts.removeAll(function(post) {
+                            return post.done;
+                        });
+                    }
+                    a.editPost = function() {//让那条评论可编辑
+                        a.posts.forEach(function(post) {
+                            post.edit = false;
+                        })
+                        this.$scope.post.edit = true;
+                        $(this).find(".edit").focus();
+                    }
+                    a.unEditPost = function() {//失去焦点就失去编辑状态
+                        var post = this.$scope.post;
+                        post.text = this.value;
+                        post.edit = false;
+                    }
+                    a.togglePost = function() {
+                        var post = this.$scope.post;
+                        var scope = this.$scopes[0];
+                        post.done = this.checked;
+                        if (this.checked) {
+                            scope.left--;
+                        } else {
+                            scope.left++;
+                        }
+                    }
+                    a.checkAll = function(e) {
+                        var done = this.checked;
+                        a.left = a.posts.length
+                        a.posts.forEach(function(post) {
+                            post.done = done;
+                            if (done) {
+                                a.left--;
+                            } 
+                        })
+                    }
+                });
+                $.avalon.scan();
+            });
+            </pre>   
+            <button class="doc_btn" type="button">点我，执行代码</button>
+           <!--[if IE 6]><center style="display:inline-block;zoom:1;text-align:left;"> <![endif]-->
+        <div id="todoapp">
+            <header>
+                <h1>Todos</h1>
+                <input id="new-todo" ms-model="newPost" placeholder="What needs to be done?" ms-on-keypress="addPost">
+            </header>
+
+            <section id="main" ms-visible="posts.size()">
+                <input id="toggle-all" type="checkbox" ms-click="checkAll">
+                <label for="toggle-all">Mark all as complete</label>
+                <ul id="todo-list" ms-each-post="posts">
+                    <li ms-on-dblclick="editPost" ms-class-editing="post.edit" ms-class-done="post.done">
+                        <div class="view">
+                            <input class="toggle" ms-checked="post.done" type="checkbox" ms-click="togglePost"  />
+                            <label>{{post.text}}</label>
+                            <a class="destroy" ms-click="removePost"></a>
+                        </div>
+                        <input class="edit" ms-value="post.text" ms-on-blur="unEditPost" />
+                    </li>
+                </ul>
+            </section>
+            <footer ms-visible="posts.size()">
+                <a id="clear-completed" ms-click="removePosts" ms-visible="posts.size() - left">Clear completed</a>
+                <div id="todo-count">
+                    <b> {{left}}<b> {{left <= 1 ? "item" : "items"}} left
+                  </div>
+            </footer>
+        </div>
+        <!--[if IE 6]></center> <![endif]-->
+
+        <div id="instructions">
+            Double-click to edit a todo.
+        </div>
+
+        <div id="credits">
+            Created by
+            <br />
+            <a href="http://jgn.me/">Jérôme Gravel-Niquet</a>.
+            <br />Rewritten by: <a href="http://addyosmani.github.com/todomvc">TodoMVC</a>.
+        </div>
+    </body>
+
+</html>

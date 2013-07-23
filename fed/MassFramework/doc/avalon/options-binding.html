@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>options-binding</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <article>
+            <h3>options-binding</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>options可以让你轻松生成一组option元素，结合selecting绑定，会让你轻松搞定option的选择。 </p>
+
+            <fieldset>
+                <legend>例子</legend>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+        &lt;div ms-controller="SimpleList"&gt;
+            &lt;select multiple="multiple" width="50" ms-options="items"&gt;
+
+            &lt;/select&gt;
+            &lt;form ms-on-submit="addItem" action="javascript:void(0)"&gt;
+                New item:
+                &lt;input ms-model="itemToAdd" /&gt;
+                &lt;button type="submit" ms-disabled="itemToAdd==''"&gt;Add&lt;/button&gt;
+                &lt;p&gt;Your items:&lt;/p&gt;
+                &lt;select multiple="multiple" width="50" ms-options="items" ms-selecting="selectedItems"&gt;
+                &lt;/select&gt;
+                &lt;p&gt;&lt;strong class='note'&gt;注意&lt;/strong&gt;，length是数组的固有属性，无法改变行为，我们无法在内部让它在改变时发出通知，因此添加一个&lt;span class="stress"&gt;size&lt;/span&gt;方法代替它。&lt;/p&gt;
+                &lt;div&gt;items.size() = {{items.size()}}&lt;/div&gt;
+                &lt;div&gt;items.length= {{items.length}}&lt;/div&gt;
+                &lt;div&gt;
+                    &lt;button ms-click="removeSelected" ms-disabled="!selectedItems.length"&gt;Remove&lt;/button&gt;
+                    &lt;button ms-click="sortItems" ms-disabled="item.length"&gt;Sort&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+                    </pre>   
+                </div>
+                <pre class="brush:js;gutter:false;toolbar:false">
+            require("more/avalon, ready", function($) {
+                $.avalon.define("SimpleList",function(a) {
+                    a.itemToAdd =  "";
+                    a.addItem = function() {
+                        if (a.itemToAdd != "") {
+                            a.items.push(a.itemToAdd);
+                            a.itemToAdd = "";
+                        }
+                    }
+                    a.removeSelected = function() {
+                        a.items.removeAll(a.selectedItems);
+                        a.selectedItems.clear();
+                    }
+                    a.sortItems = function() {
+                        a.items.sort();
+                    }
+                    a.items = ["Alpha", "Beta", "Gamma"];
+                    a.selectedItems =  ["Gamma", "Beta"];
+                });
+                $.avalon.scan();
+            });
+                </pre>   
+                <button class="doc_btn" type="button">点我，执行代码</button>
+                <div ms-controller="SimpleList">
+                    <form ms-on-submit="addItem" action="javascript:void(0)">
+                        New item:
+                        <input ms-model="itemToAdd" />
+                        <button type="submit" ms-disabled="itemToAdd==''">Add</button>
+                        <p>Your items:</p>
+                        <select multiple="multiple" width="50" ms-options="items" ms-selecting="selectedItems">
+                        </select>
+                        <p><strong class='note'>注意</strong>，length是数组的固有属性，无法改变行为，我们无法在内部让它在改变时发出通知，因此添加一个<span class="stress">size</span>方法代替它。</p>
+                        <div>items.size() = {{items.size()}}</div>
+                        <div>items.length= {{items.length}}</div>
+                        <div>
+                            <button ms-click="removeSelected" ms-disabled="!selectedItems.length">Remove</button>
+                            <button ms-click="sortItems" ms-disabled="item.length">Sort</button>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+
+        </article>
+    </body>
+
+</html>

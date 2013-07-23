@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>concept.filter</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <article>
+            <h3>concept.filter</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>avalon在$.avalon中定义了许多过滤器，我们可以在文本绑定中格式化我们的输出。 它使用管道符风格的“|”，后面接过滤器的名字，
+            如何要传参，直接在后面加小括号，里面是你的参数，与JS调用方法一样。
+            </p>
+            <ul>
+                <li>uppercase:大写化</li> 
+                <li>lowercase:小写化</li> 
+                <li>truncate: 对字符串进行截取</li> 
+                <li>camelize: 驼峰化</li> 
+                <li>escape: 对特殊字符进行转义</li> 
+                <li>currency: 添加金融符号,</li> 
+                <li>number: 对数字进行格式，比如保留多少位有效数字，每三位插入逗号。与PHP的number_format完全兼容</li> 
+                <li>data: 对日期进行格式化 </li> 
+            </ul>
+            <pre class="brush:html;gutter:false;toolbar:false">
+         &lt;p&gt;请输入名字: &lt;input ms-model="nick" /&gt;&lt;/p&gt;
+         &lt;p&gt;你的名字是{{nick | uppercase}}！！！&lt;/p&gt;    
+            </pre>   
+            <pre class="brush:js;gutter:false;toolbar:false">
+require("more/avalon, ready", function($) {
+   $.avalon.define(function(a){
+       a.nick = "ruby"
+   })
+   $.avalon.scan()
+});
+            </pre>   
+            <button class="doc_btn" type="button">点我，执行代码</button>
+            <fieldset>
+                <legend>例子</legend>
+                <p>请输入名字: <input ms-model="nick" /></p>
+                <p>你的头衔是{{nick | uppercase }}！！！</p>   
+            </fieldset>
+        </article>
+    </body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>skip-binding</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+    </head>
+
+    <body>
+        <article>
+            <h3>skip-binding</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>由于avalon会扫描指定元素下的所有元素节点，文本节点及特性节点，
+                并将插值表达式中的值替换为ViewModel对应属性的值，但有时我们不想让它们替换，要保留原文。我们可以使用skip绑定，它会忽略此元素的绑定及在下所有文本节点或子树的绑定 </p>
+            <div ms-skip>
+            <pre class="brush:html;gutter:false;toolbar:false">
+                &lt;p&gt;请输入名字: &lt;input ms-model="nick" /&gt;&lt;/p&gt;
+                &lt;p ms-skip&gt;{{nick}}&lt;/p&gt;    
+                &lt;p&gt;{{nick}}&lt;/p&gt;   
+            </pre>   
+            </div>
+            <pre class="brush:js;gutter:false;toolbar:false">
+                require("more/avalon, ready", function($) {
+                   $.avalon.define(function(a){
+                       nick: "ruby"
+                   })
+                   $.avalon.scan()
+                });
+            </pre>   
+            <button class="doc_btn" type="button">点我，执行代码</button>
+            <fieldset>
+                <legend>例子</legend>
+                <p>请输入名字: <input ms-model="nick" /></p>
+                <p ms-skip>{{nick}}</p>    
+                <p>{{nick}}</p>   
+            </fieldset>
+        </article>
+    </body>
+
+</html>

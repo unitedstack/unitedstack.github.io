@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>class-binding</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>');
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>');
+        </script>
+        <style>
+            .my-class{
+                color: yellow;
+                background:orange;
+            }
+            .your-class {
+                line-height:3;
+                width:200px;
+                height:100px;
+            }
+            .his-class{
+                text-indent:2em;
+                font-size:14px;
+            }
+            .toggle{
+                width:200px;
+                height:100px;
+                background:lightgreen;
+            }
+            .blink{
+                width:200px;
+                height:100px;
+                background:yellow
+            }
+        </style>
+    </head>
+
+    <body>
+        <article>
+            <h3>class-binding</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>用于动态添加或删除类名，有三种形式。 </p>
+            <ol>
+                <li>ms-class-xxx="flag" 根据flag的值决定是添加或删除类名xxx </li>
+                <li>ms-class=obj obj为一个{xxx:true, yyy:false}的对象，根据其值添加或删除其键名</li>
+                <li>ms-class=str str是一个类名或多个类名的集合，全部添加</li>
+            </ol>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+        &lt;style&gt;
+            .my-class{
+                color: yellow;
+                background:orange;
+            }
+            .your-class {
+                line-height:3;
+                width:200px;
+                height:100px;
+            }
+            .his-class{
+                text-indent:2em;
+                font-size:14px;
+            }
+            .toggle{
+                width:200px;
+                height:100px;
+                background:lightgreen;
+            }
+            .blink{
+                width:200px;
+                height:100px;
+                background:yellow
+            }
+        &lt;/style&gt;
+        &lt;div ms-class="{ 'my-class':true, 'your-class':true, 'his-class':true }"&gt;多个类名&lt;/div&gt;
+        &lt;div ms-class-blink="timestamp % 2"&gt;这个不断在闪&lt;/div&gt;
+        &lt;div ms-class-toggle="toggle"&gt;这个类名会改变&lt;/div&gt;
+                </pre>   
+            </div>
+            <pre class="brush:js;gutter:false;toolbar:false">
+            require("more/avalon, ready", function($) {
+                var model = $.avalon.define(function(a){
+                    a.toggle =  true
+                    a.timestamp = new Date - 0
+                })
+                $.avalon.scan()
+                //现在我们可以通过操作数据来操作节点了
+                setTimeout(function() {
+                    model.toggle = false
+                }, 1500);
+                setInterval(function(){
+                    model.timestamp = new Date - 0
+                },200)
+            });
+            </pre>   
+            <button class="doc_btn" type="button">点我，执行代码</button>
+            <fieldset>
+                <legend>例子</legend>
+        <div ms-class="{ 'my-class':true, 'your-class':true, 'his-class':true }">多个类名</div>
+        <div ms-class-blink="timestamp % 2">这个不断在闪</div>
+         <div ms-class-toggle="toggle">这个类名会改变</div>
+            </fieldset>
+        </article>
+    </body>
+
+</html>

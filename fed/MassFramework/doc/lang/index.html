@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>语言扩展模块</title>
+        <script>
+            window.$$path = location.protocol + "//" + location.host;
+            document.write('<script src="' + $$path + '/mass_merge.js"><\/script>')
+            document.write('<script src="' + $$path + '/doc/scripts/common.js"><\/script>')
+        </script>
+    </head>
+    
+    <body>
+        <article>
+            <h3>语言扩展模块</h3>
+            <p>
+                <span class="stress">描述：</span>
+            </p>
+            <p>作为一个框架，它就必然对数组，字符串，数字与对象这些基本数据类型的操作提供了诸多便捷方法。</p>
+            <p>它在$.String挂载了如下方法：contains，startsWith， endsWith，repeat，byteLen，truncate，camelize，underscored，capitalize，stripTags，stripScripts，escapeHTML，
+                unescapeHTML，escapeRegExp，pad，wbr； 此外，它还拥有原生字符串的这些常用方法：charCodeAt，concat，indexOf，lastIndexOf，localeCompare，match，replace，
+                search，slice，split，substring，toLowerCase，toLocaleLowerCase，toUpperCase，trim，toJSON。</p>
+            <p>它在$.Array挂载了如下方法： contains，removeAt，remove，merge，shuffle，
+                random，flatten，unique，compact，sortBy，groupBy，pluck，union，intersect，diff，min，max，clone。
+                此外，它还拥有原生数组的这些方法: concat，join，pop，push，shift，slice，sort，reverse，splice，unshift，
+                indexOf，lastIndexOf，every，some，forEach，map，filter，reduce，reduceRight。</p>
+            <p>它在$.Number挂载了如下方法：limit，nearer，round。 此外，它还拥有原生数字的这些方法: toLocaleString,
+                toFixed, toExponential, toPrecision, toJSON。另， 它还拥有原来Math对象的如下方法： abs,
+                acos, asin, atan, atan2, ceil, cos, exp, floor, log, pow,sin, sqrt, tan。</p>
+            <p>它在$.Object挂载了如下方法：subset，each，map，clone，merge，without。</p>
+            <p>除此之外，本模块也提供了诸如isPlainObject, isFunction, isArray, isNative, isEmptyObject,
+                isArrayLike, format, tag, range, quote, parseJS, parseJSON, parseXML等判定数据类型与转换数据类型的方法。</p>
+
+            <pre style="display:none;">var sum = function(i){//统计0到i的总和 return eval(i+new Array(i).join("+(--i)"));
+                }; sum(10)</pre>
+        </article>
+    </body>
+
+</html>
