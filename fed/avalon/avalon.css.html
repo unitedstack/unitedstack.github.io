@@ -1,0 +1,97 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+        <script>
+            var model = avalon.define("simple", function(vm) {
+                vm.background = "red"
+                vm.sbackground = "red"
+                vm.$watch("background", function(v) {
+                    vm.sbackground = vm.background + "";//将数组转换为字符串
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>ms-css绑定</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>用法为ms-css-样式名="样式值"，如ms-css-width="200"(会自动补px)， ms-css-color="red", ms-background="blue",  ms-css-font-size="14px"。</p>
+            <p>我们看下面的例子：</p>
+            <div ms-skip>
+                <h3>HTML结构</h3>
+                <pre class="brush:html;gutter:false;toolbar:false">
+    &lt;div ms-controller="simple"&gt;
+        &lt;div style="width:200px; height:50px" ms-css-background="sbackground"&gt;
+
+        &lt;/div&gt;
+        &lt;select ms-model="background"&gt;
+            &lt;option value="red"&gt;红&lt;/option&gt;
+            &lt;option value="yellow"&gt;黄&lt;/option&gt;
+            &lt;option value="green"&gt;绿&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+                </pre>   
+                <h3>JS</h3>
+                <pre class="brush:js;gutter:false;toolbar:false">
+var model = avalon.define("simple", function(vm) {
+    vm.background = "red"
+    vm.sbackground = "red"
+    vm.$watch("background", function(v) {
+        vm.sbackground = vm.background + "";//将数组转换为字符串
+    });
+});
+                </pre>   
+            </div>
+            <p>ViewModel中background监听着下拉列表的变动，变化时置换它的值为被选中的option元素的value值。注意，
+                select元素的<a href="avalon.model.html">ms-model</a>对应的是一个数组，因此我们还需要还原它为字符串。</p>
+            <p>我们用到$watch方法，当background里的元素发生变化时，就执行回调，重设sbackground的值，从而刷新视图中ms-css绑定。</p>
+            <div ms-controller="simple">
+                <div style="width:200px; height:50px" ms-css-background="sbackground">
+
+                </div>
+                <select ms-model="background">
+                    <option value="red">红</option>
+                    <option value="yellow">黄</option>
+                    <option value="green">绿</option>
+                </select>
+            </div>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

@@ -1,0 +1,548 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+        <script>
+            avalon.ready(function() {
+                avalon.define("datepicker", function(vm) {
+                    //配置
+                    vm.changeYear = false
+                    vm.changeMonth = false
+                    vm.minDate = new Date(2013, 3, 25);
+                    //vm.maxDate
+                    vm.showOtherMonths = false;
+                    vm.showButtonPanel = false;
+                    //当前时间
+                    vm.selectedDate = new Date;
+                    vm.currentDate = new Date;
+                    vm.currentMonth = vm.currentDate.getMonth();
+                    vm.currentYear = vm.currentDate.getFullYear();
+                    vm.currentWeeks = getWeeks(vm.currentDate);
+                    //显示顶部的年份与月份
+                    vm.title = {
+                        get: function() {
+                            var format = "";
+                            if (!this.changeYear && this.changeMonth) {
+                                format = "yyyy年";
+                            } else if (this.changeYear && !this.changeMonth) {
+                                format = "MMMM";
+                            } else if (!this.changeYear && !this.changeMonth) {
+                                format = "MMMM yyyy年";
+                            }
+                            return format && avalon.filters.date(this.currentDate, format);
+                        }
+                    };
+                    //星期显示
+                    vm.$weeks = "日一二三四五六".split("");
+                    //月份下拉菜单
+                    vm.$months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                    //当月的日期
+                    function isDisabled(time) {
+                        var disabled = false;
+                        if (vm.minDate) {
+                            disabled = time < vm.minDate;
+                        }
+                        if (disabled && vm.maxDate) {
+                            disabled = time > vm.maxDate;
+                        }
+                        return disabled - 0;
+                    }
+                    function  getWeeks(cur) {
+                        vm.currentDate = cur;
+                        var year = cur.getFullYear();
+                        var month = cur.getMonth();//得到今天是几月（0 ~ 11）
+                        var date = cur.getDate();  //得到今天是几号 （1 ~ 31）
+                        cur.setMonth(month + 1);//改为下一个月，
+                        //由于日期是1 ~ 31， 0则是退到上一个月的最后一天，于是得到这个月的总天数
+                        cur.setDate(0);
+                        var num = cur.getDate();
+                        var next = 6 - cur.getDay();
+                        var dates = avalon.range(1, num + 1);
+                        dates = dates.map(function(d) {
+                            var time = new Date(year, month, d)
+                            return [year, month, d, isDisabled(time)].join("-");
+                        });
+                        cur.setMonth(month);
+                        cur.setDate(1);//得到当月的第一天
+                        var prev = cur.getDay();//0 ~ 6
+                        cur.setDate(date);//还原
+                        for (var i = 0; i < prev; i++) {//补上上一个月的日期
+                            cur = new Date(year, month, -1 * i)
+                            dates.unshift([year, cur.getMonth(), cur.getDate(), isDisabled(cur)].join("-"))
+                        }
+                        for (var i = 0; i < next; i++) {//补上下一个月的日期
+                            cur = new Date(year, month + 1, i + 1)
+                            dates.push([year, cur.getMonth(), cur.getDate(), isDisabled(cur)].join("-"))
+                        }
+                        var ret = [];
+                        while (dates.length) {//每行七个分组
+                            ret.push(dates.splice(0, 7));
+                        }
+                        return ret;//一个三维数组
+                    }
+
+                    //取得当年的前后20年
+                    function getYears() {
+                        var y = vm.currentYear;
+                        return avalon.range(y - 10, y + 10);
+                    }
+                    vm.candidateYears = getYears();
+                    //点击事件
+                    vm.theme = "start";
+                    vm.nextMonth = function(e) {
+                        e.preventDefault()
+                        var d = vm.currentDate;
+                        var m = d.getMonth();
+                        d.setMonth(m + 1);
+                        m = d.getMonth();
+                        if (m === 0) {
+                            var y = d.getFullYear();
+                            vm.currentYear = y;
+                        }
+                        vm.currentMonth = m;
+                    };
+                    //点击事件
+                    vm.prevMonth = function(e) {
+                        e.preventDefault()
+                        var d = vm.currentDate;
+                        var m = d.getMonth();
+                        d.setMonth(m - 1);
+                        m = d.getMonth();
+                        if (m === 11) {
+                            var y = d.getFullYear();
+                            vm.currentYear = y;
+                        }
+                        vm.currentMonth = m;
+                    };
+                    //侦听
+                    vm.$watch("currentMonth", function(val) {
+                        var d = vm.currentDate;
+                        d.setMonth(val);
+                        vm.currentWeeks = getWeeks(d);
+                        vm.title = NaN;
+                    });
+
+                    vm.$watch("currentYear", function(val) {
+                        var d = vm.currentDate;
+                        d.setFullYear(val)
+                        vm.currentWeeks = getWeeks(d);
+                        vm.title = NaN;
+                    });
+                    //高亮当前选中的日期
+                    vm.selectDay = function(e) {
+                        var el = e.target;
+                        e.preventDefault()
+                        if (el.tagName === "A" && el.parentNode.tagName === "TD" && !/disabled/.test(el.className)) {
+                            var d = el.$vmodel.day.split('-')
+                            vm.selectedDate = new Date(d[0], d[1], d[2]);
+                        }
+                    };
+
+                    //高亮今天的日期
+                    var today = new Date;
+                    var atoday = [today.getFullYear(), today.getMonth(), today.getDate()];
+                    vm.isToday = function() {
+                        var day = this.$vmodel.day;
+                        return day.slice(0, day.lastIndexOf("-")) === atoday.join("-");
+                    };
+                    vm.backToday = function() {
+                        vm.currentMonth = atoday[1];
+                        vm.currentYear = atoday[0];
+                    }
+                });
+                avalon.scan();
+            });
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>DatePicker</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>我直接把jquery datepicker的结构抄过来，类名也照搬。于是一个换肤的日历就诞生了。</p>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false;">
+        &lt;div ms-controller="datepicker"&gt;
+
+            &lt;div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="display:block"&gt; 
+                &lt;div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"&gt;
+                    &lt;a class="ui-datepicker-prev ui-corner-all" title="Prev" 
+                       ms-click="prevMonth"
+                       ms-hover="ui-state-hover"
+                       ms-hover-1="ui-datepicker-prev-hover"
+                       &gt;
+                        &lt;span class="ui-icon ui-icon-circle-triangle-w"&gt;Prev&lt;/span&gt;&lt;/a&gt;
+                    &lt;a class="ui-datepicker-next ui-corner-all"  title="Next" 
+                       ms-click="nextMonth"
+                       ms-hover="ui-state-hover"
+                       ms-hover-1="ui-datepicker-next-hover"
+                       &gt;
+                        &lt;span class="ui-icon ui-icon-circle-triangle-e"&gt;Next&lt;/span&gt;&lt;/a&gt;
+                    &lt;div class="ui-datepicker-title"&gt;
+                        &lt;select  ms-each-month="$months" ms-if="changeMonth" ms-model="currentMonth" &gt;
+                            &lt;option ms-value="{{month}}" ms-selected="currentMonth == month"&gt;{{month+1}}月&lt;/option&gt;
+                        &lt;/select&gt;
+                        &lt;select  ms-each-year="candidateYears" ms-if="changeYear" ms-model="currentYear" &gt;
+                            &lt;option ms-value="{{year}}" ms-selected="currentYear == year"&gt;{{year}}年&lt;/option&gt;
+                        &lt;/select&gt;
+                        {{title}}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;table class="ui-datepicker-calendar" &gt;
+                    &lt;thead&gt;
+                        &lt;tr ms-each-date="$weeks"&gt;
+                            &lt;th ms-class-ui-datepicker-week-end="$first"&gt;
+                                &lt;span title="星期{{date}}"&gt;{{date}}&lt;/span&gt;
+                            &lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody ms-each-week="currentWeeks" ms-click="selectDay"&gt;
+                        &lt;tr ms-each-day="week"&gt;
+                            &lt;td ms-class-ui-datepicker-other-month="Number(day.split('-')[1]) != currentMonth"
+                                ms-class-ui-datepicker-week-end="$first || $last"
+                                ms-class-ui-state-disabled="day.split('-')[3] == 1" 
+                                ms-class-ui-datepicker-unselectable="day.split('-')[3] == 1"
+                                &gt;
+                                &lt;a class="ui-state-default"   href="#"
+                                   ms-if="showOtherMonths || Number(day.split('-')[1]) == currentMonth"
+                                   ms-hover="ui-state-hover"
+                                   ms-title="day.split('-')[2]"
+                                   ms-class-ui-state-highlight="isToday"
+                                   &gt;{{day.split('-')[2]}} &lt;/a&gt;
+                            &lt;/td&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+                &lt;div class="ui-datepicker-buttonpane ui-widget-content" ms-if="showButtonPanel"&gt;
+                    &lt;button type="button" class="ui-datepicker-current ui-state-default ui-priority-secondary ui-corner-all"
+                            ms-hover="ui-state-hover"
+                            ms-click="backToday"
+                            &gt;Today&lt;/button&gt;
+                    &lt;button type="button" class="ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all"
+                            ms-hover="ui-state-hover"
+                            &gt;Done&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/{{theme}}/jquery-ui.css" &gt;
+            &lt;div&gt;&lt;input type="radio" ms-model="changeMonth" /&gt;可选择月份&lt;/div&gt;
+            &lt;div&gt;&lt;input type="radio" ms-model="changeYear" /&gt;可选择年份&lt;/div&gt;
+            &lt;div&gt;&lt;input type="radio" ms-model="showButtonPanel" /&gt;显示按钮面板&lt;/div&gt;
+            &lt;div&gt;&lt;input type="radio" ms-model="showOtherMonths" /&gt;显示其他月份的日期&lt;/div&gt;
+            &lt;div&gt;&lt;select ms-model="theme"&gt;
+                    &lt;option value='start'&gt;start&lt;/option&gt;
+                    &lt;option value='smoothness'&gt;smoothness&lt;/option&gt;
+                    &lt;option value='flick'&gt;flick&lt;/option&gt;
+                    &lt;option value='sunny'&gt;sunny&lt;/option&gt;
+                    &lt;option value='excite-bike'&gt;excite bike&lt;/option&gt;
+                    &lt;option value='black-tie'&gt;black tie&lt;/option&gt;
+                    &lt;option value='trontastic'&gt;trontastic&lt;/option&gt;
+                    &lt;option value='swanky-purse'&gt;swanky purse&lt;/option&gt;
+                    &lt;option value='le-frog'&gt;le frog&lt;/option&gt;
+                    &lt;option value='blitzer'&gt;blitzer&lt;/option&gt;
+                    &lt;option value='dot-luv'&gt;dot luv&lt;/option&gt;
+                    &lt;option value='mint-choc'&gt;mint-choc&lt;/option&gt;
+                    &lt;option value='hot-sneaks'&gt;hot sneaks&lt;/option&gt;
+                    &lt;option value='south-street'&gt; south street&lt;/option&gt;
+                    &lt;option value='humanity'&gt;humanity&lt;/option&gt;
+                    &lt;option value='vader'&gt;vader&lt;/option&gt;
+                    &lt;option value='eggplant'&gt;eggplant&lt;/option&gt;
+                    &lt;option value='cupertino'&gt;cupertino&lt;/option&gt;
+                    &lt;option value='overcast'&gt;overcast&lt;/option&gt;
+                &lt;/select&gt;你喜欢的皮肤&lt;/div&gt;
+            &lt;p&gt;你选择的日期为 {{selectedDate | date('yyyy-MM-dd')}}&lt;/p&gt;
+
+        &lt;/div&gt;
+                </pre>
+                <p>上面的结构分两部分，最上的日历，下面的一些表单元素用于控制日历的配置。</p>
+                <pre class="brush:js;gutter:false;toolbar:false;">
+            avalon.ready(function() {
+               avalon.define("datepicker", function(vm) {
+                    //配置
+                    vm.changeYear = false
+                    vm.changeMonth = false
+                    vm.minDate = new Date(2013, 3, 25);
+                    //vm.maxDate
+                    vm.showOtherMonths = false;
+                    vm.showButtonPanel = false;
+                    //当前时间
+                    vm.selectedDate = new Date;
+                    vm.currentDate = new Date;
+                    vm.currentMonth = vm.currentDate.getMonth();
+                    vm.currentYear = vm.currentDate.getFullYear();
+                    vm.currentWeeks = getWeeks(vm.currentDate);
+                    //显示顶部的年份与月份
+                    vm.title = {
+                        get: function() {
+                            var format = "";
+                            if (!this.changeYear && this.changeMonth) {
+                                format = "yyyy年";
+                            } else if (this.changeYear && !this.changeMonth) {
+                                format = "MMMM";
+                            } else if (!this.changeYear && !this.changeMonth) {
+                                format = "MMMM yyyy年";
+                            }
+                            return format && avalon.filters.date(this.currentDate, format);
+                        }
+                    };
+                    //星期显示
+                    vm.$weeks = "日一二三四五六".split("");
+                    //月份下拉菜单
+                    vm.$months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                    //当月的日期
+                    function isDisabled(time) {
+                        var disabled = false;
+                        if (vm.minDate) {
+                            disabled = time &lt; vm.minDate;
+                        }
+                        if (disabled && vm.maxDate) {
+                            disabled = time &gt; vm.maxDate;
+                        }
+                        return disabled - 0;
+                    }
+                    function  getWeeks(cur) {
+                        vm.currentDate = cur;
+                        var year = cur.getFullYear();
+                        var month = cur.getMonth();//得到今天是几月（0 ~ 11）
+                        var date = cur.getDate();  //得到今天是几号 （1 ~ 31）
+                        cur.setMonth(month + 1);//改为下一个月，
+                        //由于日期是1 ~ 31， 0则是退到上一个月的最后一天，于是得到这个月的总天数
+                        cur.setDate(0);
+                        var num = cur.getDate();
+                        var next = 6 - cur.getDay();
+                        var dates = avalon.range(1, num + 1);
+                        dates = dates.map(function(d) {
+                            var time = new Date(year, month, d)
+                            return [year, month, d, isDisabled(time)].join("-");
+                        });
+                        cur.setMonth(month);
+                        cur.setDate(1);//得到当月的第一天
+                        var prev = cur.getDay();//0 ~ 6
+                        cur.setDate(date);//还原
+                        for (var i = 0; i &lt; prev; i++) {//补上上一个月的日期
+                            cur = new Date(year, month, -1 * i)
+                            dates.unshift([year, cur.getMonth(), cur.getDate(), isDisabled(cur)].join("-"))
+                        }
+                        for (var i = 0; i &lt; next; i++) {//补上下一个月的日期
+                            cur = new Date(year, month + 1, i + 1)
+                            dates.push([year, cur.getMonth(), cur.getDate(), isDisabled(cur)].join("-"))
+                        }
+                        var ret = [];
+                        while (dates.length) {//每行七个分组
+                            ret.push(dates.splice(0, 7));
+                        }
+                        return ret;//一个三维数组
+                    }
+
+                    //取得当年的前后20年
+                    function getYears() {
+                        var y = vm.currentYear;
+                        return avalon.range(y - 10, y + 10);
+                    }
+                    vm.candidateYears = getYears();
+                    //点击事件
+                    vm.theme = "start";
+                    vm.nextMonth = function(e) {
+                        e.preventDefault()
+                        var d = vm.currentDate;
+                        var m = d.getMonth();
+                        d.setMonth(m + 1);
+                        m = d.getMonth();
+                        if (m === 0) {
+                            var y = d.getFullYear();
+                            vm.currentYear = y;
+                        }
+                        vm.currentMonth = m;
+                    };
+                    //点击事件
+                    vm.prevMonth = function(e) {
+                        e.preventDefault()
+                        var d = vm.currentDate;
+                        var m = d.getMonth();
+                        d.setMonth(m - 1);
+                        m = d.getMonth();
+                        if (m === 11) {
+                            var y = d.getFullYear();
+                            vm.currentYear = y;
+                        }
+                        vm.currentMonth = m;
+                    };
+                    //侦听
+                    vm.$watch("currentMonth", function(val) {
+                        var d = vm.currentDate;
+                        d.setMonth(val);
+                        vm.currentWeeks = getWeeks(d);
+                        vm.title = NaN;
+                    });
+
+                    vm.$watch("currentYear", function(val) {
+                        var d = vm.currentDate;
+                        d.setFullYear(val)
+                        vm.currentWeeks = getWeeks(d);
+                        vm.title = NaN;
+                    });
+                    //高亮当前选中的日期
+                    vm.selectDay = function(e) {
+                        var el = e.target;
+                        e.preventDefault()
+                        if (el.tagName === "A" && el.parentNode.tagName === "TD" && !/disabled/.test(el.className)) {
+                            var d = el.$vmodel.day.split('-')
+                            vm.selectedDate = new Date(d[0], d[1], d[2]);
+                        }
+                    };
+
+                    //高亮今天的日期
+                    var today = new Date;
+                    var atoday = [today.getFullYear(), today.getMonth(), today.getDate()];
+                    vm.isToday = function() {
+                        var day = this.$vmodel.day;
+                        return day.slice(0, day.lastIndexOf("-")) === atoday.join("-");
+                    };
+                    vm.backToday = function() {
+                        vm.currentMonth = atoday[1];
+                        vm.currentYear = atoday[0];
+                    }
+                });
+                avalon.scan();
+            });
+                </pre>
+                <p>这个JS代码比起先前的更清晰，放弃使用$fire这个危险的操作，建议大家也不要用它。因为如果没有严格的值变动检测， 这很容易引起无限递归。
+                    现在avalon已经完全重用现有的节点，不会像过去那样每次都清空然后又添加。因此性能更好。</p>
+            </div>
+            <div ms-controller="datepicker">
+
+                <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="display:block"> 
+                    <div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+                        <a class="ui-datepicker-prev ui-corner-all" title="Prev" 
+                           ms-click="prevMonth"
+                           ms-hover="ui-state-hover"
+                           ms-hover-1="ui-datepicker-prev-hover"
+                           >
+                            <span class="ui-icon ui-icon-circle-triangle-w">Prev</span></a>
+                        <a class="ui-datepicker-next ui-corner-all"  title="Next" 
+                           ms-click="nextMonth"
+                           ms-hover="ui-state-hover"
+                           ms-hover-1="ui-datepicker-next-hover"
+                           >
+                            <span class="ui-icon ui-icon-circle-triangle-e">Next</span></a>
+                        <div class="ui-datepicker-title">
+                            <select  ms-each-month="$months" ms-if="changeMonth" ms-model="currentMonth" >
+                                <option ms-value="{{month}}" ms-selected="currentMonth == month">{{month+1}}月</option>
+                            </select>
+                            <select  ms-each-year="candidateYears" ms-if="changeYear" ms-model="currentYear" >
+                                <option ms-value="{{year}}" ms-selected="currentYear == year">{{year}}年</option>
+                            </select>
+                            {{title}}
+                        </div>
+                    </div>
+                    <table class="ui-datepicker-calendar" >
+                        <thead>
+                            <tr ms-each-date="$weeks">
+                                <th ms-class-ui-datepicker-week-end="$first">
+                                    <span title="星期{{date}}">{{date}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody ms-each-week="currentWeeks" ms-click="selectDay">
+                            <tr ms-each-day="week">
+                                <td ms-class-ui-datepicker-other-month="Number(day.split('-')[1]) != currentMonth"
+                                    ms-class-ui-datepicker-week-end="$first || $last"
+                                    ms-class-ui-state-disabled="day.split('-')[3] == 1" 
+                                    ms-class-ui-datepicker-unselectable="day.split('-')[3] == 1"
+                                    >
+                                    <a class="ui-state-default"  href="#"
+                                       ms-if="showOtherMonths || Number(day.split('-')[1]) == currentMonth"
+                                       ms-hover="ui-state-hover"
+                                       ms-title="day.split('-')[2]"
+                                       ms-class-ui-state-highlight="isToday"
+                                       >{{day.split('-')[2]}} </a>
+                                </td>
+                        </tbody>
+                    </table>
+                    <div class="ui-datepicker-buttonpane ui-widget-content" ms-if="showButtonPanel">
+                        <button type="button" class="ui-datepicker-current ui-state-default ui-priority-secondary ui-corner-all"
+                                ms-hover="ui-state-hover"
+                                ms-click="backToday"
+                                >Today</button>
+                        <button type="button" class="ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all"
+                                ms-hover="ui-state-hover"
+                                >Done</button>
+                    </div>
+                </div>
+                <link rel="stylesheet" ms-href="http://code.jquery.com/ui/1.10.3/themes/{{theme}}/jquery-ui.css" >
+                <div><input type="radio" ms-model="changeMonth" />可选择月份</div>
+                <div><input type="radio" ms-model="changeYear" />可选择年份</div>
+                <div><input type="radio" ms-model="showButtonPanel" />显示按钮面板</div>
+                <div><input type="radio" ms-model="showOtherMonths" />显示其他月份的日期</div>
+                <div><select ms-model="theme">
+                        <option value='start'>start</option>
+                        <option value='smoothness'>smoothness</option>
+                        <option value='flick'>flick</option>
+                        <option value='sunny'>sunny</option>
+                        <option value='excite-bike'>excite bike</option>
+                        <option value='black-tie'>black tie</option>
+                        <option value='trontastic'>trontastic</option>
+                        <option value='swanky-purse'>swanky purse</option>
+                        <option value='le-frog'>le frog</option>
+                        <option value='blitzer'>blitzer</option>
+                        <option value='dot-luv'>dot luv</option>
+                        <option value='mint-choc'>mint-choc</option>
+                        <option value='hot-sneaks'>hot sneaks</option>
+                        <option value='south-street'> south street</option>
+                        <option value='humanity'>humanity</option>
+                        <option value='vader'>vader</option>
+                        <option value='eggplant'>eggplant</option>
+                        <option value='cupertino'>cupertino</option>
+                        <option value='overcast'>overcast</option>
+                    </select>选择你喜欢的皮肤</div>
+                <p>你选择的日期为 {{selectedDate | date('yyyy-MM-dd')}}</p>
+
+            </div>
+
+            <p>所有JS代码不到150行，就能涵盖jquery ui datepicker（2000多行）的绝大多数功能。如果努力一点，把模板也封装一下，其他功能也跟进，最多也是500行的规模。可谓MVVM的威力。而且这样写JS，可读性非常好，思路不会像着jQuery那样跟着CSS表达式——“这个元素是在哪里，该添加类名还是移除类名……”</p>
+            <p>用了MVVM后，我们写代码的思路将是这个样子</p>
+            <ol>
+                <li>先把HTML搞出来;</li>
+                <li>把重复的部分转换为一个each绑定，VM中对应一个数组;</li>
+                <li>把页面视情况要显示隐藏，要切换类名的东西，在VM中由一个布尔属性来控制;</li>
+                <li>事件回调里再来也不进行DOM操作，而是对这些数组进行shift, pop操作，布尔属性进行反转;</li>
+                <li>把这些逻辑封到一个VM中</li>
+                <li>最后对视图进行绑定</li>
+            </ol>
+
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

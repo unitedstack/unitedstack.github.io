@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            #app{
+                background:#dfdfdf;
+                width:580px;
+                color:#000;
+                margin-bottom: 1em;
+                -margin-bottom:2em;
+            }
+            #app h1{
+                font-size: 34px;
+               	font-weight: bold;
+                text-align: center;
+                padding: 10px 0 0 0;
+                margin: 0px;
+                color:#000;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+            #app .new-todo {
+                text-align: left;
+                width:500px;
+                font-size: 24px;
+                height:30px;
+                line-height: 30px;
+            }
+            #app .left{
+                padding-left: 2em;
+            }
+            #app .todo-list {
+                margin: 10px 0;
+                padding: 0;
+                list-style: none;
+            }
+            #app .todo-list li {
+                padding: 18px 20px 18px 0;
+                position: relative;
+                width: 480px;
+                font-size: 24px;
+                height: 30px;
+                line-height: 30px;
+                text-align: left;
+                background:#f5f5f5;
+                border-bottom: 1px solid #dfdfdf;
+            }
+            #app .todo-list .destroy {
+                position: absolute;
+                right: 5px;
+                top: 20px;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                width: 30px;
+                height: 30px;
+                color:#000;
+            }
+            #app .editing{
+                position:absolute;
+                top: 0;
+                width: 480px;
+                height: 30px;
+                font-size: 25px;
+                padding: 13px 15px 15px 0px;
+                margin: 0;
+            }
+            #app .todo-list li a{
+                display: none;
+            }
+            #app .todo-list li.hover a{
+                display: block;
+            }
+            #app .todo-list li.done label{
+                text-decoration: line-through;
+            }
+            #app .todo-list li label {
+                width:444px;
+            }
+            #app #footer{
+                width: 540px;
+                overflow: hidden;
+                color: #fff;
+                background: #4d6366;
+                border-top: 1px solid #ededed;
+                padding-left: 2em;
+                line-height: 40px;
+                margin-bottom:-20px;
+                -webkit-border-radius: 0 0 5px 5px;
+                -moz-border-radius: 0 0 5px 5px;
+                -ms-border-radius: 0 0 5px 5px;
+                -o-border-radius: 0 0 5px 5px;
+                border-radius: 0 0 5px 5px;
+            }
+            #app  #clear-completed {
+                float: right;
+                line-height: 20px;
+                text-decoration: none;
+                background: rgba(0, 0, 0, 0.1);
+                color: #000;
+                font-size: 11px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding: 0 10px 1px;
+                cursor: pointer;
+                -webkit-border-radius: 12px;
+                -moz-border-radius: 12px;
+                -ms-border-radius: 12px;
+                -o-border-radius: 12px;
+                border-radius: 12px;
+                -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+                -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+                -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+                -o-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+                box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+            }
+        </style>
+        <script type="text/javascript">
+avalon.define("todos", function(a) {
+    a.posts = [{text: "aaa", done: false, edit: false}, {text: "bbb", done: false, edit: false}];
+
+    function getLeft() {
+        return a.posts.filter(function(post) {
+            return !post.done;
+        }).length;
+    }
+    a.left = getLeft();
+
+    a.newIt = function(e) {
+        if (e.which === 13 && this.value) {
+            a.posts.push({
+                text: this.value,
+                done: false,
+                edit: false
+            });
+            this.value = "";
+            a.left = getLeft();
+        }
+    };
+
+    a.checkIt = function() {
+        this.$vmodel.post.done = this.checked;
+        a.left = getLeft();
+    };
+    a.removeIt = function() {
+        this.$vmodel.$remove();
+        a.left = getLeft();
+    };
+    a.removeThem = function() {
+        a.posts.removeAll(function(post) {
+            return post.done;
+        });
+        a.left = getLeft();
+    };
+    a.checkThem = function() {
+        var done = this.checked;
+        var len = a.posts.length;
+        a.posts.forEach(function(post) {
+            post.done = done;
+            if (done) {
+                len--;
+            }
+        });
+        a.left = len;
+    };
+    a.editIt = function() {//让那条评论可编辑
+        a.posts.forEach(function(post) {
+            post.edit = false;
+        });
+        this.$vmodel.post.edit = true;
+    };
+    a.updateIt = function() {
+        var post = this.$vmodel.post;
+        post.text = this.value;
+        post.edit = false;
+    };
+});
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>todos</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>著名的todos,可以在<a href="http://todomvc.com/">todomvc官网</a>，对比其他MV*的实现，它是让用户写代码最少的。</p>
+            <p>使用到ms-visible绑定， ms-class绑定及只读计算属性（只写get, 不写set的计算属性）</p>
+            <div ms-skip>
+                <h3>HTML结构</h3>
+                <pre class="brush:html;gutter:false;toolbar:false">
+ &lt;div id="app" ms-controller="todos"&gt;
+            &lt;h1&gt;todos&lt;/h1&gt;
+            &lt;div class="left"&gt;
+                &lt;input class="new-todo" placeholder="What needs to be done?" autofocus ms-keypress="newIt"&gt;
+            &lt;/div&gt;
+            &lt;div class="left" ms-visible="posts.size()" &gt;
+                &lt;input id="toggle-all" type="checkbox" ms-click="checkThem"&gt;
+                &lt;label for="toggle-all"&gt;Mark all as complete&lt;/label&gt;
+                &lt;ul class="todo-list" ms-each-post="posts"&gt;
+                    &lt;li  ms-class-done="post.done"  ms-hover="hover" &gt;
+                        &lt;div ms-visible="!post.edit" ms-dblclick="editIt"&gt;
+                            &lt;input type="checkbox" ms-checked="post.done" ms-click="checkIt" width="10px"  /&gt;
+                            &lt;label&gt;{{post.text}}&lt;/label&gt;
+                            &lt;a href="###" ms-click="removeIt" class="destroy"&gt;●&lt;/a&gt;
+                        &lt;/div&gt;
+                        &lt;input class="editing" ms-visible="post.edit" ms-value="post.text" ms-blur="updateIt" /&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div ms-visible="posts.size()" id="footer"&gt;
+                &lt;a href="###" id="clear-completed"  ms-click="removeThem" ms-visible="posts.size() - left"&gt;Clear completed&lt;/a&gt;
+                &lt;div id="todo-count"&gt; &lt;b&gt; {{left}}&lt;/b&gt; {{left &lt;= 1 ? "item" : "items"}} left &lt;/div&gt;
+            &lt;/div&gt;
+ &lt;/div&gt;
+                </pre>   
+                <h3>ViewModel</h3>
+                <pre class="brush:js;gutter:false;toolbar:false">
+avalon.define("todos", function(a) {
+    a.posts = [{text: "aaa", done: false, edit: false}, {text: "bbb", done: false, edit: false}];
+
+    function getLeft() {
+        return a.posts.filter(function(post) {
+            return !post.done;
+        }).length;
+    }
+    a.left = getLeft();
+
+    a.newIt = function(e) {
+        if (e.which === 13 && this.value) {
+            a.posts.push({
+                text: this.value,
+                done: false,
+                edit: false
+            });
+            this.value = "";
+            a.left = getLeft();
+        }
+    };
+
+    a.checkIt = function() {
+        this.$vmodel.post.done = this.checked;
+        a.left = getLeft();
+    };
+    a.removeIt = function() {
+        this.$vmodel.$remove();
+        a.left = getLeft();
+    };
+    a.removeThem = function() {
+        a.posts.removeAll(function(post) {
+            return post.done;
+        });
+        a.left = getLeft();
+    };
+    a.checkThem = function() {
+        var done = this.checked;
+        var len = a.posts.length;
+        a.posts.forEach(function(post) {
+            post.done = done;
+            if (done) {
+                len--;
+            }
+        });
+        a.left = len;
+    };
+    a.editIt = function() {//让那条评论可编辑
+        a.posts.forEach(function(post) {
+            post.edit = false;
+        });
+        this.$vmodel.post.edit = true;
+    };
+    a.updateIt = function() {
+        var post = this.$vmodel.post;
+        post.text = this.value;
+        post.edit = false;
+    };
+});
+                </pre>
+            </div>
+            <fieldset>
+                <div id="app" ms-controller="todos">
+                    <h1>todos</h1>
+                    <div class="left">
+                        <input class="new-todo" placeholder="What needs to be done?" autofocus ms-keypress="newIt">
+                    </div>
+                    <div class="left" ms-visible="posts.size()" >
+                        <input id="toggle-all" type="checkbox" ms-click="checkThem">
+                        <label for="toggle-all">Mark all as complete</label>
+                        <ul class="todo-list" ms-each-post="posts">
+                            <li  ms-class-done="post.done" ms-hover="hover"  >
+                                <div ms-visible="!post.edit" ms-dblclick="editIt">
+                                    <input type="checkbox" ms-checked="post.done" ms-click="checkIt" width="10px"  />
+                                    <label>{{post.text}}</label>
+                                    <a href="###" ms-click="removeIt" class="destroy">●</a>
+                                </div>
+                                <input class="editing" ms-visible="post.edit" ms-value="post.text" ms-blur="updateIt" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div ms-visible="posts.size()" id="footer">
+                        <a href="###" id="clear-completed"  ms-click="removeThem" ms-visible="posts.size() - left">Clear completed</a>
+                        <div id="todo-count"> <b> {{left}}</b> {{left <= 1 ? "item" : "items"}} left </div>
+                    </div>
+                </div>
+            </fieldset>
+            <p>可以看出ViewModel在DOM树的作用范围其实与CSS很相似，采取就近原则，如果当前ViewModel没有此字段
+                就找上一级ViewModel的同名字段，这个机制非常有利于团队协作。</p>
+            <p>而important就相当于CSS的important语句，
+                强制这个区域使用此ViewModel，没有也不往上找，这样就不怕那猪一样的队友害事了！</p>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

@@ -1,0 +1,158 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+
+        </style>
+        <script type="text/javascript">
+            avalon.ready(function() {
+                avalon.define("test", function(vm) {
+                    vm.url = "template1"
+                    vm.name = "司徒正美"
+                    vm.password = '12345678'
+                    vm.array = [1, 2, 3, 4, 5, 6, 7]
+                })
+                avalon.scan()
+            })
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style="color:#fff">
+                <h1>ms-include</h1>
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+
+                <p>
+                    如果单是把DOM树作为一个模板远远不够的，比如有几个地方，需要重复利用一套HTML结构，这就要用到内部模板或外部模板了。
+                </p>
+                <p>内部模板是，这个模板与目标节点是位于同一个DOM树中。我们用一个MIME不明的script保存它，然后通过ms-include="id"引用它。</p>
+                <pre class="brush:html;gutter:false;toolbar:false;">
+        &lt;script type="text/avalon" id="tpl"&gt;
+            here, {{ 1 + 1 }}
+        &lt;/script&gt;
+
+        &lt;div  ms-include="'tpl'"&gt;&lt;/div&gt;
+                </pre>
+                <p>注意，ms-include的值要用引号括起，表示这只是一个字符串，这时它就会搜索页面的具有此ID的节点，取其innerHTML，放进ms-include所在的元素内部。否则这个tpl会被当成一个变量，
+                    框架就会在VM中检测有没有此属性，有就取其值，重复上面的步骤。如果成功，页面会出现here, 2的字样。
+                </p>
+                <p>外部模板，通常用于多个页面的复用，因此需要整成一个独立的文件。这时我们就需要通过ms-include-src="src"进行加载。</p>
+                <p>比如有一个HTML文件tmpl.html，它的内容为：</p>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false;">
+     &lt;div&gt;这是一个独立的页面&lt;/div&gt;
+     &lt;div&gt;它是通过AJAX的GET请求加载下来的&lt;/div&gt;
+                    </pre>
+                </div>
+                <p>然后我们这样引入它</p>
+                <pre class="brush:html;gutter:false;toolbar:false;">
+        &lt;div  ms-include-src="'tmpl.html'"&gt;&lt;/div&gt;
+                </pre>
+                <fieldset ><legend>例子</legend>
+                    <p>现在我们有这样一个页面与三个子页面</p>
+                    <div ms-skip>
+                        <p>index.html</p>
+                        <pre class="brush:html;gutter:false;toolbar:false;">
+      &lt;script&lt;
+            avalon.ready(function() {
+                avalon.define("test", function(vm) {
+                    vm.url = "template1"
+                    vm.name = "司徒正美"
+                    vm.password = '12345678'
+                    vm.array = [1,2,3,4,5,6,7]
+                })
+                avalon.scan()
+            })
+
+        &lt;/script&lt;
+        &lt;div ms-controller="test"&lt;
+            &lt;select ms-model="url"&lt;
+                &lt;option&lt;
+                    template1
+                &lt;/option&lt;
+                &lt;option&lt;
+                    template2
+                &lt;/option&lt;
+                &lt;option&lt;
+                    template3
+                &lt;/option&lt;
+            &lt;/select&lt;
+            &lt;div ms-include-src="{{url}}.html"&lt;&lt;/div&lt;
+        &lt;/div&lt;
+                        </pre>
+                        <p>template1.html</p>
+                        <pre class="brush:html;gutter:false;toolbar:false;">
+&lt;h1&gt;这是模板1&lt;/h1&gt;
+&lt;p&gt;生成于{{ new Date | date("yyyy MM dd:HH:mm:ss")}}&lt;/p&gt;
+                        </pre>
+                        <p>template2.html</p>
+                        <pre class="brush:html;gutter:false;toolbar:false;">
+&lt;form name="xxx"&gt;
+    &lt;p&gt;姓名：&lt;input ms-model="name"&gt;&lt;/p&gt;
+    &lt;p&gt;密码：&lt;input type="password" ms-model="password"/&gt;&lt;/p&gt;
+&lt;/form&gt;
+                        </pre>
+                        <p>template3.html</p>
+                        <pre class="brush:html;gutter:false;toolbar:false;">
+&lt;ul ms-each-el="array"&gt;
+    &lt;li&gt;第{{el}}个元素&lt;/li&gt;
+&lt;/ul&gt;
+                        </pre>
+                    </div>
+                    <div ms-controller="test">
+                        <select ms-model="url">
+                            <option>
+                                template1
+                            </option>
+                            <option>
+                                template2
+                            </option>
+                            <option>
+                                template3
+                            </option>
+                        </select>
+                        <div ms-include-src="{{url}}.html"></div>
+                    </div>
+
+                </fieldset>
+
+
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            </div>
+    </body>
+</html>
+
+

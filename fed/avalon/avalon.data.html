@@ -1,0 +1,107 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            #classtable{
+                border: 1px solid #333;
+                border-collapse: collapse;
+                width: 90%;
+            }
+            #classtable td,#classtable th{
+                border: 1px solid #333;
+                padding:4px;;
+            }
+            /*第一种颜色*/
+            tr.odd{
+
+            }
+            /*第二种颜色*/
+            tr.even{
+                background: #3671a5;
+            }
+            tr.hover{
+                background: #aabccd!important;
+            }
+
+        </style>
+        <script type="text/javascript">
+
+            avalon.ready(function() {
+                avalon.define("sample", function(vm) {
+                    vm.firstname = "aaa"
+                    vm.toggle = true;
+                });
+                avalon.scan();
+            })
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>ms-data绑定</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>用于为元素添加data-*属性。</p>
+            <p>用法为ms-data-aaa="bbb",bbb可以为ViewModel的某个监控属性或表达式，如vm.bbb="rubylouvre"，那么设置元素为setAttribute("data-aaa","rubylovre")</p>
+            <p>ms-data后面也可以接很长的字符串，如ms-data-xxx-yyy, 那么设置元素为setAttribute("data-xxx-yyy","rubylovre")</p>
+            <p>ms-data多用于框架的UI的一些配置制定。</p>
+            <p>比如ms-model会默认为表单元素绑定一些事件,如果我们想禁止这些事件,可以使用data-observe来配置.</p>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+  &lt;div ms-controller="sample"&gt;
+                &lt;input ms-model="firstname" ms-data-observe="toggle"&gt;{{firstname}}
+                &lt;p&gt;&lt;input type="radio" ms-model="toggle"&gt;&lt;/p&gt;
+  &lt;/div&gt;
+                </pre>   
+
+                <pre class="brush:js;gutter:false;toolbar:false">
+         avalon.ready(function(){
+            avalon.define("sample", function(vm) {
+                vm.firstname = "aaa"
+                vm.toggle = true;
+            });
+           avalon.scan();
+         }) 
+                </pre>  
+            </div>
+            <div ms-controller="sample">
+                <input ms-model="firstname" ms-data-observe="toggle">{{firstname}}
+                <p><input type="radio" ms-model="toggle">点这个切换同步</p>
+            </div>
+
+
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+    </body>
+</html>

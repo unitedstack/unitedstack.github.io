@@ -1,0 +1,128 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+        <script>
+
+            avalon.ready(function() {
+                avalon.define("AAA", function(vm) {
+                    vm.name = "liger"
+                    vm.color = "green"
+                    });
+                avalon.define("BBB", function(vm) {
+                    vm.name = "sphinx"
+                    vm.color = "red"
+                    });
+                avalon.define("CCC", function(vm) {
+                    vm.name = "dragon"
+                    });
+                avalon.define("DDD", function(vm) {
+                    vm.name = "sirenia"
+                    });
+                avalon.scan()
+                })
+
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>ms-controller与ms-important</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>如果一个页面非常复杂，就需要划分模块，每个模块交由不同的ViewModel去处理。我们就要用到这两个绑定来指定ViewModel了。</p>
+            <p>我们看下面的例子：</p>
+            <div ms-skip>
+                <h3>HTML结构</h3>
+                <pre class="brush:html;gutter:false;toolbar:false">
+&lt;div ms-controller="AAA"&gt;
+    &lt;div&gt;{{name}} :  {{color}}&lt;/div&gt;
+    &lt;div ms-controller="BBB"&gt;
+        &lt;div&gt;{{name}} :  {{color}}&lt;/div&gt;
+        &lt;div ms-controller="CCC"&gt;
+            &lt;div&gt;{{name}} :  {{color}}&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div ms-important="DDD"&gt;
+            &lt;div&gt;{{name}} :  {{color}}&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </pre>   
+                <h3>ViewModel</h3>
+                <pre class="brush:html;gutter:false;toolbar:false">
+  　avalon.ready(function() {
+　　    avalon.define("AAA", function(vm) {
+　　        vm.name = "liger"
+　　        vm.color = "green"
+　　    });
+　　    avalon.define("BBB", function(vm) {
+　　        vm.name = "sphinx"
+　　        vm.color = "red"
+　　    });
+　　    avalon.define("CCC", function(vm) {
+　　        vm.name = "dragon"
+　　    });
+　　    avalon.define("DDD", function(vm) {
+　　        vm.name = "sirenia"
+　　    });
+　　    avalon.scan()
+　　})
+                </pre>
+            </div>
+            <fieldset>
+                <div><img src="images/important.png"/></div>
+                <div ms-controller="AAA">
+                    <div>{{name}} :  {{color}}</div>
+                    <div ms-controller="BBB">
+                        <div>{{name}} :  {{color}}</div>
+                        <div ms-controller="CCC">
+                            <div>{{name}} :  {{color}}</div>
+                        </div>
+                        <div ms-important="DDD">
+                            <div>{{name}} :  {{color}}</div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <p>可以看出ViewModel在DOM树的作用范围其实与CSS很相似，采取就近原则，如果当前ViewModel没有此字段
+                就找上一级ViewModel的同名字段，这个机制非常有利于团队协作。</p>
+            <p>而important就相当于CSS的important语句，
+                强制这个区域使用此ViewModel，没有也不往上找，这样就不怕那猪一样的队友害事了！</p>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

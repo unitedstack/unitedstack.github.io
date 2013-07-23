@@ -1,0 +1,307 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            #classtable{
+                border: 1px solid #333;
+                border-collapse: collapse;
+                width: 90%;
+            }
+            #classtable td,#classtable th{
+                border: 1px solid #333;
+                padding:4px;;
+            }
+            /*第一种颜色*/
+            tr.odd{
+
+            }
+            /*第二种颜色*/
+            tr.even{
+                background: #3671a5;
+            }
+            tr.hover{
+                background: #aabccd!important;
+            }
+
+        </style>
+        <script type="text/javascript">
+
+            avalon.ready(function() {
+                // 这里的逻辑是test2的数据来自test1，test1的数据来自test0
+                avalon.define("test", function(vm) {
+                    vm.test0 = false;
+                    vm.test1 = {
+                        set: function(val) {
+                            this.test0 = val;
+                        },
+                        get: function() {
+                            return this.test0;
+                        }
+                    };
+                    vm.test2 = false;
+                    vm.$watch('test1', function(val) {
+                        vm.test2 = val;
+                    });
+                    vm.one = function() {
+                        vm.test1 = !vm.test1;
+                    };
+                    vm.two = function() {
+                        vm.test0 = !vm.test0;
+                    };
+                });
+                avalon.define("test2", function(vm) {
+                    vm.test0 = false;
+                    vm.test1 = false;
+                    vm.test2 = false;
+                    vm.msg = '';
+                    vm.$watch('test0', function(val) {
+                        if (val) {
+                            vm.msg += 'test0-';
+                            vm.test1 = true;
+                            if (vm.test2) {
+                                vm.msg = '这是正确的结果！';
+                            }
+                            vm.msg += '！！';
+                        }
+                    });
+                    vm.$watch('test1', function(val) {
+                        if (val) {
+                            vm.msg += 'test1-';
+                            vm.test2 = true;
+                        }
+                    });
+                    vm.one = function() {
+                        vm.test0 = true;
+                    };
+                });
+                avalon.scan();
+
+
+            })
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>$watch方法</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>$watch方法是位于VM中，当VM的第一层的属性发生改变时，就会执行预先绑定的回调。</p>
+            <h3>一个简单的例子</h3>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+           var model = avalon.define("test1", function(vm) {
+                vm.prop = 111
+                vm.$watch("prop", function(newValue,oldValue){
+                    console.log(newValue)
+                    console.log(oldValue)
+                    console.log("---------------")
+                })
+
+            });
+            setTimeout(function(){
+                model.prop = 222
+            }, 1000)
+         
+            </pre>
+            <p>打印出：</p>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+            222
+            111
+            ---------------
+            </pre>
+            <p>用于在$watch方法进行数据校验非常方便。</p>
+            <h3>例子2， 对计算属性依赖的某个监控属性进行赋值</h3>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+            var model = avalon.define("test", function(vm) {
+                vm.firstName = "司徒";
+                vm.lastName = "正美"
+                vm.fullName = {
+                    set: function(val) {
+                        var array = val.split(" ")
+                        this.firstName = array[0] 
+                        this.lastName = array[1] 
+                    },
+                    get: function() {
+                        return this.firstName + " " + this.lastName;
+                    }
+                };
+                vm.$watch("fullName", function(newValue, oldValue) {
+                    console.log(newValue)
+                    console.log(oldValue)
+                    console.log("---------------")
+                })
+
+            });
+            setTimeout(function() {
+                model.firstName = "欧阳"
+            }, 1000)
+            </pre>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+            欧阳 正美
+            司徒 正美
+            ---------------
+            </pre>
+            <h3>例子3， 对计算属性重新赋值</h3>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+            var model = avalon.define("test", function(vm) {
+                vm.firstName = "司徒";
+                vm.lastName = "正美"
+                vm.fullName = {
+                    set: function(val) {
+                        var array = val.split(" ")
+                        this.firstName = array[0]
+                        this.lastName = array[1]
+                    },
+                    get: function() {
+                        return this.firstName + " " + this.lastName;
+                    }
+                };
+                vm.$watch("fullName", function(a, b) {
+                    console.log(a)
+                    console.log(b)
+                    console.log("---------------")
+                })
+
+            });
+            setTimeout(function() {
+                model.fullName = "欧阳 风"
+            }, 1000)
+            </pre>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+            欧阳 正美
+            司徒 正美
+            ---------------
+            欧阳 风
+            欧阳 正美
+            ---------------
+            欧阳 风
+            司徒 正美
+            ---------------
+            </pre>
+            <p>注意，在前两步中，我们可以看到姓与名是如何一步步改变的，到最后一步，是给出之前的姓名与更改后的姓名。因此不满意，可以直接还原到最初。</p>
+            <h3>第4个例子</h3>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false;">
+       <div ms-controller="test">
+            <button ms-click="one">测试1</button>
+            <button ms-click="two">测试2</button>
+            <br>test1: {{test1}}
+            <br>test2: {{test2}}
+      </div>
+                </pre>
+                <pre class="brush:js;gutter:false;toolbar:false;">
+            avalon.define("test", function(vm) {
+                vm.test0 = false;
+                vm.test1 = {
+                    set: function(val) {
+                        this.test0 = val;
+                    },
+                    get: function() {
+                        return this.test0;
+                    }
+                };
+                vm.test2 = false;
+                vm.$watch('test1', function(val) {
+                    vm.test2 = val;
+                });
+                vm.one = function() {
+                    vm.test1 = !vm.test1;
+                };
+                vm.two = function() {
+                    vm.test0 = !vm.test0;
+                };
+            });
+                </pre>
+            </div>
+            <p>内部运行流程</p>
+            <p>当我们点击测试1时，test1由false变成true, 并通过$watch带动test2也变成true。</p>
+            <p>当我们点击测试2时，test0由false变成true, 由于test1与test0存在依赖关系，test1的值由test0计算得到。在最开始的时候，test1与test0都是false,而现在test1也与test0变成true了，因此也通过$watch带动test2也变成true。</p>
+            <div ms-controller="test">
+                <button ms-click="one">测试1</button>
+                <button ms-click="two">测试2</button>
+                <br>test1: {{test1}}
+                <br>test2: {{test2}}
+            </div>
+            <h3>第5个例子</h3>
+            <p>读者自己思考其内部运作流程</p>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false;">
+        <div ms-controller="test2">
+            <button ms-click="one">测试1</button>
+            <br>test0: {{test0}}
+            <br>test1: {{test1}}
+            <br>test2: {{test2}}
+            <br>msg: {{msg}}
+        </div>
+                </pre>
+                <pre class="brush:js;gutter:false;toolbar:false;">
+          avalon.define("test2", function(vm) {
+                vm.test0 = false;
+                vm.test1 = false;
+                vm.test2 = false;
+                vm.msg = '';
+                vm.$watch('test0', function(val) {
+                    if (val) {
+                        vm.msg += 'test0-';
+                        vm.test1 = true;
+                        if (vm.test2) {
+                            vm.msg = '这是正确的结果！';
+                        }
+                        vm.msg += '！！';
+                    }
+                });
+                vm.$watch('test1', function(val) {
+                    if (val) {
+                        vm.msg += 'test1-';
+                        vm.test2 = true;
+                    }
+                });
+                vm.one = function() {
+                    vm.test0 = true;
+                };
+            });
+                </pre>
+            </div>   
+            <div ms-controller="test2">
+                <button ms-click="one">测试1</button>
+                <br>test0: {{test0}}
+                <br>test1: {{test1}}
+                <br>test2: {{test2}}
+                <br>msg: {{msg}}
+            </div>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+    </body>
+</html>
+

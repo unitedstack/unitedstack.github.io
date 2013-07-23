@@ -1,0 +1,157 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+        <script type="text/javascript">
+
+            avalon.ready(function() {
+                var model = avalon.define("form", function(vm) {
+                    vm.fruits = [{name: "xxx"}, {name: "yyy"}, {name: "ooo"}, {name: "ppp"}]
+                    vm.numbers = [1, 2, 3, 4]
+                    vm.push = function() {
+                        vm.fruits.push({name: "ccccccccc"})
+                    }
+                    vm.pop = function() {
+                        vm.fruits.pop()
+                    }
+                    vm.replace = function() {
+                        vm.fruits = [{name: 1}, {name: 2}]
+                    }
+                    vm.array = []
+                });
+                setTimeout(function() {
+                    model.fruits.set(1, {name: "等4秒"})
+                    model.numbers.set(3, 20)
+                }, 4000)
+                setTimeout(function() {
+                    model.fruits[0].name = "等六秒"//对于对象数组,直接在对象上修改
+                    model.numbers.set(2, 40)
+                }, 6000)
+                setTimeout(function() {
+                    for(var i = 0; i < 50; i++){
+                        model.array.push(i)
+                    }
+                }, 6000)
+                avalon.scan();
+            })
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>ms-each绑定</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>语法为ms-each-xxx='array'，xxx为数组的某一个元素。在循环中， 我们还可以使用$index, $first, $last, $remove方法对数组元素进行判定。</p>
+            <p>$index为数组元素对应的索引值</p>
+            <p>$first，判定它是否第一个</p>
+            <p>$last，判定它是否最后一个</p>
+            <p>$remove，移除此数组元素</p>
+            <div style="color:#fff">
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+               &lt;div ms-controller="form"&gt;
+                    &lt;div ms-each-el="fruits" &gt;
+                        &lt;h3&gt;{{el.name}}&lt;/h3&gt;
+                        &lt;p&gt;这是第{{$index}}个了&lt;/p&gt;
+                        &lt;hr/&gt;
+                    &lt;/div&gt;
+                    &lt;button ms-click="push"&gt;push&lt;/button&gt;
+                    &lt;button ms-click="pop"&gt;pop&lt;/button&gt;
+                    &lt;button ms-click="replace"&gt;replace&lt;/button&gt;
+                    &lt;ol ms-each-number="numbers" &gt;
+                        &lt;li&gt;{{number}}&lt;/li&gt;
+                &lt;/div&gt;
+                    </pre>   
+                    <pre class="brush:js;gutter:false;toolbar:false">
+            avalon.ready(function() {
+                var model = avalon.define("form", function(vm) {
+                    vm.fruits = [{name: "xxx"}, {name: "yyy"}, {name: "ooo"}, {name: "ppp"}]
+                    vm.numbers = [1, 2, 3, 4]
+                    vm.push = function() {
+                        vm.fruits.push({name: "ccccccccc"})
+                    }
+                    vm.pop = function() {
+                        vm.fruits.pop()
+                    }
+                    vm.replace = function() {
+                        vm.fruits = [{name: 1}, {name: 2}]
+                    }
+                });
+                setTimeout(function() {
+                    model.fruits.set(1, {name: "等4秒"})
+                    model.numbers.set(3, 20)
+                }, 4000)
+
+                setTimeout(function() {
+                    model.fruits[0].name = "等六秒"//对于对象数组,直接在对象上修改
+                    model.numbers.set(2, 40)
+                }, 6000)
+                setTimeout(function() {
+                    for(var i = 0; i < 50; i++){
+                        model.array.push(i)
+                    }
+                }, 6000)
+                avalon.scan();
+            })
+                    </pre>   
+                </div>
+                <div ms-controller="form">
+                    <div ms-each-el="fruits" >
+                        <h3>{{el.name}}</h3>
+                        <p>这是第{{$index}}个了</p>
+                        <hr/>
+                    </div>
+                    <button ms-click="push">push</button>
+                    <button ms-click="pop">pop</button>
+                    <button ms-click="replace">replace</button>
+                    <ol ms-each-number="numbers" >
+                        <li>{{number}}</li>
+                </div>
+
+                <div ms-each-el="array" >
+                    {{el}}
+                </div>
+            </div>
+
+
+            <br/>
+            <br/>
+            <br/>
+
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+    </body>
+</html>

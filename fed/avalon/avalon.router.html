@@ -1,0 +1,200 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/avalon.router.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+        <script>
+            avalon.ready(function() {
+                avalon.Router.extend({
+                    routes: {
+                        '': 'index', // 当URL Hash在根目录时执行index方法：url#  
+                        'list': 'getList', // 当URL Hash在list节点时执行getList方法：url#list  
+                        'detail/:id': 'query', // 当URL Hash在detail节点时执行query方法，并将detail后的数据作为参数传递给query方法：url#list/1001  
+                        'time/:year/:month/:day': 'current',
+                        '*error': 'showError' // 当URL Hash不匹配以上规则时, 执行error方法  
+                    },
+                    index: function() {
+                        alert('index');
+                    },
+                    getList: function() {
+			 alert(this.value)
+                        avalon.log(this);
+                    },
+                    query: function(id) {
+                        alert('query id: ' + id);
+                    },
+                    current: function(year, month, day) {
+                        alert([year, month, day].join("-"));
+                    },
+                    showError: function(url) {
+                        alert(url + "这个URL没有对应的处理函数");
+                    }
+                });
+                avalon.history.start(true);
+                avalon.scan();
+            })
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>avalon路由系统</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>本模块需要引入avalon.router.js</p>
+            <p>本模块其实涉及两个部分，一个是历史管理， 我们通过监听URL中hash的变化来执行相应的回调，另一个路由系统，首先我们得定义一个路由表，剩下的事框架帮我们搞定。</p>
+            <p>本模块对URL的hash处理参考了argular，拥有两个模式：Hashbang mode（默认）与基于使用HTML5 History API的HTML5 mode。
+                在两种模式下，除了URL外观有点不一样外，其他都相同的，都能正确监听URL变化与处理后退按钮。</p>
+            <div><img src="images/$location.jpg"/></div>
+            <ul>
+                <li> Hashbang mode (default mode), 这个模式下所有浏览器都支持</li>
+                <li> HTML5 mode， 这个只能应用于firefox, chrome, safari，虽然IE10与opera12.1也支持HTML5 History API，
+                    但它们的popstate事件不够强大，只能手动触发pushState事件才触发。为此，即使你设置avalon.history.start(true)，它也是使用Hashbang mode运作。</li>
+            </ul>
+            <p>当我们使用history API mode的时候，我们对于不同的浏览器，需要不同的链接，
+                但我们只需要提供其hash部分就行了，例如&lt;a href=“#some?foo=bar”&gt;link&lt;/a&gt;</p>
+            <p>当用户单击这个超链接时：</p>
+            <ul>
+                <li>在Hashbang mode中，URL会改为/index.html#!index.html#some?foo=bar</li>
+                <li>在HTML5 mode中，URL会改为/index.html#some?foo=bar</li>
+            </ul>
+            <p>你会发现，Hashbang mode中的#!后面的部分等于HTML5 mode中的除域名外的所有部分。而#!其实是google的 _escaped_fragment_ 爬抓规则，
+                方便我们的AJAX应用也能被爬虫收录。当然，我们还需要在head标签内添加一个meta
+            </p>
+            <pre class="brush:html;gutter:false;toolbar:false">
+               &lt;meta name="fragment" content="!" /&gt;
+            </pre>
+            <p>想了解更多关于这个技术的信息，可以查看<a href="https://developers.google.com/webmasters/ajax-crawling/docs/specification?hl=zh-CN">这里</a></p>
+            <p>avalon对此的改良是，不像angular那样入侵所有链接的点击事件。</p>
+            <pre class="brush:js;gutter:false;toolbar:false">
+  //angular的相应实现：
+  $rootElement.bind('click', function(event) {
+      // TODO(vojta): rewrite link when opening in new tab/window (in legacy browser)
+      // currently we open nice url link and redirect then
+
+      if (event.ctrlKey || event.metaKey || event.which == 2) return;
+
+      var elm = jqLite(event.target);
+
+      // traverse the DOM up to find first A tag
+      while (lowercase(elm[0].nodeName) !== 'a') {
+        // ignore rewriting if no A tag (reached root element, or no parent - removed from document)
+        if (elm[0] === $rootElement[0] || !(elm = elm.parent())[0]) return;
+      }
+
+      var absHref = elm.prop('href');
+      var rewrittenUrl = $location.$$rewrite(absHref);
+
+      if (absHref && !elm.attr('target') && rewrittenUrl && !event.isDefaultPrevented()) {
+        event.preventDefault();
+        if (rewrittenUrl != $browser.url()) {
+          // update location manually
+          $location.$$parse(rewrittenUrl);
+          $rootScope.$apply();
+          // hack to work around FF6 bug 684208 when scenario runner clicks on links
+          window.angular['ff-684208-preventDefault'] = true;
+        }
+      }
+    });
+            </pre>
+            <p>avalon在此公开三个API，外观与backbone的一模一样，只是传参做了简化：</p>
+            <ul>
+                <li>avalon.history.state(mode)， 开始监听URL变化，mode为一个布尔，可以不写，默认为false，使用   Hashbang mode 。</li>
+                <li>avalon.history.stop()， 中止监听URL变化。</li>
+                <li>avalon.history.interval，请赋给它一个数值，默认是35，表示每35ms轮询一次，用于IE6-7。</li>
+            </ul>
+            <p>路由系统，基本上与backbone一模一样，首先我们要用avalon.Router.extend方法定义一个路由表。然后由框架在监听URL变化时调用的回调中执行它的avalon.Router.navigate方法。</p>
+
+
+
+            <p>我们看下面的例子：</p>
+            <div ms-skip>
+                <h3>HTML结构</h3>
+                <pre class="brush:html;gutter:false;toolbar:false">
+        &lt;p&gt; &lt;a href="#"&gt;aaa&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt; &lt;a href="#list"&gt;bbb&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt; &lt;a href="#detail/2342"&gt;ccc&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt; &lt;a href="#time/2013/6/1"&gt;ddd&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt; &lt;a href="#dfer"&gt;eee&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;a href="#some?foo=bar"&gt;link&lt;/a&gt;&lt;/p&gt;
+
+                </pre>   
+                <h3>JS</h3>
+                <pre class="brush:js;gutter:false;toolbar:false">
+            avalon.ready(function() {
+                avalon.Router.extend({
+                    routes: {
+                        '': 'index', // 当URL Hash在根目录时执行index方法：url#  
+                        'list': 'getList', // 当URL Hash在list节点时执行getList方法：url#list  
+                        'detail/:id': 'query', // 当URL Hash在detail节点时执行query方法，并将detail后的数据作为参数传递给query方法：url#list/1001  
+                        'time/:year/:month/:day': 'current',
+                        '*error': 'showError' // 当URL Hash不匹配以上规则时, 执行error方法  
+                    },
+                    index: function() {
+                        alert('index');
+                    },
+                    getList: function() {
+			 alert(this.value);
+                        avalon.log(this);
+                    },
+                    query: function(id) {
+                        alert('query id: ' + id);
+                    },
+                    current: function(year, month, day) {
+                        alert([year, month, day].join("-"));
+                    },
+                    showError: function(url) {
+                        alert( url +"这个URL没有对应的处理函数");
+                    }
+                });
+                avalon.history.start(true);
+                avalon.scan();
+            })
+
+                </pre>   
+            </div>
+            <fieldset><legend>示例</legend>
+                <p> <a href="#" >aaa</a></p>
+                <p> <a href="#list" >bbb</a></p>
+                <p> <a href="#detail/2342">ccc</a></p>
+                <p> <a href="#time/2013/6/1">ddd</a></p>
+                <p> <a href="#dfer">eee</a></p>
+                <p><a href="#some?foo=bar">link</a></p>
+            </fieldset>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

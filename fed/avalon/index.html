@@ -1,150 +1,357 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title> by Tengfei</title>
-  </head>
-
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Avalon</h1>
-        <h2>Mini easy to use MVVM framework</h2>
-        <a href="https://github.com/RubyLouvre/avalon" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
-<a name="" class="anchor" href=""><span class="octicon octicon-link"></span></a>
-Advantage
-<img src="https://secure.travis-ci.org/modulejs/modjs.png?branch=master" alt="Build Status"></a>
-</h1>
-<ul>
-  <li>Easy to use, add the binding in HTML, JS using avalon.define defined in ViewModel, then call avalon.scan method, it got the moves!</li>
-  <li>Compatible to IE6 (other mvvm framework, knockoutjs IE6, angularjs IE7, emberjs IE8, winJS IE9)</li>
-  <li>No dependencies, only 72K, 22K compressed</li>
-  <li>Support the pipe character style filter function, easy formatting output</li>
-  <li>Partial refresh particle size has been refined to a text node, attribute node</li>
-  <li>To operate the nodes on the first scan and view refresh function with bindings and cached, so there is no room for playing selector</li>
-  <li>Let DOM manipulation code nearly extinct</li>
-  <li>Overlapping coverage using CSS-like mechanism to allow each ViewModel partition alternately rendering the page</li>
-  <li>Nodes removed, smart uninstall the corresponding view refresh function saves memory</li>
-  <li>Operational data that is operating DOM, on the ViewModel synchronized operations will go to the View and Model</li>
-</ul>
-
-<h2>
-<a name="what-is-StackUI" class="anchor" href="#what-is-mod"><span class="octicon octicon-link"></span></a>Structure</h2>
-
-<p><img src="./images/architecture.jpg" /></p>
-<ul>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.api.html">API文档</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.define.html">avalon.define</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.mix.html">avalon.mix</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.important.html">ms-important与ms-controller绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.class.html">ms-class、 ms-hover与ms-active绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.html.html">ms-text, ms-html, {{text}}与{{text|html}}</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.model.html">ms-model绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.css.html">ms-css绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.visible.html">ms-visible绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.include.html">ms-include绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.bind.html">ms-bind绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.watch.html">$watch方法</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.href.html">ms-href, ms-src, ms-alt, ms-title, ms-value绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.disabled.html">ms-disabled, ms-enabled, ms-readonly, ms-checked, ms-selected绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.data.html">ms-data绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.on.html">ms-on-*, ms-dblclick, ms-mouseout, ms-click, ms-mouseover等事件绑定</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.each.html">ms-each绑定</a></li>
-
-    <li><a href="datepicker.html">日期选择器</a></li>
-    <li><a href="todos.html">todos示例</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.router.html">avalon路由系统</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.switch.html">switch组件</a></li>
-    <!--<li><a href="http://rubylouvre.github.io/mvvm/avalon.grid.html">grid组件</a></li>-->
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.slider.html">slider组件</a></li>
-    <li><a href="http://rubylouvre.github.io/mvvm/avalon.draggable.html">ms-draggable绑定(以插件形式引入)</a></li>
-</ul>
-
-<h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Example</h2>
-
-<div class="highlight">
-<pre>
-&lt;fieldset ms-controller="simple"&gt;
-    &lt;legend&gt;例子&lt;/legend&gt;
-    &lt;p&gt;First name: &lt;input ms-model="firstName" /&gt;&lt;/p&gt;
-    &lt;p&gt;Last name: &lt;input ms-model="lastName"  /&gt;&lt;/p&gt;
-    &lt;p&gt;Hello,    &lt;input ms-model="fullName"&gt;&lt;/p&gt;
-    &lt;div&gt;{{firstName +" | "+ lastName }}&lt;/div&gt;
-    &lt;p&gt;nick name: &lt;input ms-model="nick.name"  /&gt;&lt;/p&gt;
-    &lt;p&gt;{{nick.name}}&lt;/p&gt;
-&lt;/fieldset&gt;
-avalon.define("simple", function(vm) {
-    vm.firstName = "司徒"
-    vm.lastName = "正美"
-    vm.fullName = {//一个包含set或get的对象会被当成PropertyDescriptor，
-        set: function(val) {//set, get里面的this不能改成vm
-            var array = (val || "").split(" ");
-            this.firstName = array[0] || "";
-            this.lastName = array[1] || "";
-        },
-        get: function() {
-            return this.firstName + " " + this.lastName;
-        }
-    },
-    vm.nick = {
-          name: "暗黑之民"
-    }
-});
-</pre>
-</div>
-
-<h2>
-<a name="website" class="anchor" href="#website"><span class="octicon octicon-link"></span></a>Website</h2>
-
-<ul>
-<li>Website：<a href="http://openstack.unitedstack.com">http://openstack.unitedstack.com</a>
-</li>
-<li>chinese website<a href="http://openstack.unitedstack.com">http://openstack.ustack.com/</a>
-</li>
-</ul>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            .ms-grid { margin-bottom: 1em; width: 25em; border: 1px solid silver; }
+            .ms-grid th { text-align:left; background: black; color:White; }
+            .ms-grid td, th { padding: 0.4em; }
+            .ms-grid tr:nth-child(odd) { background: #DDD;color:black; }
+            .ms-grid-pageLinks { margin-bottom: 1em; }
+            .ms-grid td a{color:red;font-family:Microsoft YaHei,Georgia, 'Times New Roman', Times, serif}
+            .ms-grid-pageLinks a { padding: 0.5em; }
+            .ms-grid-pageLinks a.selected { background: black; color: White; }
 
 
-<h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+        </style>
+        <script>
 
-<p>Project is released under a <a href="http://opensource.org/licenses/mit-license.php">MIT</a> license.</p>
+            avalon.ready(function() {
+                var a = avalon.define("simple", function(vm) {
+                    vm.firstName = "司徒"
+                    vm.lastName = "正美"
+                    vm.fullName = {//一个包含set或get的对象会被当成PropertyDescriptor，
+                        set: function(val) {//里面必须用this指向scope，不能使用scope
+                            var array = (val || "").split(" ");
+                            this.firstName = array[0] || "";
+                            this.lastName = array[1] || "";
+                        },
+                        get: function() {
+                            return this.firstName + " " + this.lastName;
+                        }
+                    },
+                    vm.nick = {
+                        name: "暗黑之民"
+                    }
+                });
+                avalon.define("array", function(vm) {
+                    vm.array = ["1", "2", "3", "4"]
+                    "push,unshift,remove,ensure".replace(/\w+/g, function(method) {
+                        vm[method] = function(e) {
+                            if (this.value && e.which == 13) {//this为input元素
+                                vm.array[method](this.value);
+                                this.value = "";
+                            }
+                        }
+                    })
+                    vm.removeAt = function(e) {
+                        if (isFinite(this.value) && e.which == 13) {//this为input元素
+                            vm.array.removeAt(Number(this.value))
+                            this.value = "";
+                        }
+                    }
+                    "pop,shift,sort,reverse".replace(/\w+/g, function(method) {
+                        vm[method] = function(e) {
+                            vm.array[method]();
+                        }
+                    })
+                });
+                avalon.define("function", function(vm) {
+                    vm.nick = "司徒正美"
+                    vm.qq = function() {
+                        return vm.nick + "是群主"
+                    }
+                });
+                avalon.define("property", function(vm) {
+                    vm.$skipArray = ["nick", "sex"]
+                    vm.nick = "司徒正美"
+                    vm.sex = "男"
+                    vm.country = "中国"
+                });
+
+
+                avalon.scan();
+            })
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/avalon">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/avalon/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/avalon">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+
+            <section>
+                <div id="title">
+                    <h1>Avalon</h1>
+                    <p>迷你简单易用的MVVM框架</p>
+                    <hr>
+                    <span class="credits left">Project maintained by <a href="https://github.com/RubyLouvre">司徒正美</a></span>
+                    <span class="credits right">新浪微博 <a href="http://weibo.com/jslouvre">jslouvre</a></span>
+                </div>
+
+                <h3>优势</h3>
+                <ul>
+                    <li>使用简单，在HTML中添加绑定，在JS中用avalon.define定义ViewModel，再调用avalon.scan方法，它就能动了！</li>
+                    <li>兼容到IE6(其他mvvm框架， knockoutjs IE6, angularjs IE7, emberjs IE8, winJS IE9 )</li>
+                    <li>没有任何依赖，只有72K，压缩后22K</li>
+                    <li>支持管道符风格的过滤函数，方便格式化输出</li>
+                    <li>局部刷新的颗粒度已细化到一个文本节点，特性节点</li>
+                    <li>要操作的节点，在第一次扫描就与视图刷新函数相绑定，并缓存起来，因此没有选择器出场的余地。</li>
+                    <li>让DOM操作的代码近乎绝迹</li>
+                    <li>使用类似CSS的重叠覆盖机制，让各个ViewModel分区交替地渲染页面</li>
+                    <li>节点移除时，智能卸载对应的视图刷新函数，节约内存</li>
+                    <li>操作数据即操作DOM，对ViewModel的操作都会同步到View与Model去。</li>
+                </ul>
+                <p>架构图</p>
+                <p><img src="images/architecture.jpg"/></p>
+                <ul ms-skip>
+                    <li><a href="avalon.api.html">API文档</a></li>
+                    <li><a href="avalon.define.html">avalon.define</a></li>
+                    <li><a href="avalon.mix.html">avalon.mix</a></li>
+                    <li><a href="avalon.important.html">ms-important与ms-controller绑定</a></li>
+                    <li><a href="avalon.class.html">ms-class、 ms-hover与ms-active绑定</a></li>
+                    <li><a href="avalon.html.html">ms-text, ms-html, {{text}}与{{text|html}}</a></li>
+                    <li><a href="avalon.model.html">ms-model绑定</a></li>
+                    <li><a href="avalon.css.html">ms-css绑定</a></li>
+                    <li><a href="avalon.visible.html">ms-visible绑定</a></li>
+                    <li><a href="avalon.include.html">ms-include绑定</a></li>
+                    <li><a href="avalon.bind.html">ms-bind绑定</a></li>
+                    <li><a href="avalon.watch.html">$watch方法</a></li>
+                    <li><a href="avalon.href.html">ms-href, ms-src, ms-alt, ms-title, ms-value绑定</a></li>
+                    <li><a href="avalon.disabled.html">ms-disabled, ms-enabled, ms-readonly, ms-checked, ms-selected绑定</a></li>
+                    <li><a href="avalon.data.html">ms-data绑定</a></li>
+                    <li><a href="avalon.on.html">ms-on-*, ms-dblclick, ms-mouseout, ms-click, ms-mouseover等事件绑定</a></li>
+                    <li><a href="avalon.each.html">ms-each绑定</a></li>
+
+                    <li><a href="datepicker.html">日期选择器</a></li>
+                    <li><a href="todos.html">todos示例</a></li>
+                    <li><a href="avalon.router.html">avalon路由系统</a></li>
+                    <li><a href="avalon.switch.html">switch组件</a></li>
+                    <!--<li><a href="avalon.grid.html">grid组件</a></li>-->
+                    <li><a href="avalon.slider.html">slider组件</a></li>
+                    <li><a href="avalon.draggable.html">ms-draggable绑定(以插件形式引入)</a></li>
+                </ul>
+                <h3>示例</h3>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+                &lt;fieldset ms-controller="simple"&gt;
+                    &lt;legend&gt;例子&lt;/legend&gt;
+                    &lt;p&gt;First name: &lt;input ms-model="firstName" /&gt;&lt;/p&gt;
+                    &lt;p&gt;Last name: &lt;input ms-model="lastName"  /&gt;&lt;/p&gt;
+                    &lt;p&gt;Hello,    &lt;input ms-model="fullName"&gt;&lt;/p&gt;
+                    &lt;div&gt;{{firstName +" | "+ lastName }}&lt;/div&gt;
+                    &lt;p&gt;nick name: &lt;input ms-model="nick.name"  /&gt;&lt;/p&gt;
+                    &lt;p&gt;{{nick.name}}&lt;/p&gt;
+                &lt;/fieldset&gt;
+                    </pre>   
+                </div>
+                <pre class="brush:js;gutter:false;toolbar:false">
+              
+                avalon.define("simple", function(vm) {
+                    vm.firstName = "司徒"
+                    vm.lastName = "正美"
+                    vm.fullName = {//一个包含set或get的对象会被当成PropertyDescriptor，
+                        set: function(val) {//set, get里面的this不能改成vm
+                            var array = (val || "").split(" ");
+                            this.firstName = array[0] || "";
+                            this.lastName = array[1] || "";
+                        },
+                        get: function() {
+                            return this.firstName + " " + this.lastName;
+                        }
+                    },
+                    vm.nick = {
+                          name: "暗黑之民"
+                    }
+                });
+
+                </pre>   
+
+                <fieldset ms-controller="simple">
+                    <legend>例子</legend>
+                    <p>First name: <input ms-model="firstName" /></p>
+                    <p>Last name: <input ms-model="lastName"  /></p>
+                    <p>Hello,    <input ms-model="fullName"></p>
+                    <div>{{firstName +" | "+ lastName }}</div>
+                    <p>nick name: <input ms-model="nick.name"  /></p>
+                    <p>{{nick.name}}</p>
+                </fieldset>
+                <p><a href="avalon.important.html">ms-controller</a>是用于指定ViewModel的作用范围， ms-controller的值等于avalon.define的第一个参数，并且这个值必须是一个合法的变量名，
+                    如aaa, $aaa, aaaSSS, aaa_bbb,不能写成23432， sdfs-A</p>
+                <h3>核心概念介绍</h3>
+                <p><strong>ViewModel</strong>的定义，它是通过avalon.define来创建，在函数内我们定义它的属性与方法。</p>
+                <p>经过内部的转换，它的属性与方法会换胎换骨，产出以下东西。</p>
+                <ol>
+                    <li>监控属性：定义时为一个简单的数据类型，如undefined, string, number, boolean。 </li>
+                    <li>计算属性：定义时为一个最多拥有get，set方法的对象（get方法是必需的），注意，get, set里面的this不能改为vm，框架内部会帮你调整好指向。 </li>
+                    <li>监控数组：定义时为一个数组</li>
+                    <li>普通属性或方法：我们可以在vm里面设置一个$skipArray数组，里面装着你不想处理的方法与属性名。</li>
+                </ol>
+                <p>如果想还原ViewModel为普通的javascript对象，非常简单，直接model.$model就能取得了。</p>
+                <p><strong>监控属性</strong>与<strong>计算属性</strong>会转换一个<strong>访问器</strong>（或叫命名访问器属性(named accessor properties)）</p>
+
+                <p><strong>监控数组</strong>是一个经过强化的数组，它可以监听它内部的元素的位置变化或长度变化，通知视图刷新函数进行同步。</p>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+&lt;div ms-controller="array"&gt;
+    &lt;ul ms-each-el="array"&gt;
+        &lt;li&gt;数组的第{{$index+1}}个元素为{{el}}&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;对数组进行push操作，并回车&lt;input ms-keypress="push"&gt;&lt;/p&gt;
+    &lt;p&gt;对数组进行unshift操作，并回车&lt;input ms-keypress="unshift"&gt;&lt;/p&gt;
+    &lt;p&gt;对数组进行ensure操作，并回车&lt;input ms-keypress="ensure"&gt;&lt;br/&gt;
+        (只有数组不存在此元素才push进去)&lt;/p&gt;
+    &lt;p&gt;对数组进行remove操作，并回车&lt;input ms-keypress="remove"&gt;&lt;/p&gt;
+    &lt;p&gt;对数组进行removeAt操作，并回车&lt;input ms-keypress="removeAt"&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;button type="button" ms-click="sort"&gt;对数组进行sort操作&lt;/button&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;button type="button" ms-click="reverse"&gt;对数组进行reverse操作&lt;/button&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;button type="button" ms-click="shift"&gt;对数组进行shift操作&lt;/button&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;button type="button" ms-click="pop"&gt;对数组进行pop操作&lt;/button&gt;&lt;/p&gt;
+    &lt;p&gt;当前数组的长度为{{array.size()}}，……&lt;/p&gt;
+&lt;/div&gt;
+                    </pre>   
+                </div>
+                <pre class="brush:js;gutter:false;toolbar:false">
+                avalon.define("array", function(vm) {
+                    vm.array = ["1", "2", "3", "4"]
+                    "push,unshift,remove,ensure".replace(/\w+/g, function(method) {
+                        vm[method] = function(e) {
+                            if (this.value && e.which == 13) {//this为input元素
+                                vm.array[method](this.value);
+                                this.value = "";
+                            }
+                        }
+                    })
+                    vm.removeAt = function(e) {
+                        if (isFinite(this.value) && e.which == 13) {//this为input元素
+                            vm.array.removeAt(Number(this.value))
+                            this.value = "";
+                        }
+                    }
+                    "pop,shift,sort,reverse".replace(/\w+/g, function(method) {
+                        vm[method] = function(e) {
+                            vm.array[method]();
+                        }
+                    })
+                });
+                </pre>   
+
+                <fieldset ms-controller="array">
+                    <legend>例子</legend>
+                    <ul ms-each-el="array">
+                        <li>数组的第{{$index+1}}个元素为{{el}}</li>
+                    </ul>
+                    <p>对数组进行push操作，并回车<input ms-keypress="push"></p>
+                    <p>对数组进行unshift操作，并回车<input ms-keypress="unshift"></p>
+                    <p>对数组进行ensure操作，并回车<input ms-keypress="ensure"><br/>
+                        (只有数组不存在此元素才push进去)</p>
+                    <p>对数组进行remove操作，并回车<input ms-keypress="remove"></p>
+                    <p>对数组进行removeAt操作，并回车<input ms-keypress="removeAt"></p>
+                    <p><button type="button" ms-click="sort">对数组进行sort操作</button></p>
+                    <p><button type="button" ms-click="reverse">对数组进行reverse操作</button></p>
+                    <p><button type="button" ms-click="shift">对数组进行shift操作</button></p>
+                    <p><button type="button" ms-click="pop">对数组进行pop操作</button></p>
+                    <p>当前数组的长度为{{array.size()}}，注意 我们无法修改数组length的固有行为，因此它无法同步视图，需要用size方法。</p>
+                </fieldset>
+                <p><strong>监控函数</strong>，为一个包含其他监控属性或计算属性的函数。</p>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+    &lt;input ms-model="nick" /&gt;
+    &lt;p&gt;{{qq()}}&lt;/p&gt;
+                    </pre>   
+                </div>
+                <pre class="brush:js;gutter:false;toolbar:false">
+                avalon.define("function", function(vm) {
+                    vm.nick = "司徒正美"
+                    vm.qq = function() {
+                        return vm.nick + "是群主"
+                    }
+                })
+                </pre>   
+                <fieldset ms-controller="function">
+                    <legend>例子</legend>
+                    <input ms-model="nick" />
+                    <p>{{qq()}}</p>
+                </fieldset>
+            </section>
+            <p><strong>普通属性或方法</strong>，如果你不想被绑定，可以放到$skipArray数组中，或者此属性名以<b>$</b>开头。</p>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+    &lt;input ms-model="nick" /&gt;
+    &lt;p&gt;{{qq()}}&lt;/p&gt;
+                </pre>   
+            </div>
+            <pre class="brush:js;gutter:false;toolbar:false">
+                avalon.define("property", function(vm) {
+                    vm.$skipArray = ["nick", "sex"]
+                    vm.nick = "司徒正美"
+                    vm.sex = "男"
+                    vm.country = "中国"
+                });
+            </pre>   
+            <fieldset ms-controller="property">
+                <legend>例子</legend>
+                <input ms-model="nick" />
+                <input ms-model="sex" />
+                <input ms-model="country" />
+                <p>{{nick}}   {{sex}}  {{country}}</p>
+            </fieldset>
         </section>
+        <p ms-skip><strong>双向绑定链</strong>：MVVM自动同步ViewMode的对应字段与视图中被绑定的节点的关键。它分为三层，底层是监控属性，中层是
+            计算属性与监控函数，监控函数，顶层是求值函数（通过内部缓译被缓存）及依赖于求值函数的局部刷新函数！
+        </p>
+        <p>上一层的东西总是依赖于下一层，下一层在更新时要向上一层发出通知，让它们求值刷新视图。上一层要知道它依赖下一层哪些属性，就需要求值（赋值）
+            下一层要通知上一层需要被赋上新值（一样就没有必要刷新）。
+        </p>
+        <p ms-skip><strong>声明式绑定</strong>：avalon用于在页面控制输出输入的特殊属性或文本片断。前面为以ms-开头的特性节点，又叫绑定属性，后面为innerText中{{}}，又叫插值表达式。
+            它们是双向绑定链的另一个重要部件，会被编译成一个求值函数与视图刷新函数挂钩！
+        </p>
+        <p>在本文使用的绑定有：</p>
+        <ul>
+            <li>ms-controller: 指定某一个ViewModel的作用范围，这用于页面存在多个ViewModel的情况下非常有用。</li>
+            <li>ms-model: 框架会在表单元素绑定一些input, change, click事件，以同步ViewModel的某些字段。</li>
+            <li>ms-skip: 让扫描器跳下某些元素或其子元素，让它的绑定属性或插值表达式临时跳过，保持原貌输出。</li>
+            <li>ms-click, ms-keypress: 事件绑定，目前常用的事件——dblclick, mouseout, click, mouseover, mousemove, 
+                mousedown, mouseup, keypress, keydown, keyup, blur, focus都内置了，其他事件可以通过ms-on-mousewheel进行绑定
+                avalon已经对事件对象进行标准化，在IE下直接可用event.target。
+            </li>
+            <li>ms-each: 循环绑定，目标为一个监控数组或普通数组，格式为ms-each="collection" 或ms-each-el="array", el用于下面子元素，如果不设置，默认为$data，
 
-        <aside id="sidebar">
-          <a href="https://github.com/RubyLouvre/avalon/archive/master.zip" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/RubyLouvre/avalon/archive/master.zip" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+            </li>
+            <li ms-skip>{{ field or expr }}：文本绑定， 直接写在innerText中。里面可以是单个ViewModel中的字段或表达式，如firstName+" : "+last, 1+2等</li>
+        </ul>
 
-          <p class="repo-owner"><a href="http://rubylouvre.github.io/mvvm/"></a> is maintained by <a href="http://rubylouvre.github.io/mvvm/">UnitedStack Opensource</a>.</p>
 
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div> 
-  </body>
+
+        <p>avalon还内置了许多过滤器，用于格式化转出，如与PHP的number_format函数完兼容的number过滤器（来自PHP.js），满足一切复杂需求的date过滤器（不厚道地从angular扒出）。</p>
+        <p>当然还有许多，请看后续介绍！</p>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+</body>
 </html>

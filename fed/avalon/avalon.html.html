@@ -1,0 +1,97 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+        <script>
+
+            avalon.ready(function() {
+
+                avalon.define("test", function(vm) {
+                    vm.text = "<b> 1111  </b>"
+                })
+                avalon.scan()
+            })
+
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>ms-text, ms-html, {{text}}与{{text|html}}</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>avalon拥有4种填空数据的功能。</p>
+            <p>前两种是绑定属性，分别是文本绑定与HTML绑定，它们会清空原元素的内部再进行内部填充。后两种是插值表达式，{{text}}是对某一个文本节点的nodeValue进行修改，因此不会影响兄弟节点。
+            {{text|html}}添加了一个叫html的过滤器，会将文本绑定变成HTML绑定，将目标字符串转换为文档碎片，然后与所在的文本节点进行replaceChild操作，因此也不影响兄弟节点。
+            </p>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false;">
+        &lt;script&gt;
+           
+         avalon.define("test", function(vm) {
+              vm.text = "&lt;b&gt; 1111  &lt;/b&gt;"
+         })
+
+        &lt;/script&gt;
+        &lt;div ms-controller="test"&gt;
+            &lt;div&gt;&lt;em&gt;用于测试是否被测除&lt;/em&gt;xxxx{{text}}yyyy&lt;/div&gt;
+            &lt;div&gt;&lt;em&gt;用于测试是否被测除&lt;/em&gt;xxxx{{text|html}}yyyy&lt;/div&gt;
+            &lt;div ms-text="text"&gt;&lt;em&gt;用于测试是否被测除&lt;/em&gt;xxxx yyyy&lt;/div&gt;
+            &lt;div ms-html="text"&gt;&lt;em&gt;用于测试是否被测除&lt;/em&gt;xxxx yyyy&lt;/div&gt;
+        &lt;/div&gt;
+                </pre>
+            </div>
+            <div ms-controller="test">
+                <div><em>用于测试是否被测除</em>xxxx{{text}}yyyy</div>
+                <div><em>用于测试是否被测除</em>xxxx{{text|html}}yyyy</div>
+                <div ms-text="text"><em>用于测试是否被测除</em>xxxx yyyy</div>
+                <div ms-html="text"><em>用于测试是否被测除</em>xxxx yyyy</div>
+            </div>
+            <p ms-skip>此外，我们还可以通过配置方式，更改插值表达式的界定符，因为{{}}可能被其他框架的模板所占用。建议界定符的长度大于1，不要设置为>>这样的位操作符。比如在DOMReady之前，我们调用如下语句： </p>
+            <pre class="brush:js;toolbar:false;gutter:false;">
+            avalon.config({
+               interpolate: ["<%", "%>"] //  要求openTag 不等于closeTag就能配置成功
+            })
+            </pre>
+            <br/>
+            <br/>
+            <br/>
+
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

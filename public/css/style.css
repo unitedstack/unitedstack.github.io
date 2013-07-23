@@ -31,6 +31,21 @@ footer{
 	padding:0;
 }
 
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both;
+}
+
 html {
   width: 100%;
   height: 100%;
@@ -59,7 +74,7 @@ body {
 
 .project-box {
   padding: 20px;
-  border: 1px solid #ff0;
+  /*border: 1px solid #ff0;*/
   font-family:'Segoe UI Light','Segoe UI','Microsoft Jhenghei','微软雅黑',sans-serif;
   font-size: 20px;
 
@@ -70,6 +85,7 @@ body {
   width: 220px;
   height: 220px;
   /*border-radius: 50%;*/
+  padding: 10px;
   color: #e6e6e6;
   background-color:rgba(0,0,0,0.2);
   margin-top: 5px;
@@ -78,12 +94,20 @@ body {
     -ms-transition-border: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
      -o-transition-border: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
         transition-border: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+
 }
 
 .project-box li:hover {
   border: 1px dashed rgba(250,250,250,0.3);
   margin: -1px;
   color: #fff;
+}
+
+.project-box li p {
+  text-align: left;
+  padding-top: 20px;
+  font-size: 14px;
+  text-indent: 28px;
 }
 
 .ctr-box {

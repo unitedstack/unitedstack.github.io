@@ -1,0 +1,271 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            .ms-grid { margin-bottom: 1em; width: 25em; border: 1px solid silver; }
+            .ms-grid th { text-align:left; background: black; color:White; }
+            .ms-grid td, th { padding: 0.4em; }
+            .ms-grid tr:nth-child(odd) { background: #DDD;color:black; }
+            .ms-grid-pageLinks { margin-bottom: 1em; }
+            .ms-grid td a{color:red;font-family:Microsoft YaHei,Georgia, 'Times New Roman', Times, serif;}
+            .ms-grid-pageLinks a { padding: 0.5em;display: inline-block;zoom:1; }
+            .ms-grid-pageLinks a.selected { background: black; color: White; }
+
+        </style>
+        <script>
+            var grid = avalon.define("grid", function(vm) {
+                vm.$skipArray = ["items"]
+                vm.items = [
+                    {name: "AAAA", sales: 352, price: 75.95},
+                    {name: "BBBB", sales: 89, price: 190.00},
+                    {name: "CCCC", sales: 1052, price: 25.00},
+                    {name: "DDDD", sales: 1, price: 99.95},
+                    {name: "EEEE", sales: 0, price: 6350},
+                    {name: "FFFF", sales: 39450, price: 0.35},
+                    {name: "GGGG", sales: 420, price: 1.50}
+                ]
+                vm.showItems = [];//当前页面要显示出来的items
+                vm.pageIndex = 0; //当前页数
+                vm.pageCount = 3; //每页显示多个item
+                vm.pages = [];//装着所有页码,以零开始
+                vm.getShowItems = function() {
+                    var i = vm.pageIndex, c = vm.pageCount;
+                    //console.log([i *c,  (i + 1)  * c])
+                    var parts = vm.items.slice(i * c, (i + 1) * c)
+                    var array = JSON.parse(JSON.stringify(parts))
+                    console.log("1111111111111")
+                    //  console.log(avalon.mix(true,  {},  {parts: parts})  )
+                    vm.showItems = array
+                }
+                vm.addItem = function() {
+                    var a = {name: "New item", sales: 0, price: 100};
+                    vm.items.push(a);
+                    vm.showItems.push(a);
+                    vm.getPages();
+                };
+                vm.removeItem = function(e) {
+                    e.preventDefault()
+                    var item = this.$vmodel.$remove();
+                    avalon.Array.remove(vm.items, item);
+                    if (!vm.showItems.length) {
+                        if (Math.ceil(vm.items.length / vm.pageCount) === vm.pageIndex) {
+                            vm.pageIndex--;
+                        }
+                        vm.getShowItems();//如果删光了,尝试到items取
+                    }
+                    vm.getPages();
+
+                };
+                vm.getPages = function() {
+                    var total = Math.ceil(vm.items.length / vm.pageCount);
+                    console.log(total)
+                    vm.pages = avalon.range(total);//用法与python, underscorejs一致,生成一个整数数组
+                }
+                function compare(a, b) {
+                    return a.name < b.name ? -1 : 1;
+                }
+                vm.sortByName = function() {
+                    vm.items.sort(compare);
+                    vm.showItems.sort(compare);
+                };
+                vm.jumpToFirstPage = function() {
+                    vm.pageIndex = 0;
+                    vm.getShowItems();
+                };
+                vm.jumpPage = function(e) {
+                    e.preventDefault()
+                    vm.pageIndex = this.$vmodel.$index;
+                    // console.log( vm.pageIndex )
+                    vm.getShowItems();
+                }
+            });
+            grid.getShowItems();
+            grid.getPages()
+
+        </script>
+
+
+    </head>
+
+
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>grid示例</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+ &lt;fieldset ms-important="grid"&gt;
+            &lt;legend&gt;grid&lt;/legend&gt;
+            &lt;table class="ms-grid" cellspacing="0" &gt;                        
+                &lt;thead&gt;                           
+                    &lt;tr&gt;                
+                        &lt;th&gt;Item Name&lt;/th&gt; 
+                        &lt;th&gt;Sales Count&lt;/th&gt;  
+                        &lt;th&gt;Price&lt;/th&gt;    
+                        &lt;th&gt;Handle&lt;/th&gt;   
+                    &lt;/tr&gt;                 
+                &lt;/thead&gt;                  
+                &lt;tbody ms-each-row="showItems"&gt;    
+                    &lt;tr &gt;          
+                        &lt;td&gt;{{row.name}}&lt;/td&gt; 
+                        &lt;td&gt;{{row.sales | number}}&lt;/td&gt;                                                           
+                        &lt;td&gt;${{row.price }}&lt;/td&gt;  
+                        &lt;td&gt;&lt;a href="javascript:void(0)" ms-click="removeItem"&gt;删除&lt;/a&gt;&lt;/td&gt;   
+                    &lt;/tr&gt;                                                
+                &lt;/tbody&gt;                   
+            &lt;/table&gt;                    
+            &lt;div class="ms-grid-pageLinks"&gt;                  
+                &lt;span&gt;Page:&lt;/span&gt;                        
+                &lt;span ms-each-page="pages"&gt;
+                    &lt;a ms-href="#{{page}}" ms-click="jumpPage"  ms-class-selected="$index==pageIndex"   &gt;{{page+1}}&lt;/a&gt;
+                &lt;/span&gt;      
+            &lt;/div&gt;
+            &lt;button ms-click='addItem' type="button"&gt;
+                Add item
+            &lt;/button&gt;
+            &lt;button ms-click='sortByName' type="button" &gt;
+                Sort by name
+            &lt;/button&gt;
+            &lt;button ms-enabled="pageIndex" type="button" ms-click="jumpToFirstPage"&gt;
+                Jump to first page
+            &lt;/button&gt;
+
+        &lt;/fieldset&gt;
+                </pre>   
+                <pre class="brush:js;gutter:false;toolbar:false">
+            var grid = avalon.define("grid", function(scope) {
+                scope.items = [
+                    {name: "Well-Travelled Kitten", sales: 352, price: 75.95},
+                    {name: "Speedy Coyote", sales: 89, price: 190.00},
+                    {name: "Furious Lizard", sales: 1052, price: 25.00},
+                    {name: "Indifferent Monkey", sales: 1, price: 99.95},
+                    {name: "Brooding Dragon", sales: 0, price: 6350},
+                    {name: "Ingenious Tadpole", sales: 39450, price: 0.35},
+                    {name: "Optimistic Snail", sales: 420, price: 1.50}
+                ]
+                scope.showItems = [];//当前页面要显示出来的items
+                scope.pageIndex = 0; //当前页数
+                scope.pageCount = 3; //每页显示多个item
+                scope.pages = [];//装着所有页码,以零开始
+                scope.getShowItems = function() {
+                    var i = scope.pageIndex, c = scope.pageCount;
+                    var array = scope.$json.items.slice(i * c, (i + 1) * c)
+                    scope.showItems = array;
+                }
+                scope.addItem = function() {
+                    var a = {name: "New item", sales: 0, price: 100};
+                    scope.items.push(a);
+                    scope.showItems.push(a);
+                    scope.getPages();
+                };
+                scope.removeItem = function(e) {
+                    e.preventDefault()
+                    var item = this.$scope.$remove();
+                    scope.items.remove(item);
+                    if (!scope.showItems.length) {
+                        if (Math.ceil(scope.items.length / scope.pageCount) === scope.pageIndex) {
+                            scope.pageIndex--;
+                        }
+                        scope.getShowItems();//如果删光了,尝试到items取
+                    }
+                    scope.getPages();
+
+                };
+                scope.getPages = function() {
+                    var total = Math.ceil(scope.items.size() / scope.pageCount);
+                    scope.pages = avalon.range(total);//用法与python, underscorejs一致,生成一个整数数组
+                }
+                function compare(a, b) {
+                    return a.name < b.name ? -1 : 1;
+                }
+                scope.sortByName = function() {
+                    scope.items.sort(compare);
+                    scope.showItems.sort(compare);
+                };
+                scope.jumpToFirstPage = function() {
+                    scope.pageIndex = 0;
+                    scope.getShowItems();
+                };
+                scope.jumpPage = function(e) {
+                    e.preventDefault()
+                    scope.pageIndex = this.$scope.$index;
+                    scope.getShowItems();
+                }
+            });
+            grid.getShowItems();
+            grid.getPages()
+                </pre>   
+            </div>
+            <fieldset ms-important="grid">
+                <legend>grid</legend>
+                <table class="ms-grid" cellspacing="0" >                        
+                    <thead>                           
+                        <tr>                
+                            <th>Item Name</th> 
+                            <th>Sales Count</th>  
+                            <th>Price</th>    
+                            <th>Handle</th>   
+                        </tr>                 
+                    </thead>                  
+                    <tbody ms-each-row="showItems">    
+                        <tr >          
+                            <td>{{row.name}}</td> 
+                            <td>{{row.sales | number}}</td>                                                           
+                            <td>${{row.price }}</td>  
+                            <td><a href="javascript:void(0)" ms-click="removeItem">删除</a></td>   
+                        </tr>                                                
+                    </tbody>                   
+                </table>                    
+                <div class="ms-grid-pageLinks">                  
+                    <span>Page:</span>                        
+                    <span ms-each-page="pages">
+                        <a ms-href="#{{page}}" ms-click="jumpPage"  ms-class-selected="$index==pageIndex"   >{{page+1}}</a>
+                    </span>      
+                </div>
+                <button ms-click='addItem' type="button">
+                    Add item
+                </button>
+                <button ms-click='sortByName' type="button">
+                    Sort by name
+                </button>
+                <button ms-enabled="pageIndex" type="button" ms-click="jumpToFirstPage">
+                    Jump to first page
+                </button>
+
+            </fieldset>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+
+
+    </body>
+</html>

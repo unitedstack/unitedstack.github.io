@@ -1,0 +1,98 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>ms-href, ms-src, ms-alt, ms-title, ms-value绑定</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>注意到没有，href, src, alt, title,value都是一些字符串属性，其值的结构可以非常复杂。因此avalon将它们独立出来处理。 </p>
+            <ul ms-skip>
+                <li>用法一，值没有{{}}插值表达式，比如ms-alt="aaa", ViewModel存在一个aaa监控属性，值为"该图片不存在"，
+                    那么框架直接为此元素设置alt属性为"该图片不存在"
+                </li>
+                <li>用法二，值有{{}}插值表达式，但两边没有其他字符，也当成第一种处理，比如ms-alt="{{aaa}}", ViewModel存在一个aaa监控属性，值为"该图片不存在"，
+                    那么框架直接为此元素设置alt属性为"该图片不存在"
+                </li>
+                <li>用法三，值有{{}}插值表达式，但两边有其他字符，比如ms-alt="{{aaa}}+'!!'", ViewModel存在一个aaa监控属性，值为"该图片不存在"，
+                    那么框架直接为此元素设置alt属性为"该图片不存在!!"。这情况，我们允许存在多个插值表达式，如ms-title="{{bbb}}-{{ccc}}-{{ddd}}"
+                </li>
+            </ul>
+            <p>需要注意的是，为texteara绑定内容时请使用ms-value。</p>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+            &lt;link rel="stylesheet" ms-href="http://code.jquery.com/ui/1.10.3/themes/{{theme}}/jquery-ui.css" &gt;
+            &lt;select ms-model="theme"&gt;
+                &lt;option value='start'&gt;start&lt;/option&gt;
+                &lt;option value='smoothness'&gt;smoothness&lt;/option&gt;
+                &lt;option value='flick'&gt;flick&lt;/option&gt;
+                &lt;option value='sunny'&gt;sunny&lt;/option&gt;
+                &lt;option value='excite-bike'&gt;excite bike&lt;/option&gt;
+                &lt;option value='black-tie'&gt;black tie&lt;/option&gt;
+                &lt;option value='trontastic'&gt;trontastic&lt;/option&gt;
+                &lt;option value='swanky-purse'&gt;swanky purse&lt;/option&gt;
+                &lt;option value='le-frog'&gt;le frog&lt;/option&gt;
+                &lt;option value='blitzer'&gt;blitzer&lt;/option&gt;
+                &lt;option value='dot-luv'&gt;dot luv&lt;/option&gt;
+                &lt;option value='mint-choc'&gt;mint-choc&lt;/option&gt;
+                &lt;option value='hot-sneaks'&gt;hot sneaks&lt;/option&gt;
+                &lt;option value='south-street'&gt; south street&lt;/option&gt;
+                &lt;option value='humanity'&gt;humanity&lt;/option&gt;
+                &lt;option value='vader'&gt;vader&lt;/option&gt;
+                &lt;option value='eggplant'&gt;eggplant&lt;/option&gt;
+                &lt;option value='cupertino'&gt;cupertino&lt;/option&gt;
+                &lt;option value='overcast'&gt;overcast&lt;/option&gt;
+            &lt;/select&gt;你喜欢的皮肤
+                </pre>   
+
+                <pre class="brush:js;gutter:false;toolbar:false">
+            avalon.define("theme", function(vm) {
+                vm.theme = "start";
+            });
+                </pre>
+
+            </div>
+            <p>具体例子可参看<a href="avalon.slider.html">slider示例</a>。</p>
+            <br/>
+            <br/>
+            <br/>
+
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/avalon.draggable.js"></script>
+        <style>
+            body{
+                font-size:13px;
+            }
+            .drag{
+                width:100px;
+                height:100px;
+                background: green;
+                position: absolute;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style="color:#fff">
+                <h1>avalon.draggable组件</h1>
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+                <p>用法，用法直接在在拖动的元素添加ms-draggable属性。</p>
+                <div style="position: relative;width:100%;height:200px;background: red; ">
+                    <div class="drag" ms-draggable></div> <div class="drag" style="left:100px" ms-draggable data-containment="parent">相对于parent</div>
+                </div>
+                <div style="position: relative;width:100%;height:200px;background:#03c9fa; ">
+                    <div style="margin:20px;background: yellow;width:500px;height:200px;">
+                        <div class="drag" ms-draggable data-containment="parent">相对于parent</div>
+                    </div>
+                </div>
+                <div class="drag" ms-draggable data-containment="window">相对于window</div>
+
+            </div>
+        </div>
+    </body>
+</html>

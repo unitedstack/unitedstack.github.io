@@ -1,0 +1,101 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>avalon.mix与avalon.fn.mix </h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>此方法有三种玩法</P>
+            <h2>avalon.mix(dest,src1,src2,src3...);</h2>
+            <br/>
+            <p>它的含义是将src1,src2,src3...合并到dest中,返回值为合并后的dest,由此可以看出该方法合并后，是修改了dest的结构的。
+                如果想要得到合并的结果却又不想修改dest的结构，可以如下使用：</p>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+                var newSrc=avalon.mix({},src1,src2,src3...)//也就是将"{}"作为dest参数。
+            </pre>
+            <P>这样就可以将src1,src2,src3...进行合并，然后将合并结果返回给newSrc了。如下例：</P>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+               var result= avalon.mix({},{name:"Tom",age:21},{name:"Jerry",sex:"Boy"})
+            </pre>
+            <p> 那么合并后的结果</p>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+
+                 result= {name:"Jerry",age:21,sex:"Boy"}
+
+            </pre>
+            <p>也就是说后面的参数如果和前面的参数存在相同的名称，那么后面的会覆盖前面的参数值。</p>
+            <h2>省略dest参数</h2>
+            <br/>
+            <p>上述的mix方法中的dest参数是可以省略的，如果省略了，则该方法就只能有一个src参数，而且是将该src合并到拥有mix方法的对象中去</p>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+
+            avalon.mix({
+                hello:function(){alert('hello');}
+            });
+           avalon.hello()//hello
+            
+            </pre>
+            <h2>深拷贝</h2>
+            <br/>
+            <p>avalon.mix方法还有一个重载：  </p>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+                
+               avalon.mix(boolean,dest,src1,src2,src3...)
+
+            </pre>
+            <p>第一个参数boolean代表是否进行深度拷贝, false则与上面提到的方式无异。</p>
+            <pre class="brush:js;gutter:false;toolbar:false;">
+
+            var a =[{},{}] ;
+            var b = avalon.mix(true, [],a)
+            console.log(a[0] !== b[0])//true
+            console.log(b)//[{}, {}]
+            </pre>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div> 
+
+
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

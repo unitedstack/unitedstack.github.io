@@ -1,0 +1,127 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+          
+
+        </style>
+        <script type="text/javascript">
+            avalon.ready(function() {
+                avalon.define("tabs", function(a) {
+                    a.tabs = [
+                        {
+                            title: "aaaa",
+                            panel: "aaaa panel"
+                        },
+                        {
+                            title: "bbbb",
+                            panel: "ffffffffffffffffffff"
+                        },
+                        {
+                            title: "cccc",
+                            panel: "cccc panel"
+                        }
+                    ]
+                    a.activated = 0
+                    a.activate = function() {
+                        a.activated = this.$vmodel.$index;
+                    }
+                })
+                avalon.scan();
+            })
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style="color:#fff">
+                <h1>ms-visible</h1>
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+                <p>avalon通过ms-visible="bool"实现对某个元素显示隐藏控制，对于低版本的浏览器，它用的是style.display="none"进行隐藏，对于支持HTML5的浏览器，它是使用hidden属性来控制。
+                </p>
+
+
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+&lt;div ms-controller="tabs" &gt;
+    &lt;div ms-each-tab="tabs" class="triggers"&gt;
+        &lt;a href="###" class="trigger" ms-class-selected="activated === $index" ms-click="activate"&gt;{{tab.title}}&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div ms-each-tab="tabs" &gt;
+        &lt;div  class="panel" ms-visible="activated === $index"&gt;{{tab.panel}}&lt;/div&gt;
+    &lt;/div &gt;
+&lt;/div &gt;
+                    </pre>   
+
+                    <pre class="brush:js;gutter:false;toolbar:false">
+avalon.ready(function() {
+    avalon.define("tabs", function(a) {
+        a.tabs = [
+            {
+                title: "aaaa",
+                panel: "aaaa panel"
+            },
+            {
+                title: "bbbb",
+                panel: "ffffffffffffffffffff"
+            },
+            {
+                title: "cccc",
+                panel: "cccc panel"
+            }
+        ]
+        a.activated = 0
+        a.activate = function(){
+             a.activated = this.$vmodel.$index;
+        }
+    })
+    avalon.scan();
+})
+                    </pre>
+
+                </div>
+                <div ms-controller="tabs" >
+                    <div ms-each-tab="tabs" class="triggers">
+                        <a href="###" class="trigger" ms-class-selected="activated === $index" ms-click="activate">{{tab.title}}</a>
+                    </div>
+                    <div ms-each-tab="tabs" >
+                        <div  class="panel" ms-visible="activated === $index">{{tab.panel}}</div>
+                    </div >
+                </div >
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            </div>
+    </body>
+</html>
+
+

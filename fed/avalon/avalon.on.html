@@ -1,0 +1,176 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            #classtable{
+                border: 1px solid #333;
+                border-collapse: collapse;
+                width: 90%;
+            }
+            #classtable td,#classtable th{
+                border: 1px solid #333;
+                padding:4px;;
+            }
+            /*第一种颜色*/
+            tr.odd{
+
+            }
+            /*第二种颜色*/
+            tr.even{
+                background: #3671a5;
+            }
+            tr.hover{
+                background: #aabccd!important;
+            }
+
+        </style>
+        <script type="text/javascript">
+
+            avalon.ready(function() {
+                avalon.define("class", function(vm) {
+                    vm.me = "ViewModel";
+                    vm.check = function(e) {
+                        this.innerHTML = [new Date - 0, e.target.tagName, this.tagName, this.$vmodel.me, this.$vmodels.length].join();
+                    };
+                });
+                avalon.define("test", function(vm) {
+                    vm.test1 = false;
+                    vm.test2 = false;
+                    vm.one = function() {
+                        vm.test1 = false;
+                        vm.test2 = false;
+
+                        vm.test1 = true;
+                        vm.test2 = true;
+                    };
+                    vm.two = function() {
+                        vm.test2 = true;
+                        vm.test1 = true;
+
+                        vm.test1 = false;
+                        vm.test2 = false;
+                    };
+                });
+                avalon.scan();
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style="color:#fff">
+                <h1>事件绑定</h1>
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+                <p>其中ms-on-*为通用绑定事件的方法，其他几个为快捷方式（ms-dblclick  ,ms-mouseout  ,
+                    ms-click  ,ms-mouseover  ,ms-mouseenter  ,ms-mouseleave  ,ms-mousemove  ,ms-mousedown  ,ms-mouseup  ,
+                    ms-keypress  ,ms-keydown  ,ms-keyup  ,ms-blur  ,ms-focus  ,ms-change）</p>
+
+                <p>ms-click="handler", handler在ViewModel中对应一个函数，框架已经对事件对象进行了标准化。</p>
+                <p>另，handler中的this与W3C中的addEventListener一样，指向绑定事件的元素， this.$vmodel指向handler所在ViewModels， this.$vmodels为一个数组，
+                    包含此元素的父节点，父父节点所绑定的所有ViewModel。
+                </p>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+                         &lt;div ms-click="check" ms-controller="class"&gt;请点我&lt;/div&gt;
+                    </pre>   
+
+                    <pre class="brush:js;gutter:false;toolbar:false">
+            avalon.ready(function() {
+                avalon.define("class",  function(vm) {
+                    vm.me = "ViewModel";
+                    vm.check = function(e) {
+                        this.innerHTML = [new Date - 0, e.target.tagName,
+ this.tagName, this.$vmodel.me, this.$vmodels.length].join();
+                    };
+                });
+                avalon.scan();
+            });
+                    </pre>
+
+                </div>
+                <div ms-click="check" ms-controller="class">请点我</div>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+         &lt;div ms-controller="test"&gt;
+            &lt;button ms-click="one"&gt;测试1&lt;/button&gt;
+            &lt;button ms-click="two"&gt;测试2&lt;/button&gt;
+            &lt;br&gt;test1: {{test1}}
+            &lt;br&gt;test2: {{test2}}
+            &lt;br&gt;上边两个变量变true的时候，下面的表达式是false的
+            &lt;br&gt;test1 && test2, result: {{test1 && test2}} and {{test2 && test1}}
+            &lt;br&gt;ps: {{test2 || test1}}
+            &lt;p&gt;{{ new Date | date("yyyy-MM-dd") }}&lt;/p&gt;
+        &lt;/div&gt;
+                    </pre>   
+
+                    <pre class="brush:js;gutter:false;toolbar:false">
+        avalon.ready(function() {
+            avalon.define("test", function(vm) {
+                vm.test1 = false;
+                vm.test2 = false;
+                vm.one = function() {
+                    vm.test1 = false;
+                    vm.test2 = false;
+
+                    vm.test1 = true;
+                    vm.test2 = true;
+                };
+                vm.two = function() {
+                    vm.test2 = true;
+                    vm.test1 = true;
+
+                    vm.test1 = false;
+                    vm.test2 = false;
+                };
+            });
+            avalon.scan()
+        });
+                    </pre>
+
+                </div>
+                <div ms-controller="test">
+                    <button ms-click="one">测试1</button>
+                    <button ms-click="two">测试2</button>
+                    <br>test1: {{test1}}
+                    <br>test2: {{test2}}
+                    <br>上边两个变量变true的时候，下面的表达式是false的
+                    <br>test1 && test2, result: {{test1 && test2}} and {{test2 && test1}}
+                    <br>ps: {{test2 || test1}}
+                    <p>{{ new Date | date("yyyy-MM-dd") }}</p>
+                </div>
+
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            </div>
+    </body>
+</html>

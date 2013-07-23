@@ -1,0 +1,103 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <script>
+            avalon.define("props", function(vm) {
+                vm.toggle = true
+                vm.array = ["苹果", "香蕉", "桃子", "雪梨", "葡萄", "哈蜜瓜","橙子","火龙果","荔技","黄皮"]
+                vm.selectedIndex = 2;
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>ms-disabled, ms-enabled, ms-readonly, ms-checked, ms-selected绑定</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>这五个绑定是用于表单元素，控制它们的disabled, readonly, checked, selected这四个布尔属性，其中ms-enabled是ms-disabled的反转操作，目的为了节约脑细胞。 </p>
+            <p>用法ms-disabled="aaa"，aaa可以是ViewModel中的某个监控属性或表达式，如aaa+1, 4 > 1什么的</p>
+
+
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+            &lt;div ms-controller="props"&gt;
+                &lt;div&gt;&lt;input ms-disabled="toggle"&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;input ms-enabled="toggle"&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;input ms-readonly="toggle"&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;input type="radio" ms-model="toggle"&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;input type="checkbox" ms-checked="toggle"&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;input ms-model="selectedIndex"&gt;&lt;/div&gt;
+                &lt;div&gt;
+                    &lt;select ms-each-el="array"&gt;
+                        &lt;option ms-selected="$index == selectedIndex" &gt;{{el}}&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+                </pre>   
+
+                <pre class="brush:js;gutter:false;toolbar:false">
+         avalon.ready(function(){
+            avalon.define("props", function(vm) {
+                vm.toggle = true
+                vm.array = ["苹果", "香蕉", "桃子", "雪梨", "葡萄", "哈蜜瓜","橙子","火龙果","荔技","黄皮"]
+                vm.selectedIndex = 2;
+            });
+           avalon.scan();
+         }) 
+                </pre>  
+            </div>
+
+            <div ms-controller="props">
+                <div><input ms-disabled="toggle"></div>
+                <div><input ms-enabled="toggle"></div>
+                <div><input ms-readonly="toggle"></div>
+                <div><input type="radio" ms-model="toggle"></div>
+                <div><input type="checkbox" ms-checked="toggle"></div>
+                <div><input ms-model="selectedIndex"></div>
+                <div>
+                    <select ms-each-el="array">
+                        <option ms-selected="$index == selectedIndex" >{{el}}</option>
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    </body>
+</html>

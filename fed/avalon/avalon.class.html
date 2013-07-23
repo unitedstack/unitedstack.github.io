@@ -1,0 +1,138 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            #classtable{
+                border: 1px solid #333;
+                border-collapse: collapse;
+                width: 90%;
+            }
+            #classtable td,#classtable th{
+                border: 1px solid #333;
+                padding:4px;;
+            }
+            /*第一种颜色*/
+            tr.odd{
+
+            }
+            /*第二种颜色*/
+            tr.even{
+                background: #3671a5;
+            }
+            tr.hover{
+                background: #aabccd!important;
+            }
+
+        </style>
+        <script type="text/javascript">
+
+            avalon.ready(function() {
+                avalon.define("class", function(vm) {
+                    vm.rows = avalon.range(0, 15)
+                });
+                avalon.scan();
+            })
+
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style="color:#fff">
+                <h1>ms-class, ms-hover, ms-active绑定</h1>
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+                <p>这三个都是用于添加移除类名的。</p>
+                <p>ms-class-xxx="aaa"， xxx为类名， aaa为ViewModel的属性或表达式，
+                    如ms-class-main="add"而vm.add = true，那么就为此元素添加上main这个类名。或者ms-class-red="1+1",1+1为2，是真值，因为此元素添加上red这个类名。
+                    ms-class每次只能添加一个类名，如果类名是aaa-bbb-ccc这个样子，那么绑定为ms-class-aaa-bbbb-ccc="bool"。
+                </p>
+                <p>ms-hover="类名"，当用户的鼠标悬浮在元素上方时，添加此类名，移走时移除。</p>
+                <p>ms-active="类名"，当用户通过点击事件等让元素处于获得焦点状态（或叫激活状态），就添加类名，失去焦点移除。</p>
+                <div ms-skip>
+                    <pre class="brush:html;gutter:false;toolbar:false">
+ &lt;table id="classtable" &gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;流程&lt;/th&gt;
+                    &lt;th&gt;启动人&lt;/th&gt;
+                    &lt;th&gt;启动时间&lt;/th&gt;
+                    &lt;th&gt;状态&lt;/th&gt;
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody ms-each-row="rows" ms-controller="class" &gt;
+                &lt;tr ms-class-odd="$index % 2" 
+                    ms-class-even="!($index % 2)" 
+                    ms-hover="hover" 
+                    &gt;
+                    &lt;td&gt;&lt;a href="javascript:void(0)" ms-click="$remove"&gt;删除行{{$index}}&lt;/a&gt;&lt;/td&gt;
+                    &lt;td&gt;{{ Math.random().toString(36).substring(2, 15) }}&lt;/td&gt;
+                    &lt;td&gt;{{ new Date | date("yyyy-MM-dd HH:mm-ss") }}&lt;/td&gt;
+                    &lt;td&gt;{{ $first || $last }}&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+                    </pre>   
+                    <pre class="brush:js;gutter:false;toolbar:false">
+            avalon.ready(function() {
+                avalon.define("class", function(vm) {
+                    vm.rows = avalon.range(0, 15)
+                });
+                avalon.scan();
+            })
+                    </pre>   
+                </div>
+                <table id="classtable" >
+                    <thead>
+                        <tr>
+                            <th>流程</th>
+                            <th>启动人</th>
+                            <th>启动时间</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody ms-each-row="rows" ms-controller="class"   >
+                        <tr ms-class-odd="$index % 2" 
+                            ms-class-even="!($index % 2)" 
+                            ms-hover="hover" 
+                            >
+                            <td><a href="javascript:void(0)" ms-click="$remove">删除行{{$index}}</a></td>
+                            <td>{{ Math.random().toString(36).substring(2, 15) }}</td>
+                            <td>{{ new Date | date("yyyy-MM-dd HH:mm-ss") }}</td>
+                            <td>{{ $first || $last }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            </div>
+    </body>
+</html>

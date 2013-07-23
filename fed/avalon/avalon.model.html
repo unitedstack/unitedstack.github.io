@@ -1,0 +1,246 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/avalon.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            .visible{
+                width:400px;
+                height: 50px;
+                background: red;   
+            }
+            .if{
+                width:400px;
+                height: 50px;
+                background: blueviolet;   
+            }
+        </style>
+
+        <script>
+            avalon.define("model", function(vm) {
+                window.console || (window.console = function() {
+                });
+                vm.textModel = "text";
+                vm.passwordModel = "password";
+                vm.radioModel = true;
+                vm.selectModel = "bbb";
+                vm.checkboxModel = ["aaa", "bbb"];
+                vm.$watch("checkboxModel.length", function() {
+                    console.log(vm.checkboxModel);
+                });
+                vm.$watch("textModel", function(n, o) {
+                    console.log(n + "  " + o);
+                });
+                vm.$watch("passwordModel", function(n, o) {
+                    console.log(n + "  " + o);
+                });
+            });
+
+            avalon.define("weixin", function(vm) {
+                vm.url = "";
+                vm.utmSource = "weixin";
+                vm.utmMedium = "public";
+                vm.utmCampaign = "";
+                vm.utmContent = "";
+                vm.utmTerm = "";
+                vm.utmUrl = {
+                    get: function() {
+                        var url = this.url
+                        if (/([a-zA-Z\-]+)-([0-9\-]+)/.test(url)) {
+                            this.utmCampaign = RegExp.$2 + "-promo";
+                            this.utmContent = RegExp.$1;
+                            this.utmTerm = RegExp.$1;
+                        }
+                        return url ? [
+                            url,
+                            "?utm_source=" + this.utmSource,
+                            "&utm_medium=" + this.utmMedium,
+                            "&utm_campaign=" + this.utmCampaign,
+                            "&utm_content=" + this.utmContent,
+                            "&utm_term=" + this.utmTerm
+                        ].join('') : "";
+                    }
+                }
+            });
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>ms-model</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <p>此类绑定只能用于表单元素中，即text, password, textarea, radio, checkbox, select，并且对ViewModel的属性值有严格的规则
+                text, password, textarea要求类型为字符串，radio要求类型为布尔，checkbox要求类型为字符串数组，
+                select视multiple使用数组或字符串。
+            <p>
+            <p>框架会在上面绑定一些事件，如input, change, click以进行同步，相关掉它们，可以在元素上定义data-observe="false"。</p>
+
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+        &lt;div ms-controller="model"&gt;
+            &lt;input ms-model="textModel" ms-data-observe="radioModel"/&gt;
+            &lt;input ms-model="passwordModel" type="password"/&gt;
+            &lt;input type="radio" ms-model="radioModel"&gt;{{radioModel}}
+            &lt;select ms-model="selectModel"&gt;
+                &lt;option value="aaa" selected&gt;aaa&lt;/option&gt;
+                &lt;option value="bbb"&gt;bbb&lt;/option&gt;
+                &lt;option value="ccc"&gt;ccc&lt;/option&gt;
+            &lt;/select&gt;{{selectModel}}
+            &lt;input ms-model="checkboxModel" type="checkbox" value="aaa" /&gt;
+            &lt;input ms-model="checkboxModel" type="checkbox" value="bbb" /&gt;
+            &lt;input ms-model="checkboxModel" type="checkbox" value="ccc" /&gt;
+            &lt;div ms-visible="radioModel" class="visible"&gt;
+                ms-visible这个区域是受到radioModel控制
+            &lt;/div&gt;
+            &lt;div ms-if="!radioModel" class="if"&gt;
+                ms-if这个区域是受到radioModel控制
+            &lt;/div&gt;
+        &lt;/div&gt;
+                </pre>   
+
+                <pre class="brush:js;gutter:false;toolbar:false">
+            avalon.define("model", function(vm) {
+                window.console || (window.console = function() {
+                });
+                vm.textModel = "text";
+                vm.passwordModel = "password";
+                vm.radioModel = true;
+                vm.selectModel = "bbb";
+                vm.checkboxModel = ["aaa", "bbb"];
+                vm.$watch("checkboxModel.length", function() {
+                    console.log(vm.checkboxModel);
+                });
+                vm.$watch("textModel", function(n, o) {
+                    console.log(n + "  " + o);
+                });
+                vm.$watch("passwordModel", function(n, o) {
+                    console.log(n + "  " + o);
+                });
+            });
+                </pre>
+                <p>大家可以打开控制台查看相关打印日志。</p>
+            </div>
+            <div ms-controller="model">
+                <input ms-model="textModel" ms-data-observe="radioModel"/>
+                <input ms-model="passwordModel" type="password"/>
+                <input type="radio" ms-model="radioModel">{{radioModel}}
+                <select ms-model="selectModel">
+                    <option value="aaa" selected>aaa</option>
+                    <option value="bbb">bbb</option>
+                    <option value="ccc">ccc</option>
+                </select>{{selectModel}}
+                <input ms-model="checkboxModel" type="checkbox" value="aaa" />
+                <input ms-model="checkboxModel" type="checkbox" value="bbb" />
+                <input ms-model="checkboxModel" type="checkbox" value="ccc" />
+                <div ms-visible="radioModel" class="visible">
+                    ms-visible这个区域是受到radioModel控制
+                </div>
+                <div ms-if="!radioModel" class="if">
+                    ms-if这个区域是受到radioModel控制
+                </div>
+            </div>
+            <hr/>
+            <div ms-skip>
+                <pre class="brush:html;gutter:false;toolbar:false">
+&lt;table ms-controller="weixin" class="sample2"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;&lt;th&gt;地址:&lt;/th&gt;&lt;td&gt;&lt;input ms-model="url" style="width:500px" /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;th&gt;utm_source:&lt;/th&gt;&lt;td&gt;&lt;input ms-model="utmSource" /&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;th&gt;utm_medium:&lt;/th&gt;&lt;td&gt;&lt;input ms-model="utmMedium" /&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;th&gt;utm_campaign:&lt;/th&gt;&lt;td&gt;&lt;input ms-model="utmCampaign" /&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;th&gt;utm_content:&lt;/th&gt;&lt;td&gt;&lt;input ms-model="utmContent" /&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;th&gt;utm_term:&lt;/th&gt;&lt;td&gt;&lt;input ms-model="utmTerm" /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;&lt;th&gt;&nbsp;&lt;/th&gt;&lt;td&gt;&lt;textarea style="width:500px;height:200px;" ms-value="utmUrl" /&gt;&lt;/textarea&gt;&lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;
+                </pre>   
+
+                <pre class="brush:js;gutter:false;toolbar:false">
+            avalon.ready(function() {
+                 avalon.define("weixin", function(vm) {
+                    vm.url = "";
+                    vm.utmSource = "weixin";
+                    vm.utmMedium = "public";
+                    vm.utmCampaign = "";
+                    vm.utmContent = "";
+                    vm.utmTerm = "";
+                    vm.utmUrl = {
+                        get: function() {
+                            var url = this.url
+                            if (/([a-zA-Z\-]+)-([0-9\-]+)/.test(url)) {
+                                this.utmCampaign = RegExp.$2 + "-promo";
+                                this.utmContent = RegExp.$1;
+                                this.utmTerm = RegExp.$1;
+                            }
+                            return url ? [
+                                url,
+                                "?utm_source=" + this.utmSource,
+                                "&utm_medium=" + this.utmMedium,
+                                "&utm_campaign=" + this.utmCampaign,
+                                "&utm_content=" + this.utmContent,
+                                "&utm_term=" + this.utmTerm
+                            ].join('') : "";
+                        }
+                    }
+                });
+                avalon.scan();
+            });
+                </pre>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <table ms-controller="weixin" class="sample2">
+                <thead>
+                    <tr><th>地址:</th><td><input ms-model="url" style="width:500px" /></td></tr>
+                </thead>
+                <tbody>
+                    <tr><th>utm_source:</th><td><input ms-model="utmSource" /></td></tr>
+                    <tr><th>utm_medium:</th><td><input ms-model="utmMedium" /></td></tr>
+                    <tr><th>utm_campaign:</th><td><input ms-model="utmCampaign" /></td></tr>
+                    <tr><th>utm_content:</th><td><input ms-model="utmContent" /></td></tr>
+                    <tr><th>utm_term:</th><td><input ms-model="utmTerm" /></td></tr>
+                </tbody>
+                <tfoot>
+                    <tr><th>&nbsp;</th><td><textarea style="width:500px;height:200px;" ms-value="utmUrl" /></textarea></tr>
+                </tfoot>
+            </table>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Avalon by RubyLouvre</title>
+        <link rel="stylesheet" href="stylesheets/styles.css">
+        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="javascripts/common.js"></script>
+        <script src="javascripts/respond.js"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="stylesheets/ie.css">
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+
+        </style>
+
+
+
+
+    </head>
+    <body>
+        <div id="header">
+            <nav>
+                <li class="fork"><a href="https://github.com/RubyLouvre/mass-Framework">View On GitHub</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/avalon.js">ZIP</a></li>
+                <li class="downloads"><a href="https://github.com/RubyLouvre/mass-Framework">TAR</a></li>
+                <li class="title">DOWNLOADS</li>
+            </nav>
+        </div><!-- end header -->
+
+        <div class="wrapper">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>API列表</h1>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+            <hr/>
+            <h3>静态方法与属性</h3>
+
+            <ul>
+                <li>mix(a,b)， 相当于jQuery.extend</li>
+                <li>vmodels， 用于放置生成的ViewModel</li>
+                <li>models， 用于放置生成的ViewModel(已废弃)</li>
+                <li>log(s)， 打印日志</li> 
+                <li>error(s)，抛出异常</li> 
+                <li>ui， 用于放置组件</li> 
+                <li>noop， 一个空函数</li> 
+                <li>ready(fn), domReady，将回调延迟到DOM树后才执行</li> 
+                <li>oneObject(str|array, val?)， 如果传入一个字符串则将它以逗号转换为一个字符串数组，否则一定要传字符串数组，第二个参数可选，为生成的对象的值。此方法是用于生成一个键名不一样，但键值都一样的对象。如{a:1,b:1,c:1,d:1}</li>
+                <li>type(obj), 返回传参的数据类型，值可能为array, date, object, json, number,string, null, undefined</li>
+                <li>isWindow(obj),  判定是否为window对象</li>
+                <li>isPlainObject(obj), 判定是否是一个朴素的javascript对象（Object），不是DOM对象，不是BOM对象，不是自定义类的实例。</li>
+                <li>slice(obj, start?, end?), 用于转换一个类数组对象为一个纯数组，后面两个为索引值，可以只取原对象的一部分元素。</li>
+                <li>range(start, end, step)，生成一个整数数组，功能与underscorejs或python的同名函数一致。</li>
+                <li>bind(el, type, fn, phase)，绑定事件，返回一个回调给你行卸载</li>
+                <li>unbind(el, type, fn, phase)，卸载事件</li>
+                <li>each，功能同jQuery.each， 都是索引值或键名在前，值或元素在后</li>
+                <li>avalon.define(id?, factory)，定义一个ViewModel</li>
+                <li>scan(element?, ViewModel?)，开始扫描DOM树，抽取绑定。</li>
+                <li>define(id?, deps?, factory),一个全局方法，用于定义AMD规范的JS模块 </li>
+                <li>require( deps, callback),一个全局方法，用于加载JS模块 </li>
+            </ul>
+
+            <h3>迷你DOM操作对象</h3>
+            <p>要求传入一个元素节点或文档对象或window，你可以通过$().element, $()[0]再次访问到你传入的东西。它有以下原型方法。</p>
+            <ul>
+                <li>hasClass(cls)，判定有没有此类名</li>
+                <li>addClass(cls)，只有元素不存在时才添加此类名（可同时添加多个）</li>
+                <li>remvoeClass(cls)，移除多个类名</li> 
+                <li>toggleClass(cls, state?),切换多个类名，如果第2个参数为布名，则根据它强行添加或删除类名 </li> 
+                <li>attr(name,value?)， 读写特性（此方法非常弱，直接使用setAttribute, getAttribute实现，没有做任何兼容性处理）</li> 
+                <li>data(name, value?)， 读写数据，使用HTML5的data-*特性实现。它会parse一下，让数据更为实现，思路同jQuery，如果一个传参也没有，将元素的data-*属性组成一个对象返回</li> 
+                <li>removeData(name)， 移除数据</li>
+                <li>css(name,value?)，读写样式，这个兼容性做得很好，因为长达一百行，连HTML5的私有前缀都能你补上。</li>
+                <li>width(val?), 读写宽度，注意对隐藏元素没有处理。</li>
+                <li>height(val?), 读写高度，注意对隐藏元素没有处理。</li>
+                <li>bind(type, fn, phase)，绑定事件，这个没有做链式操作，目的是为了返回回调给你卸载。</li>
+                <li>unbind(type,fn, phase)，卸载事件。</li>
+                <li>val，读取表单元素的value值，功能同jQuery。</li>
+                <li>offset，取得元素在文档中的坐标，功能只实现了jQuery的一半，只能读不能写。</li>
+            </ul>
+            <h3>各种绑定</h3>
+
+            <ul>
+                <li>ms-html="str", 设置innerHTML，会清空此元素下的所有节点</li>
+                <li>ms-class-xxx="boolean", 切换类名</li>
+                <li>ms-hover="className", 移上去时添加这类名，移出去掉。</li>
+                <li>ms-active="className", 获得焦点添加这类名，失去焦点去掉。</li>
+                <li>ms-visible="boolean", 操作元素的style.display实现显示隐藏</li>
+                <li>ms-if="boolean", 决定是将此元素放出到DOM树还是移出</li>
+                <li>ms-each-el?="array", el用于下面的引用，不写默认为$data。在它的作用范围，你还可以访问$index得到其索引值，$first判定是否第一个元素，$last是否最后一个，$remove为一个方法，你执行它就会从数组中删除它，并将它作用的那一片元素都移出DOM树。</li>
+                <li>ms-model="property"，只能用于表单元素，与ViewModel中的某些字段双向绑定，它会偷偷绑定一些事件进行同步。情况与angular的ng-model相同。</li>
+                <li>ms-controller="ViewModelName"，指定一个ViewModel的作用范围</li>
+                <li>ms-important="ViewModelName"，指定这个区域只能由这个ViewModel来渲染</li>
+                <li>ms-skip，不对此元素及后代进行扫描绑定，保证原样输出。</li>
+                <li>ms-on-type="callback"，绑定一个事件，type为事件名，如ms-on-click="tick"。</li>
+                <li>ms-click="callback",ms-keypress="callback",ms-keydown="callback",
+                    ms-keyup="callback",ms-mousedown="callback"……等常用事件都做了一个快捷方式。</li>
+                <li>ms-href, ms-alt, ms-src, ms-title，ms-value这些绑定的属性如果不带有{{ }}，则以其他绑定一样，直接eval属性值，
+                    然后设置href, alt, src, title, value等属性，如果带有着{{ }}，那么整个将变成插值表达式，返回一个文本，然后赋给相关属性。</li>
+                <li>ms-css-xxx="val",规则同ms-href,不同的是， 它赋值是使用css方法，即avalon(element).css(xxx, val)</li>
+                <li>ms-disabled,ms-readyonly,ms-selected，ms-checked等布尔属性，根据属性值的情况决定添加与移除</li>
+                <li>ms-enabled="boolean"，与ms-disabled相反。</li>
+                <li>{{ expr }}, 插值表达式，与angular相同，可以使用“|filter(args1, args2)”的形式添加多个过滤器。 </li>
+                <li>{{ expr|html }}, 相当于ms-html，但不会影响它的兄弟节点。 </li>
+                <li>ms-ui-opts?="name"，生成一个UI控件。opts为ViewModel中的一个属性，name为控件名。
+                    ui绑定会取当前的data-*属性作为其配置参数。其中data-id最为重要，用于生成此UI对象的ViewModel的名字，
+                    方便以后我可以avalon.model[id]中得到此ViewModel从而对UI进行操作。</li>
+            </ul>
+
+            <h3>ViewModel</h3>
+
+            <ul title="avalonjs">
+                <li>与angular的要求一致，$开头的为框架所保留，由于在IE6-8中然后VBS实现，无法区分大小写，不要同一个ViewModel定义两个近似的方法名。
+                </li>
+                <li>$id为ViewModle的名字</li>
+                <li>$events为一个对象，用于保存$watch方法的回调</li>
+                <li>$watch(prop, callback)，ViewModel只能通知它的视图进行更新，不能通知他在ViewModel的其他属性，对于监控属性，我们可能通过这方法实现兄弟间的通信。</li>
+                <li>$unwatch(prop,callback?)，停止通知</li>
+                <li>$model，对应ViewModel的普通javascript对象形式(早期的版本，它是叫做$json)</li>
+                <li>以$开头的属性，框架都不会将它转换为监控属性</li>
+                <li>放在$skipArray中的属性名，也不会转换为监控属性</li>
+                <li title="avalonjs">一个包含get与set的对象被认为是一个计算属性。</li>
+            </ul>
+            <p><a href="http://rubylouvre.github.io/mvvm/">返回首页</a></p>
+        </div>
+    </body>
+</html>
