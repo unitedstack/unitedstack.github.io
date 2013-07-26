@@ -646,8 +646,8 @@ Updated:      110504_BW
         }
         /* line 44, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
         #nav #primary ul#primary_filter li a.selected {
-          color: rgba(255,255,0,1);
-          border-bottom: 1px solid rgba(255,255,0,1);
+          color: rgba(18,187,213,1);
+          border-bottom: 1px solid rgba(18,187,213,1);
           -webkit-transition: all 0.5s; 
           -moz-transition: all 0.5s; 
           -ms-transition: all 0.5s; 
@@ -866,9 +866,13 @@ Updated:      110504_BW
   perspective: 600px; }
   /* line 18, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
   .card h3 {
+    margin: #fff;
+    margin: #fff;
     font-size: 14px;
     font-weight: bold;
-    margin: 20px 10px 10px; }
+    margin: 20px 10px 10px; 
+    color: rgba(18,187,213,1);
+  }
   /* line 23, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
   .card h4 {
     margin: 20px 10px 0px;
@@ -972,7 +976,7 @@ Updated:      110504_BW
   .card .back {
     z-index: 800;
     /*border-color: #cccccc;*/
-    background: rgba(250,6,172,1);
+    background: rgba(18,187,213,1);
     color: #fff;
     -webkit-transform: rotateY(-180deg);
     -moz-transform: rotateY(-180deg);
