@@ -371,7 +371,7 @@ input:focus, textarea:focus {
 
 /* line 164, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
 ::selection {
-  background: #ffd4d8; }
+  background: #EC061B; }
 
 /* line 167, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
 ::-moz-selection {
@@ -953,7 +953,7 @@ Updated:      110504_BW
     /* line 76, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
     .card .front a {
       visibility: hidden;
-      color: #0C6BE8; 
+      color: #12BBD5; 
     }
   /* line 80, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
   .card.flip .front {
@@ -985,7 +985,7 @@ Updated:      110504_BW
     /* line 90, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
     .card .back a {
       background-position: 0 4px;
-      color: rgba(248, 171, 255, 1);
+      color: rgba(240, 240, 240, 1);
     }
       /* line 93, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
       .card .back a:hover {
