@@ -573,7 +573,7 @@ Updated:      110504_BW
   -o-transition-duration: 0.8s;
   transition-duration: 0.8s; 
   /*border-top: 2px solid #ff0;*/
-  border-bottom: 1px solid #FF0ABA;;
+  border-bottom: 1px solid #313131;
 }
   /* line 11, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
   #nav .filter_label {
