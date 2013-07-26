@@ -1,0 +1,1182 @@
+/*  
+Theme Name: Datavisualization.ch 2010
+Theme URI: http://datavisualization.ch/
+Description: Design for the Data Visualization and Infographics Magazine Datavisualization.ch
+Version: 1.2
+Author: Interactive Things
+Author URI: http://interactivethings.com/
+Updated: 111012_BW
+*/
+/*
+BASE STYLESHEET
+Description:  Global variables for the website
+Author:       Interactive Things
+Created:      110504_BW
+Updated:      110504_BW
+*/
+/* line 17, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; 
+}
+
+/* line 20, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  width: 100%;
+  height: 100%;
+  font: 300 20px/1.4 'Open Sans', Helvetica, Arial, sans-serif;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #181818 url("../images/bg10.jpg") no-repeat 0 0;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed; 
+}
+
+.hide {
+  display: hidden;
+}
+
+/* line 22, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 24, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 26, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 28, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none; }
+  /* line 101, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+/* line 30, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none; }
+
+/* line 114, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+/*
+LIBRARY STYLESHEET
+Description:  Reusable styling patterns
+Author:       Interactive Things
+Created:      110504_BW
+Updated:      110504_BW
+*/
+/* line 16, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+.navigation ul, #header ul, #nav ul {
+  margin: 0;
+  padding: 0; }
+  /* line 19, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+  .navigation ul li, #header ul li, #nav ul li {
+    display: block;
+    height: 30px;
+    line-height: 32px;
+    list-style: none;
+    color: white;
+    text-transform: uppercase; }
+    /* line 26, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+    .navigation ul li a, #header ul li a, #nav ul li a {
+      color: white;
+      display: block;
+      font-weight: normal;
+      height: 30px;
+      line-height: 32px; }
+
+/* line 34, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+.border_image, img.border, a img.border {
+  border: 4px solid #dddddd;
+  padding: 1px; }
+
+/* line 38, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+.border_image_active, a:hover img.border {
+  border: 4px solid #ee0011; }
+
+/* line 41, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+.meta_text, .section_heading h2, .section_heading h3 {
+  font-size: 11px;
+  font-weight: normal;
+  color: #bbbbbb;
+  line-height: 1;
+  text-transform: uppercase; }
+  /* line 47, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+  .meta_text span, .section_heading h2 span, .section_heading h3 span {
+    padding: 0 20px 0 20px; }
+  /* line 49, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+  .meta_text a, .section_heading h2 a, .section_heading h3 a {
+    color: #bbbbbb;
+    font-weight: normal; }
+  /* line 52, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+  .meta_text a:hover, .section_heading h2 a:hover, .section_heading h3 a:hover {
+    color: #ee0011; }
+
+/* line 56, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+.lead p, #footer p {
+  background: url("../images/icon_sprite.png") 0 -1144px no-repeat;
+  color: #999999;
+  font: italic 14px/16px "Georgia", Georgia, serif;
+  text-indent: 12px; }
+  /* line 61, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+  .lead p a, #footer p a {
+    font-weight: normal; }
+    /* line 63, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+    .lead p a strong, #footer p a strong {
+      color: #ee0011;
+      font-weight: normal;
+      text-decoration: underline; }
+
+/* line 68, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+.icon_links, #footer ul {
+  font-size: 11px;
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  /* line 73, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+  .icon_links li, #footer ul li {
+    border-bottom: 1px solid #dddddd; }
+    /* line 75, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+    .icon_links li a, #footer ul li a {
+      display: block;
+      height: 18px;
+      padding: 4px 0 0 0; }
+
+/* line 80, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/library/_mixins.scss */
+.rounded {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px; }
+
+/*
+GENERAL STYLESHEET
+Description:  Global styling for the Website
+Author:       Interactive Things
+Created:      110504_BW
+Updated:      120125_BW
+*/
+/* line 3, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+html, body {
+  color: #333333; }
+
+/* line 6, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+body {
+  font: 75% "Helvetica", Helvetica, Arial, sans-serif;
+  line-height: 1.5; }
+
+/* line 13, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+h1 {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: bold; }
+
+/* line 18, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+h2 {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: bold; }
+
+/* line 23, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+h2 a:hover {
+  color: #333333; }
+
+/* line 26, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+h3 {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: bold; }
+
+/* line 31, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+h4 {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: bold; }
+
+/* line 38, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+a {
+  color: #333333;
+  text-decoration: none;
+  font-weight: bold; }
+
+/* line 43, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+a:focus, a:active, a:hover {
+  color: #ee0011;
+  border: none;
+  outline: none; }
+
+/* line 48, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+p {
+  margin: 0 0 1.5em; }
+
+/* line 51, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+form p {
+  margin: 0; }
+
+/* line 54, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+hr {
+  height: 1px;
+  padding: 0;
+  margin: 9px 0 10px;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #dddddd; }
+
+/* line 62, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+blockquote {
+  margin: 1.5em;
+  color: #999999;
+  font: italic 14px/18px "Georgia", Georgia, serif; }
+
+/* line 67, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+strong {
+  font-weight: bold; }
+
+/* line 70, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+em, dfn {
+  font-style: italic; }
+
+/* line 73, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+dfn {
+  font-weight: bold; }
+
+/* line 76, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+sup, sub {
+  line-height: 0; }
+
+/* line 79, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+abbr, acronym {
+  border-bottom: 1px dotted #333333; }
+
+/* line 82, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+address {
+  margin: 0 0 1.5em;
+  font-style: italic; }
+
+/* line 86, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+del {
+  color: #999999; }
+
+/* line 89, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+pre {
+  margin: 1.5em 0;
+  white-space: pre; }
+
+/* line 93, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+pre, code, tt {
+  font: 1em "andale mono", "lucida console", monospace;
+  line-height: 1.5; }
+
+/* line 97, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+li ul, li ol {
+  margin: 0; }
+
+/* line 100, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+ul, ol {
+  margin: 0 1.5em 1.5em 0;
+  padding-left: 3.333em; }
+
+/* line 104, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+ul {
+  list-style-type: disc; }
+
+/* line 107, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+ol {
+  list-style-type: decimal; }
+
+/* line 110, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+dl {
+  margin: 0 0 1.5em 0; }
+
+/* line 113, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+dl dt {
+  font-weight: bold; }
+
+/* line 116, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+dd {
+  margin-left: 1.5em; }
+
+/* line 121, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+table {
+  margin-bottom: 1.4em;
+  width: 100%; }
+
+/* line 125, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+th {
+  font-weight: bold; }
+
+/* line 128, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+th, td {
+  padding: 4px 10px 4px 5px; }
+
+/* line 131, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+tfoot {
+  font-style: italic; }
+
+/* line 136, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+label {
+  font-size: 11px;
+  font-weight: normal;
+  color: #333333;
+  line-height: 1;
+  text-transform: uppercase; }
+
+/* line 143, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+input {
+  outline: none;
+  border: 1px solid #dddddd;
+  padding: 5px;
+  margin: 0 0 20px;
+  width: 338px;
+  font: 12px/1.5 "Helvetica", Helvetica, Arial, sans-serif; }
+
+/* line 151, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+textarea {
+  outline: none;
+  border: 1px solid #dddddd;
+  padding: 5px;
+  margin: 0 0 20px;
+  width: 338px;
+  font: 12px/1.5 "Helvetica", Helvetica, Arial, sans-serif; }
+
+/* line 159, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+input:focus, textarea:focus {
+  border-color: #999999; }
+
+/* line 164, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+::selection {
+  background: #ffd4d8; }
+
+/* line 167, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_typography.scss */
+::-moz-selection {
+  background: #ffd4d8; }
+
+/* line 18, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_all.scss */
+.floatleft {
+  float: left;
+  margin: 3px 10px 0 0; }
+
+/* line 22, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_all.scss */
+.floatright {
+  float: right;
+  margin: 3px 0 0 10px; }
+
+/* line 26, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_all.scss */
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow: hidden; }
+
+/* line 34, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/general/_all.scss */
+.clearfix, .container {
+  display: block; }
+
+/*
+STRUCTURE STYLESHEET
+Description:  Page structure definitions
+Author:       Interactive Things
+Created:      110504_BW
+Updated:      110504_BW
+*/
+/* line 5, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/structure/_grid.scss */
+#content {
+  padding: 60px 0;
+  /*text-align: center;*/
+}
+  /* line 7, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/structure/_grid.scss */
+  #content .container {
+    padding: 20px auto; 
+}
+
+/* line 11, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/structure/_grid.scss */
+.container {
+  margin: 0 auto;
+  position: relative;
+  padding: 0 40px;
+  min-width: 640px; }
+
+/*
+COMPONENTS STYLESHEET
+Description:  Page components definitions
+Author:       Interactive Things
+Created:      110504_BW
+Updated:      110504_BW
+*/
+/* line 3, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+#header {
+  height: 30px;
+  background: #ee0011;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 10000; }
+  /* line 8, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #header h1 {
+    position: relative;
+    height: 30px;
+    z-index: 2; }
+  /* line 13, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #header h1 a {
+/*    background: url("../images/logo.png") -12px 0 no-repeat;*/
+    display: block;
+    height: 50px; }
+  /* line 18, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #header h1 img {
+    margin-left: -12px; }
+  /* line 21, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #header h2 {
+    position: absolute;
+    top: 10px;
+    left: 240px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px -1px 0;
+    text-transform: uppercase;
+    z-index: 1; }
+  /* line 32, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #header ul {
+    position: absolute;
+    right: 0px;
+    top: 0; }
+    /* line 36, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+    #header ul li {
+      margin: 0 0 0 12px;
+      width: auto;
+      float: right;
+      font-weight: bold;
+      font-size: 14px;
+      text-shadow: rgba(0, 0, 0, 0.3) 0px -1px 0; }
+      /* line 43, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+      #header ul li a {
+        width: auto; }
+      /* line 45, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+      #header ul li a:hover {
+        color: #333333; }
+
+/* line 48, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+#header h1 a:hover img {
+  display: none; }
+
+/* line 51, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+#header.overlayed h1 a:hover img {
+  display: block; }
+
+/* line 57, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+#search_form {
+  position: absolute;
+  right: 40px;
+  top: 5px;
+  z-index: 3; }
+  /* line 62, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #search_form #search_field {
+    border: none;
+    font: 20px/1 "Helvetica", Helvetica, Arial, sans-serif;
+    height: 30px;
+    padding: 10px 0 0 20px;
+    margin: 0;
+    width: 167px;
+  }
+  /* line 71, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #search_form #search_field[type="search"] {
+    border: none;
+    background: rgba(50,50,50,0.8);
+    font: 16px/1.4 "Helvetica", Helvetica, Arial, sans-serif;
+    height: auto;
+    padding: 5px 2px 6px 5px;
+    margin-top: 1px;
+    text-transform: 1s;
+    -webkit-transition: all 0.6s; 
+     -moz-transition: all 0.6s; 
+      -ms-transition: all 0.6s; 
+       -o-transition: all 0.6s; 
+          transition: all 0.6s; 
+}
+
+/* webkit hack*/
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    #search_form #search_field[type="search"] {
+      border: none;
+      background: rgba(50,50,50,0.8);
+      font: 16px/1.4 "Helvetica", Helvetica, Arial, sans-serif;
+      height: 34px;
+      padding: 5px 2px 6px 5px;
+      margin-top: 0px;
+      text-transform: 1s;
+      -webkit-transition: all 0.6s; 
+       -moz-transition: all 0.6s; 
+        -ms-transition: all 0.6s; 
+         -o-transition: all 0.6s; 
+            transition: all 0.6s; 
+  }
+}
+
+  /* line 78, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #search_form #search_field:hover, #search_form #search_field:focus, #search_form #search_field:active {
+    background: white;
+  }
+  #search_form #search_field:focus, #search_form #search_field:active {
+    width: 300px; 
+  }
+  /* line 81, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_header.scss */
+  #search_form #search_field::-webkit-search-cancel-button {
+    -webkit-appearance: none; }
+
+/* line 3, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+#nav {
+  height: 44px;
+  background: rgba(0,0,0,0.7);
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 10001;
+  -webkit-box-shadow: rgba(0, 0, 0, 0), 0 0 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0), 0 0 0;
+  box-shadow: rgba(0, 0, 0, 0), 0 0 0;
+  -webkit-transition-property: box-shadow;
+  -moz-transition-property: box-shadow;
+  -ms-transition-property: box-shadow;
+  -o-transition-property: box-shadow;
+  transition-property: box-shadow;
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -ms-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s; 
+  /*border-top: 2px solid #ff0;*/
+  border-bottom: 1px solid #FF0ABA;;
+}
+  /* line 11, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+  #nav .filter_label {
+    color: #666666;
+    margin: 5px 5px 5px 20px;
+    line-height: 20px;
+    display: -moz-inline-box;
+    -moz-box-orient: vertical;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto; }
+    /* line 7, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+    #nav .filter_label {
+      *display: inline; }
+  /* line 17, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+  #nav #primary {
+    display: -moz-inline-box;
+    -moz-box-orient: vertical;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    float: left; }
+    /* line 7, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+    #nav #primary {
+      *display: inline; }
+    /* line 20, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+    #nav #primary ul#primary_filter {
+      overflow: hidden;
+      *zoom: 1;
+      margin-left: 0; }
+      /* line 23, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+      #nav #primary ul#primary_filter li {
+        width: 100px;
+        height: 44px;
+        border-right: none;
+        margin: 0px 5px 5px 0;
+        float: left;
+        text-align: center; 
+      }
+        /* line 30, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #primary ul#primary_filter li a {
+          color: #999999;
+          height: 44px;
+          line-height: 44px;
+          padding: 0 10px;
+          /*background: rgba(0,0,0,0.8);*/
+          -webkit-transition: all 0.5s; 
+          -moz-transition: all 0.5s; 
+          -ms-transition: all 0.5s; 
+           -o-transition: all 0.5s; 
+              transition: all 0.5s; 
+
+       /*   text-transform: none;
+          background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #333333));
+          background: -webkit-linear-gradient(#444444, #333333);
+          background: -moz-linear-gradient(#444444, #333333);
+          background: -o-linear-gradient(#444444, #333333);
+          background: -ms-linear-gradient(#444444, #333333);
+          background: linear-gradient(#444444, #333333);*/
+          -webkit-border-radius: 0px;
+          -moz-border-radius: 0px;
+          -ms-border-radius: 0px;
+          -o-border-radius: 0px;
+          border-radius: 0px; }
+        /* line 40, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #primary ul#primary_filter li a:hover {
+          border-bottom: 1px solid rgba(255,255,255,1);
+          color: rgba(255,255,255,1);
+
+        }
+        /* line 44, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #primary ul#primary_filter li a.selected {
+          color: rgba(255,255,0,1);
+          border-bottom: 1px solid rgba(255,255,0,1);
+          -webkit-transition: all 0.5s; 
+          -moz-transition: all 0.5s; 
+          -ms-transition: all 0.5s; 
+           -o-transition: all 0.5s; 
+              transition: all 0.5s; 
+        }
+        /* line 50, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #primary ul#primary_filter li a.selected:hover {
+          /*background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #555555));
+          background: -webkit-linear-gradient(#444444, #555555);
+          background: -moz-linear-gradient(#444444, #555555);
+          background: -o-linear-gradient(#444444, #555555);
+          background: -ms-linear-gradient(#444444, #555555);
+          background: linear-gradient(#f0f0f0, #f6f6f6); */
+        }
+      /* line 54, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+      #nav #primary ul#primary_filter li:first-child {
+        width: 250px;
+        margin-right: 20px; }
+  /* line 60, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+  #nav #secondary {
+    float: right;
+    display: -moz-inline-box;
+    -moz-box-orient: vertical;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto; }
+    /* line 7, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+    #nav #secondary {
+      *display: inline; }
+    /* line 63, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+    #nav #secondary ul#secondary_filter {
+      overflow: hidden;
+      *zoom: 1;
+      display: -moz-inline-box;
+      -moz-box-orient: vertical;
+      display: inline-block;
+      vertical-align: middle;
+      *vertical-align: auto;
+      margin-left: 0; }
+      /* line 7, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+      #nav #secondary ul#secondary_filter {
+        *display: inline; }
+      /* line 67, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+      #nav #secondary ul#secondary_filter li {
+        width: 40px;
+        height: 44px;
+        border-right: none;
+        margin: 5px 0;
+        float: left;
+        text-align: center; }
+        /* line 74, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #secondary ul#secondary_filter li a {
+          color: #999999;
+          height: 44px;
+          line-height: 44px;
+          padding: 0 10px;
+          background: #333;
+          text-transform: none;
+          background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #333333));
+          background: -webkit-linear-gradient(#444444, #333333);
+          background: -moz-linear-gradient(#444444, #333333);
+          background: -o-linear-gradient(#444444, #333333);
+          background: -ms-linear-gradient(#444444, #333333);
+          background: linear-gradient(#444444, #333333); }
+        /* line 83, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #secondary ul#secondary_filter li a:hover {
+          color: #bbbbbb;
+          background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555555), color-stop(100%, #444444));
+          background: -webkit-linear-gradient(#555555, #444444);
+          background: -moz-linear-gradient(#555555, #444444);
+          background: -o-linear-gradient(#555555, #444444);
+          background: -ms-linear-gradient(#555555, #444444);
+          background: linear-gradient(#555555, #444444); }
+        /* line 87, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #secondary ul#secondary_filter li a.selected {
+          color: #fff;
+         /* font-weight: bold;
+          background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #555555));
+          background: -webkit-linear-gradient(#444444, #555555);
+          background: -moz-linear-gradient(#444444, #555555);
+          background: -o-linear-gradient(#444444, #555555);
+          background: -ms-linear-gradient(#444444, #555555);
+          background: linear-gradient(#444444, #555555);
+          -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 0px 0px inset;
+          -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 0px 0px inset;
+          box-shadow: rgba(0, 0, 0, 0.2) 0 1px 0px 0px inset;*/
+          }
+        /* line 93, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #secondary ul#secondary_filter li a.selected:hover {
+        /*  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #555555));
+          background: -webkit-linear-gradient(#444444, #555555);
+          background: -moz-linear-gradient(#444444, #555555);
+          background: -o-linear-gradient(#444444, #555555);
+          background: -ms-linear-gradient(#444444, #555555);
+          background: linear-gradient(#444444, #555555); */
+        }
+      /* line 97, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+      #nav #secondary ul#secondary_filter li:first-child {
+        margin-right: 1px; }
+        /* line 99, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #secondary ul#secondary_filter li:first-child a {
+          -moz-border-radius-topleft: 10px;
+          -webkit-border-top-left-radius: 10px;
+          -ms-border-top-left-radius: 10px;
+          -o-border-top-left-radius: 10px;
+          border-top-left-radius: 10px;
+          -moz-border-radius-bottomleft: 10px;
+          -webkit-border-bottom-left-radius: 10px;
+          -ms-border-bottom-left-radius: 10px;
+          -o-border-bottom-left-radius: 10px;
+          border-bottom-left-radius: 10px; }
+      /* line 104, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+      #nav #secondary ul#secondary_filter li:last-child {
+        margin-right: 0px; }
+        /* line 106, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+        #nav #secondary ul#secondary_filter li:last-child a {
+          -moz-border-radius-topright: 10px;
+          -webkit-border-top-right-radius: 10px;
+          -ms-border-top-right-radius: 10px;
+          -o-border-top-right-radius: 10px;
+          border-top-right-radius: 10px;
+          -moz-border-radius-bottomright: 10px;
+          -webkit-border-bottom-right-radius: 10px;
+          -ms-border-bottom-right-radius: 10px;
+          -o-border-bottom-right-radius: 10px;
+          border-bottom-right-radius: 10px; }
+
+/* line 114, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_navigation.scss */
+#nav.overlayed {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 10px; }
+
+/* line 3, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_sections.scss */
+#main .section {
+  margin: 0 0 30px; }
+
+/* line 6, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_sections.scss */
+#footer .section {
+  margin: 0 0 30px; }
+  /* line 8, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_sections.scss */
+  #footer .section .section_heading {
+    margin: 0 0 10px; }
+
+/* line 11, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_sections.scss */
+.section_heading {
+  position: relative;
+  border-bottom: 1px solid #dddddd; }
+  /* line 14, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_sections.scss */
+  .section_heading h2, .section_heading h3 {
+    margin-bottom: 1px; }
+
+/* line 1, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+#footer {
+  overflow: hidden;
+  *zoom: 1;
+  color: #bbbbbb;
+  font-size: 11px; }
+  /* line 6, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+  #footer a {
+    color: #999999; }
+  /* line 8, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+  #footer a:hover {
+    color: #333333; }
+  /* line 10, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+  #footer ul {
+    margin: 0;
+    padding: 0; }
+    /* line 14, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+    #footer ul li {
+      list-style: none;
+      border-bottom: 1px solid #dddddd;
+      padding: 5px 0;
+      height: 20px; }
+  /* line 21, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+  #footer h3 span {
+    padding: 0;
+    font-size: 9px;
+    text-transform: none;
+    float: right;
+    position: relative;
+    top: 1px; }
+  /* line 29, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+  #footer #about {
+    float: left;
+    width: 480px;
+    position: relative;
+    float: left; }
+  /* line 33, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_footer.scss */
+  #footer #share {
+    float: left;
+    width: 230px;
+    position: relative;
+    float: left;
+    margin-left: 20px; }
+
+/* line 4, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+#deck #cards {
+  *zoom: 1;
+  padding-top: 30px; }
+  /* line 38, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+  #deck #cards:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+/* line 11, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.card {
+  height: 280px;
+  margin: 0 10px 20px 10px;
+  position: relative;
+  width: 225px;
+  cursor: pointer;
+  -webkit-perspective: 600px;
+  perspective: 600px; }
+  /* line 18, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 20px 10px 10px; }
+  /* line 23, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card h4 {
+    margin: 20px 10px 0px;
+    font-size: 12px;
+    text-transform: uppercase; }
+  /* line 28, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card strong {
+    font-size: 12px;
+    text-transform: uppercase; }
+  /* line 32, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card p {
+    margin: 0 10px 10px; }
+  /* line 35, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card a {
+    color: #999999;
+    font-weight: normal;
+    background: transparent url(../images/link_icon.png) 0 -37px no-repeat;
+    padding-left: 15px;
+    -webkit-transition: all 300ms; 
+    -moz-transition: all 300ms; 
+    -ms-transition: all 300ms; 
+     -o-transition: all 300ms; 
+        transition: all 300ms; 
+   }
+    /* line 40, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+    .card a:hover {
+      color: #12BBD5;
+      background-position: 0 -57px; }
+  /* line 45, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card ul {
+    margin: 3px 10px 10px;
+    padding: 0 0 0 2px;
+    list-style: none;
+    color: #999999; }
+    /* line 50, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+    .card ul li a {
+      font-weight: normal; }
+  /* line 54, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card img {
+    margin: 0; }
+  /* line 57, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card .front, .card .back {
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    /*border: 1px solid #dddddd;*/
+    padding: 1px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    -webkit-transition-duration: 0.5s, 0.2s;
+    -moz-transition-duration: 0.5s, 0.2s;
+    -ms-transition-duration: 0.5s, 0.2s;
+    -o-transition-duration: 0.5s, 0.2s;
+    transition-duration: 0.5s, 0.2s;
+    -webkit-transition-property: -webkit-transform, box-shadow;
+    -moz-transition-property: -moz-transform, box-shadow;
+    -ms-transition-property: -ms-transform, box-shadow;
+    -o-transition-property: -o-transform, box-shadow;
+    transition-property: transform box-shadow; }
+  /* line 72, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card .front {
+    z-index: 900;
+    background: rgba(255,255,0,1);
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg); 
+  }
+    /* line 76, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+    .card .front a {
+      visibility: hidden;
+      color: #0C6BE8; 
+    }
+  /* line 80, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card.flip .front {
+    z-index: 900;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg); 
+    -webkit-transition: all 1s; 
+       -moz-transition: all 1s; 
+        -ms-transition: all 1s; 
+         -o-transition: all 1s; 
+            transition: all 1s; 
+    border: 4px solid rgba(0,0,0,0.0);
+    margin: -4px;
+  }
+  /* line 84, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card .back {
+    z-index: 800;
+    /*border-color: #cccccc;*/
+    background: rgba(250,6,172,1);
+    color: #fff;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    transform: rotateY(-180deg); }
+    /* line 90, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+    .card .back a {
+      background-position: 0 4px;
+      color: rgba(248, 171, 255, 1);
+    }
+      /* line 93, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+      .card .back a:hover {
+        color: white;
+        background-position: 0 -17px; }
+  /* line 100, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card.flip .back {
+    z-index: 1000;
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5); }
+  /* line 107, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card .front:hover {
+    -webkit-transition: all 0.5s; 
+   -moz-transition: all 0.5s; 
+    -ms-transition: all 0.5s; 
+     -o-transition: all 0.5s; 
+        transition: all 0.5s; 
+  /*  border: 4px solid rgba(18,187,213,0.9);
+    border: 4px solid rgba(0,0,0,0.2);
+    margin: -4px;*/
+    -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); }
+    /* line 112, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+    .card .front:hover a {
+      visibility: visible; }
+  /* line 116, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card .flip_back, .card .flip_front {
+    visibility: hidden;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px; }
+  /* line 124, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card .flip_front {
+    background: transparent url("../images/flip_icon.png") 0 0 no-repeat; }
+  /* line 127, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card .flip_back {
+    background: transparent url("../images/flip_icon.png") 0 -30px no-repeat; }
+  /* line 130, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+  .card:hover {
+    z-index: 1000; }
+    /* line 132, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+    .card:hover .flip_back, .card:hover .flip_front {
+      visibility: visible; }
+
+/* line 140, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.isotope-item {
+  z-index: 2; }
+
+/* line 143, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1; }
+
+/* line 149, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -ms-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s; }
+
+/* line 152, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.isotope {
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  -ms-transition-property: height, width;
+  -o-transition-property: height, width;
+  transition-property: height width; }
+
+/* line 155, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  -ms-transition-property: -ms-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
+  transition-property: transform opacity; }
+
+/* line 160, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -ms-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s; }
+
+/* line 166, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.popularity_chart {
+  margin: 10px;
+  padding: 0 0 0 20px; }
+
+/* line 170, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.popularity_track {
+  background: rgba(0, 0, 0, 0.1);
+  display: block;
+  height: 10px; }
+
+/* line 175, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.popularity_bar {
+  background: rgba(0, 0, 0, 0.1);
+  display: block;
+  height: 10px;
+  width: 50%; }
+
+/* line 181, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+.github_watchers {
+  background: transparent url("../images/watch_icon.png") 0 4px no-repeat;
+  padding: 0 0 0 18px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  margin: 0 0 0 2px; }
+  /* line 7, /Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+  .github_watchers {
+    *display: inline; }
+
+/* line 187, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
+a:hover .github_watchers {
+  background: transparent url("../images/watch_icon.png") 0 -16px no-repeat; }
+
+/* line 3, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_tooltip.scss */
+.ui-tooltip-datavis {
+  border: 0; 
+  background: rgba(0,0,0,0.7);
+}
+
+/* line 7, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_tooltip.scss */
+.ui-tooltip-datavis .ui-tooltip-titlebar,
+.ui-tooltip-datavis .ui-tooltip-content {
+  _margin-bottom: 0;
+  /* IE6 */
+  .margin-bottom: 0;
+  /* IE7 */
+  background: transparent;
+  background: rgba(0, 0, 0, 0.87);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000)";
+  color: white;
+  border: 0px transparent;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 16px;
+  text-shadow: 0 1px black;
+  max-width: 120px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px; }
+
+/* line 27, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_tooltip.scss */
+.ui-tooltip-datavis .ui-tooltip-titlebar {
+  padding: 6px 35px 0 10; }
+
+/* line 31, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_tooltip.scss */
+.ui-tooltip-datavis .ui-tooltip-content {
+  padding: 6px 10;
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); }
+
+/* line 36, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_tooltip.scss */
+.ui-tooltip-datavis .ui-tooltip-icon {
+  border-color: #222;
+  text-shadow: none; }
+
+/* line 41, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_tooltip.scss */
+.ui-tooltip-datavis .ui-tooltip-titlebar .ui-state-hover {
+  border-color: #303030; }
+
+/*Scroll bar*/
+
+::-webkit-scrollbar {
+  width: .5em;
+  height: .35em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(217,217,217,0.5);
+}
+

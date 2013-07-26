@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,7 +28,7 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          mmTemplate
+        mmTemplate
 ===
 
 我的前后端通用模板，既可以自动变成jQuery插件,也可以单独为一个前端模板,亦可以是独立的node.js模板
@@ -58,7 +57,7 @@ var fn = ejs.compile(source, {
    }
 })
 </pre>
-那么我们就可以直接在模板中使用此方法
+  那么我们就可以直接在模板中使用此方法
 <pre>
 &lt;&= set_link("rubylouvre","http://www.cnblogs.com/rubylouvre/") %&gt;
 </pre>
@@ -104,13 +103,8 @@ var fn = ejs(source, data, {
 </pre>
 <p>至于指定layout,可以详看我的newlandjs的set_layout方法与位于/app/views/...中的使用示例</p>
 
-
-
 <p>吸收Tj大神的ejs模块的全部优点（向Tj致敬），如准确定位错误与模板套嵌。本模板不使用with与eval！</p>
 <p>本模板最先在博客园公布，版本迭代已到v10，并有一批C#的忠实用户在使用，我也长期用于任职公司的内部使用，历经考验。</p>
-
-
-
 具体见 http://www.cnblogs.com/rubylouvre/archive/2012/08/06/2624970.html
         </section>
 
