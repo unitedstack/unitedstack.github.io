@@ -115,8 +115,8 @@
 /*! Default tooltip style */
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content{
-	border-color: #F1D031;
-	background-color: #FFFFA3;
+	/*border-color: #F1D031;*/
+	/*background-color: #FFFFA3;*/
 	color: #555;
 }
 
