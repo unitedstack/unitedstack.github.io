@@ -29,5 +29,5 @@ $(function(){
   ];
   var index = Math.floor(Math.random() * bgArr.length);
   bg = bgArr[index];
-  $('body').css({'background' : bg});
+  $('body').css({'background' : bg, opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0}, 1000);
 })
