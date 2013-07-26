@@ -25,9 +25,7 @@ $(function(){
   var bgArr = [
   'url(images/bg6.jpg) no-repeat fixed',
   'url(images/bg7.jpg) no-repeat fixed',
-  'url(images/bg8.jpg) no-repeat fixed',
-  'url(images/bg9.jpg) no-repeat fixed',
-  'url(images/bg10.jpg) no-repeat fixed'
+  'url(images/bg8.jpg) no-repeat fixed'
   ];
   var index = Math.floor(Math.random() * bgArr.length);
   bg = bgArr[index];

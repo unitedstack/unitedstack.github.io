@@ -902,7 +902,8 @@ Updated:      110504_BW
     margin: 3px 10px 10px;
     padding: 0 0 0 2px;
     list-style: none;
-    color: #999999; }
+    color: #999999; 
+  }
     /* line 50, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
     .card ul li a {
       font-weight: normal; }
@@ -939,7 +940,7 @@ Updated:      110504_BW
   /* line 72, /Users/Benjamin/Dropbox/Interactive Things/IXT Programmierung/GIT/i1010_datavisualization/selection/assets/app/stylesheets/components/_deck.scss */
   .card .front {
     z-index: 900;
-    background: rgba(255,255,0,1);
+    background: #f0f0f0;
     -webkit-transform: rotateY(0deg);
     -moz-transform: rotateY(0deg);
     -ms-transform: rotateY(0deg);
