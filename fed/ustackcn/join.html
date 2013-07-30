@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UnitedStack 官网</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		::-webkit-scrollbar {
+		  width: .5em;
+		  height: .35em;
+		}
+
+		::-webkit-scrollbar-thumb {
+		  background: #aaa;
+		}
+
+		::-webkit-scrollbar-track {
+		  background: rgba(217,217,217,0.5);
+		}
+		a {
+			color: #333;
+			font: 14px '微软雅黑';
+			padding: 4px 10px;
+			text-decoration: none;
+			-webkit-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			   -moz-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			    -ms-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			     -o-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			        transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+
+		}
+		.clearfix:before,
+		.clearfix:after {
+		  display: table;
+		  content: " ";
+		}
+
+		.clearfix:after {
+		  clear: both;
+		}
+		a:hover {
+			color: #12BBD5;
+		}
+		body {
+			background: url(images/bg.png) repeat 0 0;
+			background-attachment: fixed; 
+			color: #333;
+			font: 14px '微软雅黑','黑体';
+		}
+		.header {
+			height: 90px;
+			border-bottom: 5px solid #12BBD5;
+			position: fixed;
+			width: 100%;
+			line-height: 90px;
+			margin-top: 0px;
+			z-index: 1000;
+			background: url(images/bg.png);
+			top: 0px;
+		}
+		.header div {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.header .logo {
+			display: inline-block;
+			width: 280px;
+			background: url(images/logo.png) no-repeat 0 19px ;
+			text-indent: -999px;
+		}
+		.header .nav {
+			float: right;
+			display: inline-block;
+		}
+		.header .nav li {
+			display: inline-block;
+		}
+
+		/*Opera Hack*/
+		@media all and (min-width:0px){
+			.header .nav li {
+				margin-top: 35px;
+			}
+		}
+		.header .nav li a:hover {
+			color: #fff;
+			background: #12BBD5;
+			box-shadow: 1px 1px 3px #999;
+		}
+		.header .nav .active a {
+			color: #fff;
+			background: #12BBD5;
+			box-shadow: 1px 1px 3px #999;
+		}
+		.banner {
+			background: url(images/banner.jpg) no-repeat 0 0;
+			width: 100%;
+			height: 550px;
+	 	 	-webkit-background-size: cover;
+		  	-o-background-size: cover;
+		 	background-size: cover;
+		 	margin-top: 95px;
+		}
+		.content {
+			width: 1000px;
+			/*border: 1px solid #000;*/
+			position: relative;
+			margin: 40px auto;
+		}
+		.content h2 {
+			font: 20px/30px '微软雅黑','黑体';
+			padding: 15px;
+		}
+		.content h2:hover {
+			-webkit-transition: color .218s;
+			transition: color .218s;
+			color:  #12BBD5;
+			cursor: pointer;
+		}
+
+		.content img {
+			margin: 0px 0 0 0px;
+			float: left;
+		}
+		.content img:hover {
+			border: 3px solid #12BBD5;
+			margin: -3px;
+		}
+		.content p {
+			padding: 0 15px 5px 15px;
+			word-wrap: break-word;
+			word-break: break-all;
+			display: inline-block;
+			-webkit-margin-start: 0px;
+			-webkit-margin-end: 0px;
+			font: 16px/26px '微软雅黑';
+			color: #333;
+			text-indent: 32px;
+		}
+		.footer {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.copyright{
+		    margin:50px 0 0 0;
+		    height:50px;
+		    color:#999999;
+		    font-family:Tahoma;
+		    font-size: 12px;
+		    text-align:center;
+		}
+		.copyright a {
+			color: #999;
+		}
+		.copyright a:hover {
+			color: #12BBD5;;
+		}
+
+	</style>
+</head>
+<body>
+	<!-- 政府官员喜欢用IE6，老老实实不要用html5等标签，避免之后的麻烦 -->
+<div class="header">
+	<div>
+		<h1 class="logo">UnitedStack 官网</h1>
+		<ul class="nav">
+			<li><a href="company.html">首页</a></li>
+			<li><a href="product.html">产品服务</a></li>	
+			<li><a href="about.html">关于我们</a></li>
+			<li><a href="connect.html">联系我们</a></li>
+			<li class='active'><a href="join.html">加入我们</a></li>
+		</ul>
+	</div>
+</div>
+<div class="banner"></div>
+<div class="content clearfix">
+	<h2>UnitedStack是怎样的？</h2>
+	<p>
+		UnitedStack聚集了中国最优秀的OpenStack工程师，是中国最懂OpenStack的团队，没有之一。UnitedStack期待你的加入，只要你足够优秀，对自己足够有信心。请简历发至Hui[at]UnitedStack.com。我们在硅谷、在香港、在北京。你在哪儿？
+	</p>
+	<h2>UnitedStack能给你什么？</h2>
+	<p>
+		在UnitedStack工作，除了工作其他的几乎不用你考虑。早餐、午餐、晚餐有专门的大厨负责，你只负责吃就可以。什么？吃腻了怎么办？我们不敢保证你吃不腻，但是我们这里的早、中、晚三餐每顿都是不一样的。各种建议随便提，大厨们尽量满足^ ^。上班时间各种免费的水果饮料零食什么的由你吃。
+	</p>
+	<p>
+		那我吃好了睡哪儿？如果你在北京有房子，还是建议你住家里。如果没有，公司为员工提供了良好的公寓。如果不信你可以过来瞧瞧，可以带家属的，亲！
+	</p>
+	<p>
+		各前端后端大牛的指导。UnitedStack的工程师有活跃在开源社区的大牛，也有非常低调的大牛。但是都很牛，真的很牛！不信你何以来看看。在开源社区活跃的大牛有<a>程辉</a><a href="">司徒正美</a>，非常低调的大牛有<a href="https://launchpad.net/~asias">Asias He</a><a href="">@jianingy</a><a>@l4future</a><a>@Jiang_Qi</a>
+	</p>
+	<h2>UnitedStack的薪酬怎么样?</h2>
+	<p>
+		UnitedStack为每一位员工提供富有竞争力的薪酬，只要你足够优秀，UnitedStack绝对会给你一份有尊严的薪水。
+	</p>
+	<h2>UnitedStack需要怎样的工程师?</h2>
+	<p>UnitedStack只要最优秀的工程师，现在、将来都是。具体标准强参考这里<a href="http://www.ustack.com/unitedstack-first-recruitment/">UnitedStack招聘要求</a>,至于你怎样达到这个标准，我们也给出了建议方案。<a href="http://www.ustack.com/unitedstack-engineer-value/">谈工程师的价值和发展<a/></p>
+
+</div>
+<div class="footer">
+	<p class="copyright">优思得云计算科技（北京）有限公司  Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="http://www.ustack.com/" target="_blank">ustack.cn </a> All Rights Reserved. 京ICP证1000000号 京公网安备111111111111</p>
+</div>
+</body>
+</html>

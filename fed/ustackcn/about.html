@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UnitedStack 官网</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		::-webkit-scrollbar {
+		  width: .5em;
+		  height: .35em;
+		}
+
+		::-webkit-scrollbar-thumb {
+		  background: #aaa;
+		}
+
+		::-webkit-scrollbar-track {
+		  background: rgba(217,217,217,0.5);
+		}
+		a {
+			color: #333;
+			font: 14px '微软雅黑';
+			padding: 4px 10px;
+			text-decoration: none;
+			-webkit-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			   -moz-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			    -ms-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			     -o-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+			        transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+
+		}
+		.clearfix:before,
+		.clearfix:after {
+		  display: table;
+		  content: " ";
+		}
+
+		.clearfix:after {
+		  clear: both;
+		}
+		a:hover {
+			color: #12BBD5;
+		}
+		body {
+			background: url(images/bg.png) repeat 0 0;
+			background-attachment: fixed; 
+			color: #333;
+			font: 14px '微软雅黑','黑体';
+		}
+		.header {
+			height: 90px;
+			border-bottom: 5px solid #12BBD5;
+			position: fixed;
+			width: 100%;
+			line-height: 90px;
+			margin-top: 0px;
+			z-index: 1000;
+			background: url(images/bg.png);
+			top: 0px;
+		}
+		.header div {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.header .logo {
+			display: inline-block;
+			width: 280px;
+			background: url(images/logo.png) no-repeat 0 19px ;
+			text-indent: -999px;
+		}
+		.header .nav {
+			float: right;
+			display: inline-block;
+		}
+		.header .nav li {
+			display: inline-block;
+		}
+
+		/*Opera Hack*/
+		@media all and (min-width:0px){
+			.header .nav li {
+				margin-top: 35px;
+			}
+		}
+		.header .nav li a:hover {
+			color: #fff;
+			background: #12BBD5;
+			box-shadow: 1px 1px 3px #999;
+		}
+		.header .nav .active a {
+			color: #fff;
+			background: #12BBD5;
+			box-shadow: 1px 1px 3px #999;
+		}
+		.banner {
+			background: url(images/banner.jpg) no-repeat 0 0;
+			width: 100%;
+			height: 550px;
+	 	 	-webkit-background-size: cover;
+		  	-o-background-size: cover;
+		 	background-size: cover;
+		 	margin-top: 95px;
+		}
+		.content {
+			width: 1000px;
+			/*border: 1px solid #000;*/
+			position: relative;
+			margin: 40px auto;
+		}
+		.content h2 {
+			font: 20px/30px '微软雅黑','黑体';
+			padding: 15px;
+		}
+		.content h2:hover {
+			-webkit-transition: color .218s;
+			transition: color .218s;
+			color:  #12BBD5;
+			cursor: pointer;
+		}
+
+		.content img {
+			margin: 0px 0 0 0px;
+			float: left;
+		}
+		.content img:hover {
+			border: 3px solid #12BBD5;
+			margin: -3px;
+		}
+		.content p {
+			padding: 0 15px 5px 15px;
+			word-wrap: break-word;
+			word-break: break-all;
+			display: inline-block;
+			-webkit-margin-start: 0px;
+			-webkit-margin-end: 0px;
+			font: 16px/26px '微软雅黑';
+			color: #333;
+			text-indent: 32px;
+		}
+		.footer {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.copyright{
+		    margin:50px 0 0 0;
+		    height:50px;
+		    color:#999999;
+		    font-family:Tahoma;
+		    font-size: 12px;
+		    text-align:center;
+		}
+		.copyright a {
+			color: #999;
+		}
+		.copyright a:hover {
+			color: #12BBD5;;
+		}
+
+	</style>
+</head>
+<body>
+	<!-- 政府官员喜欢用IE6，老老实实不要用html5等标签，避免之后的麻烦 -->
+<div class="header">
+	<div>
+		<h1 class="logo">UnitedStack 官网</h1>
+		<ul class="nav">
+			<li><a href="company.html">首页</a></li>
+			<li><a href="product.html">产品服务</a></li>	
+			<li class='active'><a href="about.html">关于我们</a></li>
+			<li><a href="connect.html">联系我们</a></li>
+			<li><a href="join.html">加入我们</a></li>
+		</ul>
+	</div>
+</div>
+<div class="banner"></div>
+<div class="content clearfix">
+	<h2>这就是UnitedStack</h2>
+	<p>
+	没有通知媒体，没有新闻发布会，UnitedStack Inc.，又一家OpenStack公司在硅谷悄悄地成立了。没有显赫的背景，创始人也不是什么大腕儿，仅仅是一帮来自互联网公司和开源社区的工程师，我们将用做互联网产品的方法和态度来做一家与众不同的公司。
+	</p>
+	<p>
+	『云端解决方案』本来是一个很严谨的概念。这么多年来被各大IT巨头或皮包公司包装成各种概念来忽悠政府、企业和用户，而且这个泡沫在中国吹了6、7年之后，还有愈演愈烈之势，如果我们不站出来，这个行业将继续成为投机者的天堂、忽悠家捞钱的工具。
+	</p>
+	<p>
+	我们认为，真正的云端解决方案应该是一个统一的、标准的和开放的基础设施平台，对下即能够整合数据中心各项物理资源并将其虚拟化和服务化，对上能支持企业的各种应用，没有厂商依赖和绑定。评判一个云端解决方案产品好坏，不应该去看那些精心设计的产品手册，也不需要去听那些云架构师们的各种吹嘘，你要做的只是去用它，体会它，然后评估它解决了你哪些问题，是否好用，是否能够自服务而不需要经过培训，未来是否有很好的扩展性，等等。
+	</p>
+	<p>
+	UnitedStack定位很简单，我们希望借助OpenStack开放云端解决方案平台和技术来替代传统IT基础设施，建设统一的基础设计服务平台，未来的基础设施管理平台和软件应该是易获得的，廉价的，自服务的，并且非常好用的。
+	</p>
+	<p>
+	公司核心竞争力有两个：开源精神和互联网态度。
+	</p>
+	<h2>
+	开源精神
+	</h2>
+	<p>
+	OpenStack是一个由全球几十家公司、几百位开发者共同协作开发的开源项目，并且还在高速发展之中。我们深刻理解开源社区的力量，参与开源的方式是全方位的，比如我们目前所有的工程师都是开源社区的贡献者，并且仍持续地向社区做贡献；新招的工程师必须有开源社区工作经历；我们公司内部团队协作的方法也是借鉴社区的；我们基于OpenStack的产品会与上游每天做一次整合等等。
+	</p>
+	<h2>互联网</h2>
+	<p>
+	互联网人有对于产品极致的追求和理想，我们不仅追求功能性，更注意良好用户体验和人文关怀。而一般的企业用户使用的产品从来没有体验可言，传统IT公司将软件部署完成之后便走人，出现问题没人修复，要么买昂贵的服务，要么弃用。而我们将用快速迭代的方法来迅速改进自己的产品，让企业永远能用上最好用的OpenStack。
+	</p>
+	
+
+</div>
+<div class="footer">
+	<p class="copyright">优思得云端解决方案科技（北京）有限公司  Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="http://www.ustack.com/" target="_blank">ustack.cn </a> All Rights Reserved. 京ICP证1000000号 京公网安备111111111111</p>
+</div>
+</body>
+</html>

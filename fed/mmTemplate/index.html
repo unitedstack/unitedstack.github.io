@@ -28,12 +28,10 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-        mmTemplate
-===
+        <h2>mmTemplate</h2>
+<p>我的前后端通用模板，既可以自动变成jQuery插件,也可以单独为一个前端模板,亦可以是独立的node.js模板</p>
 
-我的前后端通用模板，既可以自动变成jQuery插件,也可以单独为一个前端模板,亦可以是独立的node.js模板
-
-前端默认是使用<& &>做定界符
+<p>前端默认是使用<& &>做定界符</p>
 后端默认是使用<% %>做定界符
 
 <strong>过滤器的使用</strong>，它只能出现<%= <&这样的左定界符内，操作对象是字符串，数组等， 我们在它后面跟一个“|”当分隔符，后面跟过滤器的名字。
@@ -59,7 +57,7 @@ var fn = ejs.compile(source, {
 </pre>
   那么我们就可以直接在模板中使用此方法
 <pre>
-&lt;&= set_link("rubylouvre","http://www.cnblogs.com/rubylouvre/") %&gt;
+<&= set_link("rubylouvre","http://www.cnblogs.com/rubylouvre/") %>;
 </pre>
 <h3> "-"操作符的使用</h3>
 <p>见下面模板</p>
@@ -73,7 +71,7 @@ var fn = ejs.compile(source, {
 </pre>
 <p>如果不使用-操作符,那么生成的HTML会在原<% %>之间的地方出现大块的空白,用了它就会削掉它们,保证HTML的干净,这是从rails的ERB模块引入的语法.</p>
 
-<h3>模板的编译函数的缓存</h3>
+<h2>模板的编译函数的缓存</h2>
 <p>在前端我们可以通过选择器来缓存模板,比如</p>
 <pre>
 var html = ejs("#js_tmpl", {
@@ -92,7 +90,7 @@ var html = ejs(source, {
 },{tid:"first_tmpl"})
 </pre>
 
-<h3>子模板的使用或layout的指定<h3>
+<h2>子模板的使用或layout的指定</h2>
 <p>它们都是使用视图helper实现的，比如我们用include函数作为引入子模板的函数</p>
 <pre>
 var fn = ejs(source, data, {
