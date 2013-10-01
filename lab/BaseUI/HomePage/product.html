@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="UnitedStack.Team" />
+  <meta name="copyright" content="UnitedStack Inc." />
+  <meta name="keywords" content="UnitedStack UnitedStack OS OpenStack " />
+  <meta name="description" content="Without the media, nor a press conference, UnitedStack Inc., an OpenStack company was quietly set up in Silicon Valley in Feb 2013. Without distinguished background, nor the founders are  large bowl, just a bunch of engineers from Internet companies and the open source community, we will use the methodology of building Internet products and attitude of open source to run a different company." />
+  <title>UnitedStack Home Page | Cloud Computing Services</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <style type="text/css">
+    body {
+      background: url(./images/bg.png);
+      font-family: "microsoft yahei";
+    }
+    .button {
+      background: #00a2c8;
+      display: inline-block;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 0px 8px;
+      border: none;
+      color: #fff;
+      -webkit-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+         -moz-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+          -ms-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+           -o-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+              transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    }
+    .button:hover {
+      box-shadow: 1px 1px 3px #006d86;
+    }
+    .button:active {
+      box-shadow: none;
+    }
+    ul li {
+      list-style: none;
+    }
+    input {
+      display: inline-block;
+      height: 28px;
+      padding: 0;
+      margin: 0;
+      border: none;
+      padding-left: 5px;
+      width: 210px;
+    }
+    input:focus { 
+      outline: none;
+    }
+    .clearfix {
+      *zoom: 1;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+      display: table;
+      content: "";
+    }
+
+    .clearfix:after {
+      clear: both;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    a {
+      text-decoration: none;
+      -webkit-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+         -moz-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+          -ms-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+           -o-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+              transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+    }
+    a:hover {
+      color: #00a2c8;
+      cursor: pointer;
+    }
+    .header-top {
+      position: relative;
+      height: 100px;
+      width: 1024px;
+      margin: 0 auto;
+      font-size: 12px;
+    } 
+    .header-top .logo {
+      background: url(images/page-logo.png) no-repeat;
+      position: absolute;
+      text-indent: -9998px;
+      display: inline-block;
+      width: 256px;
+      height: 50px;
+      top: 50%;
+      margin-top: -25px;
+      cursor: pointer;
+    }
+    .header-top nav {
+      float: right;
+    }
+    .header-top nav ,.header-top nav ul,.header-top nav ul li {
+      display: inline-block;
+    }
+    .header-top nav ul li {
+      line-height: 126px;
+      margin-left: 38px;
+      cursor: pointer;
+    }
+    .header-top .login {
+      position: absolute;
+      display: inline-block;
+      background: #00a2c8;
+      width: 130px;
+      height: 25px;
+      right: 0px;
+      top: 0px;
+    }
+    .header-top .login a {
+      color: #fff;
+      line-height: 25px;
+      padding: 0 9px;
+    }
+    .header-top .login i {
+      font-style: normal;
+      color: #96d9e8;
+      box-shadow: 
+    }
+    .header-top .lang {
+      position: absolute;
+      display: inline-block;
+      line-height: 25px;
+      padding-left: 25px;
+      color: #00a2c8;
+      width: 80px;
+      right: -100px;
+      top: 0px;
+    }
+    .header-banner {
+      border-top: 4px solid #00a2c8;
+      background-size: cover;
+      background: url(./images/banner.jpg) no-repeat 0 0;
+      height: 230px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      line-height: 70px;
+      margin-bottom: 45px;
+    }
+    .header-banner h1 {
+      display: inline-block;
+    }
+
+    .contents {
+      width: 1024px;
+      margin: 0 auto;
+      margin-bottom: 100px;
+    } 
+    .contents h3 {
+      color: #00a2c8;
+      font-weight: normal;
+      font-size: 19px;
+      border-bottom: 1px solid #aaa;
+      height: 35px;
+      margin-bottom: 40px;
+    }
+    .contents .content {
+      float: right;
+      width: 82%;
+    }
+    .contents .content p,.footer .footer-nav p {
+      font-size: 13px;
+      color: #323232;
+      line-height: 24px;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+    .contents .summary {
+      float: left;
+      width: 17%;
+    }
+    .contents .summary ul li {
+      font-size: 12px;
+      list-style: none;
+    }
+    .contents .summary ul li:hover {
+      list-style-image: url(./images/list-image.png) ;
+      color: #00a2c8;
+    }
+    .footer {
+      height: 324px;
+      background: url(./images/footer-bg.png);
+      border-top: 4px solid #00a2c8;
+      position: relative;
+    }
+    .footer a {
+      color: #fff;
+    }
+    .footer .copyright {
+      color: #f0f0f0;
+      font-size: 12px;
+      height: 35px;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      line-height: 35px;
+      text-align: center;
+    }
+    .footer .footer-nav {
+      padding-top: 35px;
+      width: 1024px;
+      height: 245px;
+      margin: 0 auto;
+    }
+
+    .footer .footer-nav li{
+      width: 230px;
+      height: 200px;
+      display: inline-block;
+      margin-left: 18px;
+      font-size: 12px;
+      line-height: 30px;
+      float: left;
+    }
+    .footer .footer-nav h4 {
+      color: #fff;
+      font-weight: normal;
+      font-size: 14.64px;
+      line-height: 55px;
+    }
+    .footer .footer-nav .footer-about {
+      color: #fff;
+      line-height: 16px;
+      width: 190px;
+    }
+    .footer .footer-nav .archive-list li{
+      height: 30px;
+      list-style-position: outside;
+      margin: 0;
+      border-bottom: 1px dashed #aaa;
+      width: 190px;
+    }
+    .footer .footer-nav .content-list li {
+      border: none;
+      width: 225px;
+    }
+    .footer .footer-nav .subscribe-list li {
+      height: 40px;
+      width: 225px;
+    }
+    .btn-subscribe {
+      margin-top: 18px;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <h1 class="logo"><a>Unitedstack Logo 这里的文字最好text-indent</a></h1>
+      <nav class="top-nav">
+        <ul>
+          <li><a>HOME</a></li>
+          <li><a>PRODUCTS</a></li>
+          <li><a>FEATURES</a></li>
+          <li><a>CONTACT</a></li>
+          <li><a>APP STORE</a></li>
+        </ul>
+      </nav>
+      <p class="login">
+        <a href="#">Log in</a>
+        <i>|</i>
+        <a href="#">Sign up</a>
+      </p>
+      <p class="lang">English</p>
+    </div>
+    <div class="header-banner">
+      <h2>Strong technical services</h2>
+      <h3>Here are few tasks and pointers to help you get going.</h3>
+    </div>
+  </header>
+  
+  <section class="contents clearfix">
+    <h3>Technical Services</h3>
+    <div class="content">
+      <P>Pistorius is charged with premeditated murder over the February shooting death of Steenkamp. His expected indictment follows the completion of the police investigation into the case.
+The double amputee track star killed the woman he calls the love of his life on Valentine's Day in his home. He denies the murder charge and says he mistook her for a home invader.
+The athlete's trial will begin in March, his attorney Kenny Oldwage said Sunday.
+The first phase will take place in March, but the entire trial could take place at various times across a year or more because of potential motions and postponements along the way.
+The police investigation team "is convinced that the accused has a charge to answer," a police statement said last week.
+The athlete's family said in June that he would resume running using his blade-shaped prosthetic legs.
+Pistorius has started sprinting again for the sake of his emotional health, not for training to compete again, the family said.
+Michael Steenkamp, the victim's uncle, said the model's family isn't focusing on Pistorius' guilt or innocence, and they will not attend any of the related court proceedings.
+While the hearing is going on Monday, the Steenkamp family will be spending time together remembering Reeva.
+"My wife and myself are going up to (see) my brother in Port Elizabeth, and we will be there with (Reeva's parents) on Monday to be there for Reeva's birthday. What could we do? Bake a cake and you know sit down quietly and reminisce about the qualities of Reeva's life," he said.
+The uncle said his faith has helped him forgive Pistorius.
+"If I can't forgive him, and I have been forgiven, then that is our sin. And I very much asked the Lord to guide me before I got to Port Elizabeth when the tragedy happened ... that took a lot of pressure off my shoulders," he said.</P>
+    </div>
+    <div class="summary">
+      <ul>
+          <li><a>Service Name</a></li>
+          <li><a>Service Name</a></li>
+          <li><a>Service Name</a></li>
+          <li><a>Service Name</a></li>
+          <li><a>Service Name</a></li>
+          <li><a>Service Name</a></li>
+        </ul>
+    </div>
+  </section>
+
+  <footer class="footer clearfix">
+    <nav class="footer-nav clearfix">
+      <ul>
+        <li>
+          <h4>Little About us</h4>
+          <p class="footer-about">ign to newsletterign to newsletterign to newsletterign to newsletterign to newsletterign to newsletter</p>
+          <h4>Fllow US</h4>
+          <p><!--这里之后换成list列表-->
+            <a href="">shjufa</a>
+            <a href="">shjufa</a>
+            <a href="">shjufa</a>
+            <a href="">shjufa</a>
+          </p>
+        </li>
+        <li>
+          <h4>Archive</h4>
+          <ul class="archive-list">
+            <li><a href="">March 2013</a></li>
+            <li><a href="">March 2013</a></li>
+            <li><a href="">March 2013</a></li>
+            <li><a href="">March 2013</a></li>
+          </ul>
+        </li>
+        <li>
+          <h4>Content us</h4>
+          <ul class="archive-list content-list">
+            <li><a href="">Email: hui@UnitedStack.com</a></li>
+            <li><a href="">Tel: 800 750 456</a></li>
+            <li><a href="">Mobile: +86-133-7741-9213</a></li>
+            <li><a href="">Address: Yuan ming yuan Haidian Beijing China</a></li>
+            
+          </ul>
+        </li>
+        <li>
+          <h4>Sign to newsletter</h4>
+          <ul class="archive-list content-list subscribe-list">
+            <li><input placeholder="Name"/></li>
+            <li><input placeholder="Email" /></li>
+            <li><div class="button btn-subscribe">SUBSCRIBE</div></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <p class="copyright">Copyright &copy; 2013 UnitedStack Inc. All Rights Reserved</p>
+  </footer>
+</body>
+</html>

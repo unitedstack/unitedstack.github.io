@@ -1,0 +1,313 @@
+<!--
+   __  __      _ __           _______ __             __  
+  / / / /___  (_) /____  ____/ / ___// /_____ ______/ /__
+ / / / / __ \/ / __/ _ \/ __  /\__ \/ __/ __ `/ ___/ //_/
+/ /_/ / / / / / /_/  __/ /_/ /___/ / /_/ /_/ / /__/ ,<   
+\____/_/ /_/_/\__/\___/\__,_//____/\__/\__,_/\___/_/|_|  
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" class="home">
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="UnitedStack.Team" />
+  <meta name="copyright" content="UnitedStack Inc." />
+  <meta name="keywords" content="UnitedStack UnitedStackOS OpenStack 程辉 ustack uOS" />
+  <meta name="description" content="UnitedStack Inc.是一家OpenStack公司，于2013年2月成立于美国硅谷Santa Clara，在北京有研发和运营中心。主要为企业和服务供应商提供云计算解决方案，面向中国和亚太地区市场。我们的使命是将开源的OpenStack项目变成一个全功能的、良好用户体验的云计算产品。UnitedStack的主要创始人兼CEO是程辉先生，他是中国OpenStack最活跃的布道师和实践者，在此之前，他是新浪OpenStack团队的创始人和技术负责人，怀抱着用OpenStack去统一和颠覆传统IT基础设施和应用的梦想，来到了硅谷。从一个普通技术工程师到一个创业企业家过程中，只有短短的几个月，期间得到很多朋友的帮助，尤其幸运的是得到了一些硅谷著名的VC的支持，并接受他们最初的资本注入。现在，程辉和他的创始团队正在路上，为了实现那个梦想。" />
+  <title>UnitedStack 官网首页</title>
+  <link rel="short icon" href="http://www.ustack.com/wp-content/themes/ustack/images/favicon.png" type="image/png">
+  <link rel="prerender" href="" >
+  <link rel="prefrech" href="" >
+<style type="text/css">
+/**
+* 上边线,下边线5px：#00a2c8;
+* h1大标题： #4bdaf4;
+* button白字 #fff; 上导航button 背景 #00b4d2;
+* 亮button背景 #00b4d2  暗的：#0a5467; 下拉Icon三角 #e6e7e7; 导航黑字：#323232; 蓝字#00b4d2; 第二屏蓝背景：#42aabc; 
+* 第三屏浅灰：#fafafa; 最下面button：#0a5467; 所有黑色字: #323232;  Footer 字颜色： #858585; footer 黑条：#101010;
+*/
+html,body,div,p,h1,h2,h3,h4,ul,li,ol { 
+	margin: 0; 
+	padding: 0; 
+	color: #323232; 
+	font-family: 'Segoe UI Light','Segoe UI','Microsoft Jhenghei','微软雅黑',sans-serif;
+	text-align: center;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+}
+
+.clearfix:after {
+  clear: both;
+}
+::-webkit-scrollbar {
+  width: .5em;
+  height: .35em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(217,217,217,0.5);
+}
+a {
+	/*display: inline-block;*/
+	text-decoration: none;
+	color: #323232;
+  -webkit-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+   -moz-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+    -ms-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+     -o-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+        transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+}
+.firstScreen {
+	/*height: 677px; /*836**/
+  /**height: 577px; 妈的，我还要兼容搜狗，这个狗屎浏览器
+  _height: 577px;
+  height:577px\0/;*/
+	border-top: 5px solid #00a2c8; 
+	background: url(./images/1366.png) no-repeat 0 0;
+	background-size: cover;
+  *zoom: 1;
+}
+.menu {
+	width: 75%;
+	height: 55px;
+	margin: 0 auto;
+}
+.menu li {
+	display: inline-block;
+	height: 55px;
+	line-height: 55px;
+	float: right;
+	margin-left: 50px;
+}
+.menu li a {
+	/*font-weight: bold;*/
+	font-size: 18px;
+	padding: 3px 10px;
+}
+.menu li a:hover {
+	background: #00b4d2;
+	color: #fff; 
+}
+.bg-blue {
+	background: #00b4d2;
+}
+.part-one {
+	height: 612px;
+	position: relative;
+}
+.center-content {
+	padding-top: 70px;
+	width: 720px;
+	margin: 0 auto;
+	/*border: 1px solid #000;*/
+	height: 596px;
+	text-align: center;
+}
+.font-white {
+	color: #fff;
+}
+.center-content h2 {
+	font-family: "Myriad Pro";
+	padding-bottom: 20px;
+  font-size: 2.5em;
+  font-weight: normal;
+}
+.center-content p {
+	padding: 0 50px;
+}
+.center-content .mac {
+	display: inline-block;
+	margin-top: 20px;
+}
+.part-two {
+	height: 840px;
+	padding-top: 70px;
+}
+.part-three {
+	background: #fafafa
+}
+.footer {
+
+}
+.hide {
+  display: none;
+}
+.btn-navy {
+  background: #0a5467;
+  color: #fff;
+  width: 250px;
+  height: 64px;
+  line-height: 64px;
+  margin: 0 auto;
+  font-family: "Myriad Pro";
+  font-size: 1.9em;
+  font-weight: normal;
+  cursor: pointer;
+}
+.mt80 {
+  margin-top: 80px;
+}
+.footer {
+  height: 170px;
+  border-top: 5px solid #00a2c8;
+  background: #323437;
+}
+.footer .footer-content {
+  height: 135px;
+  text-align: left;
+  width: 75%;
+  margin: 0 auto;
+  padding: 0;
+}
+.footer .footer-content .footer-nav {
+  display: inline-block;
+}
+.footer .footer-content .footer-nav li {
+  display: inline-block;
+  line-height: 135px;
+  float: left;
+}
+.footer .footer-content .footer-nav li a {
+  display: inline-block;
+  padding: 0 15px;
+  font-size: 20px;
+  color: #858585;
+}
+.footer .footer-content .footer-nav li a:hover {
+  color: #fff;
+}
+.footer .footer-copy {
+  background: #101010;
+  height: 35px;
+  line-height: 35px;
+  color: #fafafa;
+  font-size: 13px;
+}
+#up-arrow {
+  width: 102px;
+  height: 50px;
+  background: url(images/arrow.png) no-repeat 0 0;
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  margin-left: -51px;
+  cursor: pointer;
+  z-index: 9000;
+}
+</style>
+</head>
+<body id="home">
+  <div class="firstScreen"></div>
+
+  <div class="nav hide">
+  	<ul class="menu clearfix">
+  		<li><a href="">Free Application</a></li>
+  		<li><a href="">Products</a></li>
+  		<li><a href="">Home</a></li>
+  	</ul>
+  </div>
+
+  <div class="part-one bg-blue">
+  	<div class="center-content">
+  		<h2 class="font-white">One-click installation</h2>
+  		<p class="font-white">
+  			Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
+  		</p>
+  		<img class="mac" src="./images/mac.png"/>
+  	</div>
+  </div>
+
+  <div class="part-two">
+  	<div class="center-content">
+  		<h2>One-click installation</h2>
+  		<p>
+  			Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
+  		</p>
+  		<img class="mac" src="./images/screen.png"/>
+  		<div class="btn-navy mt80">Try UOS Free</div>
+  	</div>
+  </div>
+
+<!--   <div class="part-three">
+  	<div class="center-content">
+  		<h2>One-click installation</h2>
+  		<p>
+  			Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
+  		</p>
+  		<img class="mac" src="./images/screen.png"/>
+  	</div>
+  </div> -->
+
+  <div class="footer">
+    <div class="footer-content clearfix">
+      <ul class="footer-nav">
+        <li><a href="">News</a></li>
+        <li><a href="">Blog</a></li>
+        <li><a href="">Company</a></li>
+        <li><a href="">Join-Us</a></li>
+      </ul>
+    </div>
+    <p class="footer-copy">© 2013 UnitedStack Inc.</p>
+  </div>
+<div id="up-arrow"></div>
+<!-- <div id="down-arrow">asdgasfgd</div> -->
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<!-- <script src="http://browser.qq.com/js/jquery.mousewheel.min.js"></script> -->
+
+<script type="text/javascript">
+var UnitedStack = {
+  firstScreenHeightInit: function (){
+    var winHeight = $(window).height();
+    $(".firstScreen").css({"height": winHeight});
+  },
+  smartScroll: function(){
+    var whell = window.sidebar ? "DOMMouseScroll" : "mousewheel";
+    function fn(e){
+      var  event = e.originalEvent;
+      var delta = 0;
+      if (event.wheelDelta) {
+        delta = event.wheelDelta/120; 
+      } else if (event.detail) {
+        delta = -event.detail/3;
+      }
+      $(window).off(whell)
+      var winHeight = $(window).height();
+      if (delta < 0){
+        console.log("Down ^ ^");
+        $("body").animate({ scrollTop: "+=" +winHeight },800,function(){
+            setTimeout(function(){
+                $(window).on(whell, fn);
+             })
+        });
+        // $("body").animate({ scrollTop: $('body').position().top += winHeight },1000);
+      } else {
+        console.log("Up ^ ^");
+        $("body").animate({ scrollTop: "-=" +winHeight },800,function(){
+            setTimeout(function(){
+                $(window).on(whell, fn);
+             })
+        });
+      }
+
+      return false;
+    }
+    $(window).on(whell,fn);
+  }, //end Smart Scroll
+  init: function () {
+    this.firstScreenHeightInit();
+    this.smartScroll();
+  }
+};
+
+$(function(){
+  UnitedStack.init();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+/*Base Reset css*/
+html,body,h1,h2,h3,h4,h5,h6,div,p,ul,li,header,nav,menu,footer {
+    padding: 0;
+    margin: 0;
+}
+
+/*Home movie impression page style */
+html.home {
+    width: 100%;
+    height: 100%;
+}
+.home {
+    /*background: #eaeff0;*/
+    overflow: hidden;
+    background-image: radial-gradient(center center, circle cover, #ffffff, #eaeff0);
+    background-image: -o-radial-gradient(center center, circle cover, #ffffff, #eaeff0);
+    background-image: -ms-radial-gradient(center center, circle cover, #ffffff, #eaeff0);
+    background-image: -moz-radial-gradient(center center, circle cover, #ffffff, #eaeff0);
+    background-image: -webkit-radial-gradient(center center, circle cover, #ffffff, #eaeff0);
+    /*background-image: -webkit-radial-gradient(50% 37%, closest-corner, #fff, #eaeff0);*/
+    font-family: "Segoe UI Light";
+    color: #555;
+    font-weight: bold;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.home a {
+    color: #A8A8A8;
+    text-decoration: none;
+}
+.home header {
+    text-indent: -9999px;
+    position: absolute;
+}
+.home #logo {
+    width: 500px;
+    height: 180px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -250px;
+}
+.home menu {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    bottom: 0px;
+    line-height: 100px;
+}
+.home menu li {
+    display: inline-block;
+    width: 15%;
+    margin-left: 15%;
+    cursor: pointer;
+    background: url(../images/sprite/sprite-black.png) no-repeat 0px 40px;
+    padding-left: 18px;
+    -webkit-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+    -moz-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+    -ms-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+     -o-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+        transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+}
+@media all and (min-width: 240px) and (max-width: 640px) {
+    .home menu li {
+    display: inline-block;
+    width: 15%;
+    margin-left: 10%;
+    cursor: pointer;
+    background: url(../images/sprite/sprite-black.png) no-repeat 0px 40px;
+    padding-left: 18px;
+    -webkit-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+    -moz-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+    -ms-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+     -o-transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+        transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    }
+    .home #logo {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -130px;
+        margin-left: -75px;
+        background-size:300px 150px;
+        background: url(../images/logo.png) no-repeat 0,0;
+    }
+}
+.home menu li:hover {
+    background: url(../images/sprite/sprite-blue.png) no-repeat 0px 40px;
+}
+.home menu li a {
+    display: inline-block;
+    width: 100%;
+}
+
