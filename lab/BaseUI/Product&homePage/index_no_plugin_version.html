@@ -26,11 +26,11 @@
 * 第三屏浅灰：#fafafa; 最下面button：#0a5467; 所有黑色字: #323232;  Footer 字颜色： #858585; footer 黑条：#101010;
 */
 html,body,div,p,h1,h2,h3,h4,ul,li,ol { 
-	margin: 0; 
-	padding: 0; 
-	color: #323232; 
-	font-family: 'Segoe UI Light','Segoe UI','Microsoft Jhenghei','微软雅黑',sans-serif;
-	text-align: center;
+  margin: 0; 
+  padding: 0; 
+  color: #323232; 
+  font-family: 'Segoe UI Light','Segoe UI','Microsoft Jhenghei','微软雅黑',sans-serif;
+  text-align: center;
 }
 .clearfix:before,
 .clearfix:after {
@@ -54,9 +54,9 @@ html,body,div,p,h1,h2,h3,h4,ul,li,ol {
   background: rgba(217,217,217,0.5);
 }
 a {
-	/*display: inline-block;*/
-	text-decoration: none;
-	color: #323232;
+  /*display: inline-block;*/
+  text-decoration: none;
+  color: #323232;
   -webkit-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
    -moz-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
     -ms-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
@@ -64,73 +64,74 @@ a {
         transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
 }
 .firstScreen {
-	/*height: 677px; /*836**/
+  /*height: 677px; /*836**/
   /**height: 577px; 妈的，我还要兼容搜狗，这个狗屎浏览器
   _height: 577px;
   height:577px\0/;*/
-	border-top: 5px solid #00a2c8; 
-	background: url(./images/1366.png) no-repeat 0 0;
-	background-size: cover;
+  border-top: 5px solid #00a2c8; 
+  background: url(./images/1366.png) no-repeat 0 0;
+  background-size: cover;
   *zoom: 1;
 }
 .menu {
-	width: 75%;
-	height: 55px;
-	margin: 0 auto;
+  width: 75%;
+  height: 55px;
+  margin: 0 auto;
+  background: url(images/logo.png) no-repeat 0 center;
 }
 .menu li {
-	display: inline-block;
-	height: 55px;
-	line-height: 55px;
-	float: right;
-	margin-left: 50px;
+  display: inline-block;
+  height: 55px;
+  line-height: 55px;
+  float: right;
+  margin-left: 20px;
 }
 .menu li a {
-	/*font-weight: bold;*/
-	font-size: 18px;
-	padding: 3px 10px;
+  /*font-weight: bold;*/
+  font-size: 18px;
+  padding: 3px 10px;
 }
 .menu li a:hover {
-	background: #00b4d2;
-	color: #fff; 
+  background: #00b4d2;
+  color: #fff; 
 }
 .bg-blue {
-	background: #00b4d2;
+  background: #00b4d2;
 }
 .part-one {
-	height: 612px;
-	position: relative;
+  height: 612px;
+  position: relative;
 }
 .center-content {
-	padding-top: 70px;
-	width: 720px;
-	margin: 0 auto;
-	/*border: 1px solid #000;*/
-	height: 596px;
-	text-align: center;
+  padding-top: 70px;
+  width: 720px;
+  margin: 0 auto;
+  /*border: 1px solid #000;*/
+  height: 596px;
+  text-align: center;
 }
 .font-white {
-	color: #fff;
+  color: #fff;
 }
 .center-content h2 {
-	font-family: "Myriad Pro";
-	padding-bottom: 20px;
+  font-family: "Myriad Pro";
+  padding-bottom: 20px;
   font-size: 2.5em;
   font-weight: normal;
 }
 .center-content p {
-	padding: 0 50px;
+  padding: 0 50px;
 }
 .center-content .mac {
-	display: inline-block;
-	margin-top: 20px;
+  display: inline-block;
+  margin-top: 20px;
 }
 .part-two {
-	height: 840px;
-	padding-top: 70px;
+  height: 840px;
+  padding-top: 70px;
 }
 .part-three {
-	background: #fafafa
+  background: #fafafa
 }
 .footer {
 
@@ -193,70 +194,94 @@ a {
   width: 102px;
   height: 50px;
   background: url(images/arrow.png) no-repeat 0 0;
-  position: fixed;
-  bottom: 0px;
+  position: absolute;
+  bottom: -5px;
   left: 50%;
   margin-left: -51px;
   cursor: pointer;
   z-index: 9000;
 }
+
+.topFixedNav {
+  position: fixed;
+  z-index: 9999;
+  height: 55px;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  -webkit-box-shadow: rgba(0,0,0,.1) 0 1px 5px;
+  -moz-box-shadow: rgba(0,0,0,.1) 0 1px 5px;
+  box-shadow: rgba(0,0,0,.1) 0 1px 5px;
+}
+#height55 {
+   height: 55px;
+}
 </style>
 </head>
 <body id="home">
-  <div class="firstScreen"></div>
+  <div class="firstScreen">
+    <div id="up-arrow"></div>
+  </div>
 
-  <div class="nav hide">
-  	<ul class="menu clearfix">
-  		<li><a href="">Free Application</a></li>
-  		<li><a href="">Products</a></li>
-  		<li><a href="">Home</a></li>
-  	</ul>
+  <div class="nav">
+    <ul class="menu clearfix">
+      <li><a href="">加入我们</a></li>
+      <li><a href="">公司</a></li>
+      <li><a href="">博客</a></li>
+      <li><a href="">OpenStack</a></li>
+      <li><a href="">服务</a></li>
+      <li><a href="">产品</a></li>
+      <li><a href="">首页</a></li>  
+    </ul>
   </div>
 
   <div class="part-one bg-blue">
-  	<div class="center-content">
-  		<h2 class="font-white">One-click installation</h2>
-  		<p class="font-white">
-  			Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
-  		</p>
-  		<img class="mac" src="./images/mac.png"/>
-  	</div>
+    <div class="center-content">
+      <h2 class="font-white">One-click installation</h2>
+      <p class="font-white">
+        Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
+      </p>
+      <img class="mac" src="./images/mac.png"/>
+    </div>
   </div>
 
   <div class="part-two">
-  	<div class="center-content">
-  		<h2>One-click installation</h2>
-  		<p>
-  			Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
-  		</p>
-  		<img class="mac" src="./images/screen.png"/>
-  		<div class="btn-navy mt80">Try UOS Free</div>
-  	</div>
+    <div class="center-content">
+      <h2>One-click installation</h2>
+      <p>
+        Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
+      </p>
+      <img class="mac" src="./images/screen.png"/>
+      <div class="btn-navy mt80">Try UOS Free</div>
+    </div>
   </div>
 
 <!--   <div class="part-three">
-  	<div class="center-content">
-  		<h2>One-click installation</h2>
-  		<p>
-  			Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
-  		</p>
-  		<img class="mac" src="./images/screen.png"/>
-  	</div>
+    <div class="center-content">
+      <h2>One-click installation</h2>
+      <p>
+        Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
+      </p>
+      <img class="mac" src="./images/screen.png"/>
+    </div>
   </div> -->
 
   <div class="footer">
     <div class="footer-content clearfix">
       <ul class="footer-nav">
-        <li><a href="">News</a></li>
-        <li><a href="">Blog</a></li>
-        <li><a href="">Company</a></li>
-        <li><a href="">Join-Us</a></li>
+        <li><a href="">首页</a></li>
+        <li><a href="">产品</a></li>
+        <li><a href="">服务</a></li>
+        <li><a href="">OpenStack</a></li>
+        <li><a href="">博客</a></li>
+        <li><a href="">公司</a></li>
+        <li><a href="">加入我们</a></li>
       </ul>
     </div>
     <p class="footer-copy">© 2013 UnitedStack Inc.</p>
   </div>
-<div id="up-arrow"></div>
-<!-- <div id="down-arrow">asdgasfgd</div> -->
+
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 <!-- <script src="http://browser.qq.com/js/jquery.mousewheel.min.js"></script> -->
 
@@ -265,43 +290,56 @@ var UnitedStack = {
   firstScreenHeightInit: function (){
     var winHeight = $(window).height();
     $(".firstScreen").css({"height": winHeight});
-  },
-  smartScroll: function(){
-    var whell = window.sidebar ? "DOMMouseScroll" : "mousewheel";
-    function fn(e){
-      var  event = e.originalEvent;
-      var delta = 0;
-      if (event.wheelDelta) {
-        delta = event.wheelDelta/120; 
-      } else if (event.detail) {
-        delta = -event.detail/3;
-      }
-      $(window).off(whell)
-      var winHeight = $(window).height();
-      if (delta < 0){
-        console.log("Down ^ ^");
-        $("body").animate({ scrollTop: "+=" +winHeight },800,function(){
-            setTimeout(function(){
-                $(window).on(whell, fn);
-             })
-        });
-        // $("body").animate({ scrollTop: $('body').position().top += winHeight },1000);
-      } else {
-        console.log("Up ^ ^");
-        $("body").animate({ scrollTop: "-=" +winHeight },800,function(){
-            setTimeout(function(){
-                $(window).on(whell, fn);
-             })
-        });
-      }
+    $("#up-arrow").on("click", function(){
+      $("body").animate({ scrollTop: $('body').position().top + winHeight + 5 },800);
+    });
 
-      return false;
-    }
-    $(window).on(whell,fn);
-  }, //end Smart Scroll
+    $(window).on("scroll", function(){
+      var scrHeight = $(window).scrollTop();
+      if( scrHeight >= (winHeight + 5)){
+        $(".nav").addClass("topFixedNav");
+      } else {
+        $(".nav").removeClass("topFixedNav");
+      }
+    });
+  },
+  // smartScroll: function(){
+  //   var whell = window.sidebar ? "DOMMouseScroll" : "mousewheel";
+  //   function fn(e){
+  //     var  event = e.originalEvent;
+  //     var delta = 0;
+  //     if (event.wheelDelta) {
+  //       delta = event.wheelDelta/120; 
+  //     } else if (event.detail) {
+  //       delta = -event.detail/3;
+  //     }
+  //     $(window).off(whell)
+  //     var winHeight = $(window).height();
+  //     if (delta < 0){
+  //       console.log("Down ^ ^");
+  //       $("body").animate({ scrollTop: "+=" +winHeight },800,function(){
+  //           setTimeout(function(){
+  //               $(window).on(whell, fn);
+  //            })
+  //       });
+  //       // $("body").animate({ scrollTop: $('body').position().top += winHeight },1000);
+  //     } else {
+  //       console.log("Up ^ ^");
+  //       $("body").animate({ scrollTop: "-=" +winHeight },800,function(){
+  //           setTimeout(function(){
+  //               $(window).on(whell, fn);
+  //            })
+  //       });
+  //     }
+
+  //     return false;
+  //   }
+  //   $(window).on(whell,fn);
+  // }, //end Smart Scroll
+
   init: function () {
     this.firstScreenHeightInit();
-    this.smartScroll();
+    // this.smartScroll();
   }
 };
 
