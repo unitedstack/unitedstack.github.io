@@ -304,8 +304,10 @@ var UnitedStack = {
       var scrHeight = $(window).scrollTop();
       if( scrHeight >= (winHeight + 5)){
         $(".nav").addClass("topFixedNav");
+        $('body').css('padding-top','55px');
       } else {
         $(".nav").removeClass("topFixedNav");
+        $('body').css('padding-top','0px');
       }
     });
   },
