@@ -65,9 +65,10 @@ a {
 }
 .firstScreen {
   /*height: 677px; /*836**/
-  /**height: 577px; 妈的，我还要兼容搜狗，这个狗屎浏览器
+  /**height: 577px; 妈的，我还要兼容搜狗，这个狗屎浏览器*/
   _height: 577px;
-  height:577px\0/;*/
+  *height: 577px;
+  min-height: 600px;
   border-top: 5px solid #00a2c8; 
   background: url(./images/1366.jpg) no-repeat 0 0;
   background-size: cover;
@@ -223,6 +224,10 @@ a {
     *zoom: 1;
   }
 }
+.mac, .mac-screen {
+  display: none;
+}
+
 </style>
 </head>
 <body id="home">
@@ -241,7 +246,6 @@ a {
       <li><a href="">首页</a></li>  
     </ul>
   </div>
-
   <div class="part-one bg-blue">
     <div class="center-content">
       <h2 class="font-white">One-click installation</h2>
@@ -258,7 +262,7 @@ a {
       <p>
         Equivalent to the physical world, we often say that the computers, servers, machines and so on. In the context of the cloud, the host is the one configured server that has the desired hardware configuration, operating system and network configuration. Albatron system, you can usually 10 seconds to 60 seconds within the time you want to get any number of hosts, this feature allows you to fully dynamic, on-demand computing power.
       </p>
-      <img class="mac" src="./images/screen.png"/>
+      <img class="mac-screen" src="./images/screen.png"/>
       <div class="btn-navy mt80">Try UOS Free</div>
     </div>
   </div>
@@ -301,15 +305,27 @@ var UnitedStack = {
     $("#up-arrow").on("click", function(){
       $("html,body").animate({ scrollTop: $('html,body').offset().top + winHeight + 5 },700,'easeInOutExpo');
     });
-    
+
     $(window).on("scroll", function(){
       var scrHeight = $(window).scrollTop();
+      var $mac = $(".mac");
+      var $macScreen = $(".mac-screen")
+      var $nav = $(".nav");
+      var $body = $("body");
       if( scrHeight >= (winHeight + 5)){
-        $(".nav").addClass("topFixedNav");
-        $('body').css('padding-top','55px');
+        $nav.addClass("topFixedNav");
+        $body.css("padding-top","55px");
+        $mac.fadeIn(900);
       } else {
-        $(".nav").removeClass("topFixedNav");
-        $('body').css('padding-top','0px');
+        $nav.removeClass("topFixedNav");
+        $body.css("padding-top","0px");
+        $mac.fadeOut(900);
+      }
+
+      if(scrHeight >= (winHeight + 550)) {
+        $macScreen.fadeIn(900);
+      } else {
+        $macScreen.fadeOut(900);
       }
     });
   },
