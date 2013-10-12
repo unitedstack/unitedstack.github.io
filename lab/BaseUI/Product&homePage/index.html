@@ -368,10 +368,13 @@ a {
 
 
 <script type="text/javascript">
+var winHeight = $(window).height();
+$(".firstScreen").css({"height": winHeight});
+
 var UnitedStack = {
   firstScreenHeightInit: function (){
-    var winHeight = $(window).height();
-    $(".firstScreen").css({"height": winHeight});
+    // var winHeight = $(window).height();
+    // $(".firstScreen").css({"height": winHeight});
     $("#up-arrow").on("click", function(){
       $("html,body").animate({ scrollTop: $('html,body').offset().top + winHeight + 5 },700,'easeInOutExpo');
     });
