@@ -184,32 +184,32 @@ a {
   </ul>
 </div>
 
-<div class="product-area gray-bg">
+<div id="install" class="product-area gray-bg">
   <div class="content">
     <h2>UOS Installer - 极致简化的部署</h2>
   </div>
 </div>
-<div class="product-area">
+<div id="panel" class="product-area">
   <div class="content">
     <h2>UOS Dashboard - 人性化的Web控制面板</h2>
   </div>
 </div>
-<div class="product-area gray-bg">
+<div id="UStorage" class="product-area gray-bg">
   <div class="content">
     <h2>UOS Unified Storage - 统一的多用途分布式块存储</h2>
   </div>
 </div>
-<div class="product-area">
+<div id="Manager" class="product-area">
   <div class="content">
     <h2>UOS Host Manager - 物理机管理</h2>
   </div>
 </div>
-<div class="product-area gray-bg">
+<div id="Monitoring" class="product-area gray-bg">
   <div class="content">
     <h2>UOS Monitoring - 强大的监控中心</h2>
   </div>
 </div>
-<div class="product-area">
+<div id="openstack" class="product-area">
   <div class="content">
     <h2>UOS 100% 由OpenStack和开源软件支持</h2>
   </div>
@@ -231,12 +231,50 @@ a {
 </div>
 <script src="./js/jquery.js"></script>
 <script src="./js/jquery.easing.1.3.js"></script>
-<!-- <script src="http://browser.qq.com/js/jquery.mousewheel.min.js"></script> -->
+<script src="http://browser.qq.com/js/jquery.mousewheel.min.js"></script>
 
 
 <script type="text/javascript">
 var UnitedStack = {  
+  smartMouseWheel: function () {
+    var sectionsAry = ['body','#install','#panel','#UStorage','#Manager','#Monitoring','#openstack'];
+    var totalSection = sectionsAry.length;
+    var currentSectionId = -1;
+    var isSectionMovementBusy = false;
+    var counter = 0;
+    $('body').on('mousewheel', function(event, delta) {
+      
+      if(isSectionMovementBusy == true) return false;
+      event.preventDefault();
+
+      
+      if(delta > 0){
+        currentSectionId--;   
+      }else{
+        currentSectionId++;
+      }
+      if(currentSectionId < 0) {
+        currentSectionId = 0;
+        return false;
+      }
+      if(currentSectionId > totalSection-1) {
+        currentSectionId = totalSection-1;
+        return false;
+      } 
+      var yPos = $(sectionsAry[currentSectionId]).offset().top -55;
+      if(currentSectionId == 1) yPos -=50;
+      
+      isSectionMovementBusy = true;
+
+      $('body,html').stop(true, false).animate({'scrollTop':yPos+'px'},600, 'easeInOutExpo',function(){
+        isSectionMovementBusy = false;
+      })
+      return false;
+      
+    });
+  },
   init: function () {
+    this.smartMouseWheel();
   }
 };
 
