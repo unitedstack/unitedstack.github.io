@@ -168,7 +168,68 @@ a {
 .gray-bg {
   background: #f0f0f0;
 }
+#showMenu {
+  position: fixed;
+  width: 120px;
+  height: 55px;
+  line-height: 55px;
+  right: 0;
+  top: 0;
+  text-align: center;
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+}
+#showMenu:hover {
+  background: #00b4d2;
+  color: #fff;
+}
 
+@media all and (min-width: 800px) and (max-width: 1080px) {
+  .menu,.content,.footer .footer-content {
+    width: 90%;
+  }
+  .menu li {
+    margin-left: 5px;
+  }
+}
+@media all and (min-width: 680px) and (max-width: 800px) {
+  .menu,.content,.footer .footer-content {
+    width: 98%;
+  }
+  .menu li {
+    margin-left: 0px;
+  }
+}
+@media all and (min-width: 240px) and (max-width: 680px) {
+  .menu,.content,.footer .footer-content {
+    width: 98%;
+  }
+  .nav {
+    background: url(images/logo.png) no-repeat 5px center;
+  }
+  .menu {
+    margin-top: 55px;
+    width: 120px;
+    float: right;
+    background: none;
+    display: none;
+  }
+  .menu li {
+    display: block;
+    height: 30px;
+    line-height: 28px;
+    background: #fff;
+  }
+  .menu li a {
+    display: inline-block;
+    width: 100px;
+  }
+  #showMenu {
+    display: block;
+    cursor: pointer;
+  }
+}
 </style>
 </head>
 <body id="home">
@@ -230,6 +291,7 @@ a {
   </div>
   <p class="footer-copy">© 2013 UnitedStack Inc.</p>
 </div>
+<div id="showMenu">Menu</div>
 <script src="./js/jquery.js"></script>
 <script src="./js/jquery.easing.1.3.js"></script>
 <script src="./js/jquery.mousewheel.js"></script>
@@ -274,8 +336,14 @@ var UnitedStack = {
       
     });
   },
+  responseMenu: function () {
+    $("div#showMenu").on("click", function(){
+      $(".menu").toggle(400);
+    });
+  },
   init: function () {
     this.smartMouseWheel();
+    this.responseMenu();
   }
 };
 
