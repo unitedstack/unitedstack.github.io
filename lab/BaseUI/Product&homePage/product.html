@@ -140,6 +140,7 @@ a {
 .product-area {
   width: 100%;
 /*  height: 620px; 530px;*/
+  position: relative;
   min-height: 580px;
 }
 
@@ -149,15 +150,28 @@ a {
   color: #666;
 }
 .content h2 {
-  text-align: left;
+  text-align: center;
   font-family: "Myriad Pro","微软雅黑";
-  height: 140px;
+  height: 100px;
   line-height: 140px;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: normal;
-  color: #666;
 }
-
+.content h3 {
+  text-align: center;
+  font-family: "Myriad Pro","微软雅黑";
+  height: 50px;
+  line-height: 50px;
+  font-size: 1em;
+  font-weight: normal;
+}
+.text-color-white {
+  color: #fff;
+}
+.blue-bg {
+  background: #00b4d2;
+  color: #fff;
+}
 .gray-bg {
   background: #f0f0f0;
 }
@@ -223,6 +237,16 @@ a {
     cursor: pointer;
   }
 }
+.absolute {
+  position: absolute;
+  left: 50%;
+  margin-left: -341px;
+  z-index: 5;
+}
+.w100 {
+  width: 100%;
+  margin: 0;
+}
 </style>
 </head>
 <body id="home">
@@ -239,29 +263,49 @@ a {
   </ul>
 </div>
 
+<div id="unitedstack-os" class="product-area gray-bg">
+  <div class="content">
+    <div class="absolute">
+      <h2 class="text-color-white">UnitedStack OS</h2>
+      <h3 class="text-color-white">OpenStack从未如此简单</h3>
+      <img src="./images/unitedstack-os.png">
+    </div>
+  </div>
+  <div style="position: absolute; width: 100%; height:427px; background: #00b4d2;z-index: 0;"></div>
+</div>
 <div id="install" class="product-area gray-bg">
   <div class="content">
-    <h2>UOS Installer - 极致简化的部署</h2>
+    <h2>UOS Installer</h2>
+    <h3>极致简化的部署</h3>
+    <img src="./images/install.png">
   </div>
 </div>
-<div id="panel" class="product-area">
+<div id="panel" class="product-area blue-bg">
   <div class="content">
-    <h2>UOS Dashboard - 人性化的Web控制面板</h2>
+    <h2 class="text-color-white">UOS Dashboard</h2>
+    <h3 class="text-color-white">人性化的Web控制面板</h3>
+    <img src="./images/panel.png">
   </div>
 </div>
 <div id="UStorage" class="product-area gray-bg">
   <div class="content">
-    <h2>UOS Unified Storage - 统一的多用途分布式块存储</h2>
+    <h2>UOS Unified Storage</h2>
+    <h3>统一的多用途分布式块存储</h3>
+    <img src="./images/storage.png">
   </div>
 </div>
-<div id="Manager" class="product-area">
+<div id="Manager" class="product-area blue-bg">
   <div class="content">
-    <h2>UOS Host Manager - 物理机管理</h2>
+    <h2 class="text-color-white">UOS Host Manager</h2>
+    <h3 class="text-color-white">物理机管理</h3>
+    <img src="./images/manager.png">
   </div>
 </div>
 <div id="Monitoring" class="product-area gray-bg">
-  <div class="content">
-    <h2>UOS Monitoring - 强大的监控中心</h2>
+  <div class="content w100">
+    <h2>UOS Monitoring</h2>
+    <h3>强大的监控中心</h3>
+    <img src="./images/monitoring.png">
   </div>
 </div>
 <div id="openstack" class="product-area">
@@ -294,7 +338,7 @@ var UnitedStack = {
   smartMouseWheel: function () {
     var productAreaHeight = $(window).height() - 55;
     $(".product-area").css({'height': productAreaHeight});
-    var sectionsAry = ['body','#install','#panel','#UStorage','#Manager','#Monitoring','#openstack','#footer'];
+    var sectionsAry = ['body','#unitedstack-os','#install','#panel','#UStorage','#Manager','#Monitoring','#openstack','#footer'];
     var totalSection = sectionsAry.length;
     var currentSectionId = 1; //origin is -1
     var isSectionMovementBusy = false;
