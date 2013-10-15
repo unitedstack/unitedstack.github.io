@@ -367,9 +367,9 @@ $(".firstScreen").css({"height": winHeight});
 var UnitedStack = {
   firstScreenHeightInit: function (){
     // var winHeight = $(window).height();
-    // $(".firstScreen").css({"height": winHeight});
+    // $(".firstScreen").css({"height": winHeight});  easeInOutExpo
     $("#up-arrow").on("click", function(){
-      $("html,body").animate({ scrollTop: $('html,body').offset().top + winHeight + 5 },700,'easeInOutExpo');
+      $("html,body").animate({ scrollTop: $('html,body').offset().top + winHeight + 5 },700,'easeInQuad');
     });
 
     $(window).on("scroll", function(){
