@@ -254,6 +254,9 @@ a {
 .gray-bg {
   background: #f0f0f0;
 }
+.openstack {
+  height: 325px;
+}
 </style>
 </head>
 <body id="home">
@@ -321,7 +324,7 @@ a {
     <img src="./images/monitoring.png">
   </div>
 </div>
-<div id="openstack" class="product-area">
+<div id="openstack" class="openstack">
   <div class="content">
     <h2>UOS 100% 由OpenStack和开源软件支持</h2>
   </div>
@@ -351,7 +354,7 @@ var UnitedStack = {
   smartMouseWheel: function () {
     var productAreaHeight = $(window).height() - 55;
     $(".product-area").css({'height': productAreaHeight});
-    var sectionsAry = ['body','#unitedstack-os','#install','#panel','#UStorage','#Manager','#Monitoring','#openstack','#footer'];
+    var sectionsAry = ['body','#unitedstack-os','#install','#panel','#UStorage','#Manager','#Monitoring','#openstack'];
     var totalSection = sectionsAry.length;
     var currentSectionId = 1; //origin is -1
     var isSectionMovementBusy = false;
