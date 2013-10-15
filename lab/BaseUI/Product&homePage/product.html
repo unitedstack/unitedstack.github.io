@@ -153,27 +153,20 @@ a {
   text-align: center;
   font-family: "Myriad Pro","微软雅黑";
   height: 100px;
+  color: #9b9b9b;
   line-height: 140px;
   font-size: 1.8em;
   font-weight: normal;
 }
 .content h3 {
   text-align: center;
+  font-size: 2em;
+  display: inline-block;
   font-family: "Myriad Pro","微软雅黑";
   height: 50px;
   line-height: 50px;
-  font-size: 1em;
+  border-top: 1px solid #fff; 
   font-weight: normal;
-}
-.text-color-white {
-  color: #fff;
-}
-.blue-bg {
-  background: #00b4d2;
-  color: #fff;
-}
-.gray-bg {
-  background: #f0f0f0;
 }
 #showMenu {
   position: fixed;
@@ -247,6 +240,20 @@ a {
   width: 100%;
   margin: 0;
 }
+.content .gray-border-top {
+    border-top: 1px solid #9b9b9b;
+    color: #00b4d2; 
+}
+.content .text-color-white {
+  color: #fff;
+}
+.blue-bg {
+  background: #00b4d2;
+  color: #fff;
+}
+.gray-bg {
+  background: #f0f0f0;
+}
 </style>
 </head>
 <body id="home">
@@ -268,6 +275,7 @@ a {
     <div class="absolute">
       <h2 class="text-color-white">UnitedStack OS</h2>
       <h3 class="text-color-white">OpenStack从未如此简单</h3>
+      <div></div>
       <img src="./images/unitedstack-os.png">
     </div>
   </div>
@@ -276,7 +284,8 @@ a {
 <div id="install" class="product-area gray-bg">
   <div class="content">
     <h2>UOS Installer</h2>
-    <h3>极致简化的部署</h3>
+    <h3 class="content-h3 gray-border-top">极致简化的部署</h3>
+    <div></div>
     <img src="./images/install.png">
   </div>
 </div>
@@ -284,13 +293,15 @@ a {
   <div class="content">
     <h2 class="text-color-white">UOS Dashboard</h2>
     <h3 class="text-color-white">人性化的Web控制面板</h3>
+    <div></div>
     <img src="./images/panel.png">
   </div>
 </div>
 <div id="UStorage" class="product-area gray-bg">
   <div class="content">
     <h2>UOS Unified Storage</h2>
-    <h3>统一的多用途分布式块存储</h3>
+    <h3 class="gray-border-top">统一的多用途分布式块存储</h3>
+    <div></div>
     <img src="./images/storage.png">
   </div>
 </div>
@@ -298,13 +309,15 @@ a {
   <div class="content">
     <h2 class="text-color-white">UOS Host Manager</h2>
     <h3 class="text-color-white">物理机管理</h3>
+    <div></div>
     <img src="./images/manager.png">
   </div>
 </div>
 <div id="Monitoring" class="product-area gray-bg">
   <div class="content w100">
     <h2>UOS Monitoring</h2>
-    <h3>强大的监控中心</h3>
+    <h3 class="content-h3 gray-border-top">强大的监控中心</h3>
+    <div></div>
     <img src="./images/monitoring.png">
   </div>
 </div>
