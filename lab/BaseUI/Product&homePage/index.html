@@ -25,6 +25,9 @@ html,body,div,p,h1,h2,h3,h4,ul,li,ol {
   font-family: 'Segoe UI Light','Segoe UI','Microsoft Jhenghei','微软雅黑',sans-serif;
   text-align: center;
 }
+html,body {
+  overflow: hidden;
+}
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -62,7 +65,7 @@ a {
   _height: 577px;
   *height: 577px;
   min-height: 600px;
-  border-top: 5px solid #00a2c8; 
+  border-top: 4px solid #00a2c8; 
   background: url(./images/1366.jpg) no-repeat 0 0;
   background-size: cover;
   *zoom: 1;
@@ -83,6 +86,7 @@ a {
 .menu li a {
   /*font-weight: bold;*/
   font-size: 18px;
+  color: #f0f0f0;
   padding: 3px 10px;
 }
 .menu li a:hover {
@@ -200,10 +204,10 @@ a {
   position: fixed;
   z-index: 9999;
   height: 55px;
-  top: 0;
+  top: 4px;
   width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background: rgba(256,256,256,.4);
+/*  border-bottom: 1px solid #eee;*/
   -webkit-box-shadow: rgba(0,0,0,.1) 0 1px 5px;
   -moz-box-shadow: rgba(0,0,0,.1) 0 1px 5px;
   box-shadow: rgba(0,0,0,.1) 0 1px 5px;
@@ -291,25 +295,56 @@ a {
     width:400px;
   }
 }
+#down-button-group {
+  height: 64px;
+  position: absolute;
+  bottom: 60px;
+  left: 160px;
+}
+#down-button-group a {
+  display: inline-block;
+  height: 64px;
+  line-height: 64px;
+  color: #fff;
+  background: #00b4d2;
+  padding: 0 55px;
+  font-size: 22px;
+  font-family: "微软雅黑";
+  /*font-weight: bold;*/
+}
+#down-button-group .try {
+  margin-left: 35px;
+  background: #0a5467;
+}
+.active a {
+  color: #00a1c7!important;
+}
+.active a:hover {
+  color: #fff!important;
+}
 </style>
 </head>
 <body id="home">
-  <div class="firstScreen">
-    <div id="up-arrow"></div>
-  </div>
+<div class="nav topFixedNav">
+  <ul class="menu clearfix">
+    <li><a href="">加入我们</a></li>
+    <li><a href="">公司</a></li>
+    <li><a href="">博客</a></li>
+    <li><a href="">OpenStack</a></li>
+    <li><a href="">服务</a></li>
+    <li><a href="product.html">产品</a></li>
+    <li class="active"><a href="">首页</a></li>  
+  </ul>
+</div>
 
-  <div class="nav">
-    <ul class="menu clearfix">
-      <li><a href="">加入我们</a></li>
-      <li><a href="">公司</a></li>
-      <li><a href="">博客</a></li>
-      <li><a href="">OpenStack</a></li>
-      <li><a href="">服务</a></li>
-      <li><a href="product.html">产品</a></li>
-      <li><a href="">首页</a></li>  
-    </ul>
-  </div>
-  <div class="part-one bg-blue">
+<div class="firstScreen">
+</div>
+
+<div id="down-button-group">
+  <a class="free" href="">Free Application</a>
+  <a class="try"href="">Try UOS Free</a>
+</div>
+<!--   <div class="part-one bg-blue">
     <div class="center-content">
       <h2 class="font-white">One-click installation</h2>
       <p class="font-white">
@@ -317,9 +352,9 @@ a {
       </p>
       <img class="mac" src="./images/mac.png"/>
     </div>
-  </div>
+  </div> -->
 
-  <div class="part-two">
+ <!--  <div class="part-two">
     <div class="center-content">
       <h2>One-click installation</h2>
       <p>
@@ -328,7 +363,7 @@ a {
       <img class="mac-screen" src="./images/screen.png"/>
       <div class="btn-navy mt80">Try UOS Free</div>
     </div>
-  </div>
+  </div> -->
 
 <!--   <div class="part-three">
     <div class="center-content">
@@ -340,7 +375,7 @@ a {
     </div>
   </div> -->
 
-  <div class="footer">
+<!--   <div class="footer">
     <div class="footer-content clearfix">
       <ul class="footer-nav">
         <li><a href="">首页</a></li>
@@ -353,62 +388,16 @@ a {
       </ul>
     </div>
     <p class="footer-copy">© 2013 UnitedStack Inc.</p>
-  </div>
+  </div> -->
 <div id="showMenu">Menu</div>
 <script src="./js/jquery.js"></script>
-<script src="./js/jquery.easing.1.3.js"></script>
+<!-- <script src="./js/jquery.easing.1.3.js"></script> -->
 <!-- <script src="http://browser.qq.com/js/jquery.mousewheel.min.js"></script> -->
 
 
 <script type="text/javascript">
 var winHeight = $(window).height();
 $(".firstScreen").css({"height": winHeight});
-
-var UnitedStack = {
-  firstScreenHeightInit: function (){
-    // var winHeight = $(window).height();
-    // $(".firstScreen").css({"height": winHeight});  easeInOutExpo
-    $("#up-arrow").on("click", function(){
-      $("html,body").animate({ scrollTop: $('html,body').offset().top + winHeight + 5 },700,'easeInQuad');
-    });
-
-    $(window).on("scroll", function(){
-      var scrHeight = $(window).scrollTop();
-      var $mac = $(".mac");
-      var $macScreen = $(".mac-screen")
-      var $nav = $(".nav");
-      var $body = $("body");
-      if( scrHeight >= (winHeight + 5)){
-        $nav.addClass("topFixedNav");
-        $body.css("padding-top","55px");
-        $mac.fadeIn(900);
-      } else {
-        $nav.removeClass("topFixedNav");
-        $body.css("padding-top","0px");
-        $mac.fadeOut(900);
-      }
-
-      if(scrHeight >= (winHeight + 550)) {
-        $macScreen.fadeIn(900);
-      } else {
-        $macScreen.fadeOut(900);
-      }
-    });
-  },
-  responseMenu: function () {
-    $("div#showMenu").on("click", function(){
-      $(".menu").toggle(400);
-    });
-  },
-  init: function () {
-    this.firstScreenHeightInit();
-    this.responseMenu();
-  }
-};
-
-$(function(){
-  UnitedStack.init();
-});
 </script>
 </body>
 </html>
