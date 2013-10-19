@@ -27,6 +27,7 @@ html,body,div,p,h1,h2,h3,h4,ul,li,ol {
 }
 body {
   padding-top: 55px;
+  overflow: hidden;
 }
 .clearfix:before,
 .clearfix:after {
@@ -262,6 +263,63 @@ a {
   border: none;
   font-size: 1.3em;
 }
+#sider-nav {
+  font-size: 12px;
+  position: fixed;
+  right: 20px;
+  top: 150px;
+  /*border: 1px solid #f00;*/
+  text-align: left;
+  list-style: none;
+}
+#sider-nav a {
+  display: block;
+  height: 45px;
+  color: #fff;
+  line-height: 45px;
+  padding-left: 50px;
+  text-align: left!important;
+ /*   -webkit-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+   -moz-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+    -ms-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+     -o-transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+        transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */*/
+ /* -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+   -o-transition: none;
+      transition: none;*/
+}
+
+.active {
+  color: #0DECDA!important;
+  background-position: 0 -54px!important;
+}
+.icon-uos {
+  background: url(./images/icon-install.png) no-repeat 0 -4px;
+}
+
+.icon-manager {
+  background: url(./images/icon-manage.png) no-repeat 0 -4px;
+}
+.icon-install {
+  background: url(./images/icon-install.png) no-repeat 0 -4px;
+}
+.icon-dash {
+  background: url(./images/icon-manage.png) no-repeat 0 -4px;
+}
+.icon-storage {
+  background: url(./images/icon-snc.png) no-repeat 0 -4px;
+}
+.icon-manager {
+  background: url(./images/icon-host.png) no-repeat 0 -4px;
+}
+.icon-monitoring {
+  background: url(./images/icon-gh.png) no-repeat 0 -4px;
+}
+.icon-openstack {
+  background: url(./images/icon-openstacks.png) no-repeat 0-3px;
+}
 </style>
 </head>
 <body id="home">
@@ -351,6 +409,15 @@ a {
   <p class="footer-copy">© 2013 UnitedStack Inc.</p>
 </div>
 <div id="showMenu">Menu</div>
+<ul id="sider-nav">
+  <li><a class="icon-uos active" href="#unitedstack-os">UOS</a></li>
+  <li><a class="icon-install" href="#install">Installer</a></li>
+  <li><a class="icon-dash" href="#panel">Dashboard</a></li>
+  <li><a class="icon-storage" href="#UStorage">Storage</a></li>
+  <li><a class="icon-manager" href="#Manager">Host Manager</a></li>
+  <li><a class="icon-monitoring" href="#Monitoring">Monitor</a></li>
+  <li><a class="icon-openstack"href="#openstack">Openstack</a></li>
+</ul>
 <script src="./js/jquery.js"></script>
 <script src="./js/jquery.easing.1.3.js"></script>
 <script src="./js/jquery.mousewheel.js"></script>
@@ -387,11 +454,32 @@ var UnitedStack = {
       if(currentSectionId == 1) yPos -=50;
       
       isSectionMovementBusy = true;  //easeInOutExpo easeInOutCubic easeInOutQuart
+      $("#sider-nav a").each(function(){
+          if($(this).attr("href")==sectionsAry[currentSectionId]){
+              $(this)
+                .addClass("active")
+                .parent().siblings().children('a').removeClass("active"); 
+          }
+      });
 
       $('body,html').stop(true, false).animate({'scrollTop':yPos+'px'},1000, 'easeInOutExpo',function(){
         isSectionMovementBusy = false;
       })
       return false; 
+    });
+  },
+  siderNav: function(){
+    $("#sider-nav a").click(function(e){
+        var href = $(this).attr("href");
+        var pos = $(href).offset().top - 55;
+        console.log($(this).siblings());
+        $(this)
+          .addClass("active")
+          .parent().siblings().children('a').removeClass("active");  
+        $("html,body").animate({scrollTop: pos}, 1000, 'easeInOutExpo',function(){
+        });
+
+        return false;
     });
   },
   responseMenu: function () {
@@ -402,6 +490,7 @@ var UnitedStack = {
   init: function () {
     this.smartMouseWheel();
     this.responseMenu();
+    this.siderNav();
   }
 };
 
