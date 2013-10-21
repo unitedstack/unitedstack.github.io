@@ -103,6 +103,40 @@ a {
 .footer .footer-content .footer-nav {
   display: inline-block;
 }
+
+.footer .sns-icon {
+  display: inline;
+  float: right;
+  height: 30px;
+  width: 135px;
+  /*border: 1px solid #f00;*/
+  margin-top: 60px;
+}
+.footer .sns-icon .twitter {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./images/sns-icon.png) no-repeat 0 0;
+}
+.footer .sns-icon .weibo {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./images/sns-icon.png) no-repeat 0 -30px;
+}
+.footer .sns-icon .facebook {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./images/sns-icon.png) no-repeat 0 -60px;
+}
+.footer .sns-icon .google-plus {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./images/sns-icon.png) no-repeat 0 -90px;
+}
+
 .footer .footer-content .footer-nav li {
   display: inline-block;
   line-height: 135px;
@@ -318,6 +352,9 @@ a {
 .icon-openstack {
   background: url(./images/icon-openstacks.png) no-repeat 0-3px;
 }
+.monitorint-img {
+  width: 100%;
+}
 </style>
 </head>
 <body id="home">
@@ -382,7 +419,7 @@ a {
     <h2>UOS Monitoring</h2>
     <h3 class="content-h3 gray-border-top">强大的监控中心</h3>
     <div></div>
-    <img src="./images/monitoring.png">
+    <img class="monitorint-img" src="./images/monitoring.png">
   </div>
 </div>
 <div id="openstack" class="openstack">
@@ -403,6 +440,12 @@ a {
       <li><a href="">公司</a></li>
       <li><a href="">加入我们</a></li>
     </ul>
+    <p class="sns-icon">
+      <a class="twitter" href=""></a>
+      <a class="weibo" href=""></a>
+      <a class="facebook" href=""></a>
+      <a class="google-plus"href=""></a>
+    </p>
   </div>
   <p class="footer-copy">© 2013 UnitedStack Inc.</p>
 </div>
