@@ -29,6 +29,7 @@ html,body,div,p,h1,h2,h3,h4,ul,li,ol {
 body {
   padding-top: 55px;
   overflow: hidden;
+  color: #666;
 }
 .clearfix:before,
 .clearfix:after {
@@ -83,10 +84,6 @@ a {
 .menu li a:hover {
   background: #00b4d2;
   color: #fff; 
-}
-
-.footer {
-
 }
 
 .footer {
@@ -160,6 +157,11 @@ a {
   font-size: 13px;
 }
 
+.gray-border-top {
+    border-top: 1px solid #9b9b9b;
+    color: #00b4d2; 
+}
+
 .topFixedNav {
   position: fixed;
   z-index: 6666;
@@ -180,13 +182,7 @@ a {
   min-height: 580px;
 }
 
-.content {
-  width: 75%;
-  margin: 0 auto;
-  color: #666;
-  overflow: hidden;
-}
-.content h2 {
+h2 {
   text-align: center;
   font-family: "Myriad Pro","微软雅黑";
   height: 100px;
@@ -195,7 +191,7 @@ a {
   font-size: 1.8em;
   font-weight: normal;
 }
-.content h3 {
+h3 {
   text-align: center;
   font-size: 2em;
   display: inline-block;
@@ -223,8 +219,8 @@ a {
 }
 
 @media all and (min-width: 800px) and (max-width: 1080px) {
-  .menu,.content,.footer .footer-content {
-    width: 90%;
+  .menu,.footer .footer-content {
+    width: 100%;
   }
   .menu li {
     margin-left: 5px;
@@ -232,7 +228,7 @@ a {
 }
 @media all and (min-width: 680px) and (max-width: 800px) {
   .menu,.content,.footer .footer-content {
-    width: 98%;
+    width: 100%;
   }
   .menu li {
     margin-left: 0px;
@@ -270,32 +266,20 @@ a {
 .absolute {
   position: absolute;
   left: 50%;
+  overflow: hidden;
   margin-left: -341px;
   z-index: 5;
 }
-.w100 {
-  width: 100%;
-  margin: 0;
-}
-.content .gray-border-top {
-    border-top: 1px solid #9b9b9b;
-    color: #00b4d2; 
-}
-.content .text-color-white {
+
+.text-color-white {
   color: #fff;
 }
-.blue-bg {
-  background: #00b4d2;
-  color: #fff;
-}
-.gray-bg {
-  background: #f0f0f0;
-}
+
 .openstack {
   height: 325px;
   background: #d5d5d5;
 }
-.content .first-h3-title {
+.first-h3-title {
   border: none;
   font-size: 1.3em;
 }
@@ -354,9 +338,26 @@ a {
 .icon-openstack {
   background: url(./images/icon-openstacks.png) no-repeat 0-3px;
 }
-.monitorint-img {
-  /*display: inline-block;*/
-  width: 100%;
+#unitedstack-os {
+  background: #00b4d2 url(./images/unitedstack-os.png) no-repeat center 73.5%;
+}
+#install {
+  background: #f0f0f0 url(./images/install.png) no-repeat center 73.5%;
+}
+#panel {
+  background: #00b4d2 url(./images/panel.png) no-repeat center 78%;
+}
+#UStorage {
+  background: #f0f0f0 url(./images/storage.png) no-repeat center 73.5%;
+}
+#Manager {
+  background: #00b4d2 url(./images/manager.png) no-repeat center 78%;
+}
+#Monitoring {
+  background: #f0f0f0 url(./images/monitoring.png) no-repeat center 73.5%;
+}
+#openstack {
+  background:  #d5d5d5 url(./images/openstack-logo.png) no-repeat center 78%;
 }
 </style>
 </head>
@@ -375,61 +376,31 @@ a {
 </div>
 
 <div id="unitedstack-os" class="product-area gray-bg">
-  <div class="content">
-    <div class="absolute">
-      <h2 class="text-color-white"><img src="./images/UOS-text.png" alt="UnitedStack OS"/></h2>
-      <h3 class="text-color-white first-h3-title">OpenStack从未如此简单</h3>
-      <div></div>
-      <img src="./images/unitedstack-os.png">
-    </div>
-  </div>
-  <div style="position: absolute; width: 100%; height:427px; background: #00b4d2;z-index: 0;"></div>
+    <h2 class="text-color-white"><img src="./images/UOS-text.png" alt="UnitedStack OS"/></h2>
+    <h3 class="text-color-white first-h3-title">OpenStack从未如此简单</h3>
 </div>
 <div id="install" class="product-area gray-bg">
-  <div class="content">
     <h2>UOS Installer</h2>
     <h3 class="content-h3 gray-border-top">极致简化的部署</h3>
-    <div></div>
-    <img src="./images/install.png">
-  </div>
 </div>
 <div id="panel" class="product-area blue-bg">
-  <div class="content">
-    <h2 class="text-color-white">UOS Dashboard</h2>
-    <h3 class="text-color-white">人性化的Web控制面板</h3>
-    <div></div>
-    <img src="./images/panel.png">
-  </div>
+  <h2 class="text-color-white">UOS Dashboard</h2>
+  <h3 class="text-color-white">人性化的Web控制面板</h3>
 </div>
 <div id="UStorage" class="product-area gray-bg">
-  <div class="content">
     <h2>UOS Unified Storage</h2>
-    <h3 class="gray-border-top">统一的多用途分布式块存储</h3>
-    <div></div>
-    <img src="./images/storage.png">
-  </div>
+    <h3 class="gray-border-top">统一的多用途分布式块存储</h3>  
 </div>
 <div id="Manager" class="product-area blue-bg">
-  <div class="content">
     <h2 class="text-color-white">UOS Host Manager</h2>
     <h3 class="text-color-white">物理机管理</h3>
-    <div></div>
-    <img src="./images/manager.png">
-  </div>
 </div>
 <div id="Monitoring" class="product-area gray-bg">
-  <div class="content w100">
     <h2>UOS Monitoring</h2>
     <h3 class="content-h3 gray-border-top">强大的监控中心</h3>
-    <div></div>
-    <img class="monitorint-img" src="./images/monitoring.png">
-  </div>
 </div>
 <div id="openstack" class="openstack">
-  <div class="content">
     <h2>UOS 100% 由OpenStack和开源软件支持</h2>
-    <img src="./images/openstack-logo.png">
-  </div>
 </div>
 
 <div id="footer" class="footer">
